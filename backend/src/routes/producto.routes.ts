@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { TrianaController } from "../controllers/triana.controllers";
+import { ProductoController } from "../controllers/producto.controllers";
 
-let trianaController = new TrianaController();
+let trianaController = new ProductoController();
 
 const enrutadorTriana = Router();
 
