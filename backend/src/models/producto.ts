@@ -1,3 +1,1 @@
-export interface IProducto
-{
-}
+export interface IProducto{}
