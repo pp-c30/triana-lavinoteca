@@ -5,64 +5,64 @@ import { Request, Response } from "express";
 import { IProducto } from '../models/producto';
 
 export class ProductoController{
-    //Listado de pagos
+    //Listado de producto
     public async listarTrianaProducto(req:Request, res:Response)
     {
         //aca logro la conexión con la base de datos
         const db = await conexion();
 
-        let pagos = await db.query('select * from pagos');
+        let triana_producto = await db.query('select * from producto');
 
-        return res.json(pagos);
+        return res.json(triana_producto);
     }
 
-    //Guardar pagos
+    //Guardar producto
     public async guardarTrianaProducto(req:Request, res:Response)
     {
         const db= await conexion();
 
-        const pago:IProducto= req.body;
+        const triana_producto:IProducto= req.body;
 
-        await db.query("insert into pagos set ?",[pago]);
+        await db.query("insert into producto set ?",[triana_producto]);
 
-        return res.json('El pago fue guardado exitosamente');
+        return res.json('El producto fue guardado exitosamente');
     }
 
-    //Eliminar pagos
+    //Eliminar producto
     public async eliminarTrianaProducto(req:Request, res:Response)
     {
         const db = await conexion();
 
-        let codigo = req.params.codigo;
+        let codigo_triana_producto = req.params.codigo;
 
-        await db.query("delete from pagos where id_pago = ?", [codigo]);
+        await db.query("delete from producto where id_producto = ?", [codigo_triana_producto]);
 
-        return res.json('El pago se eliminó correctamente');
+        return res.json('El producto se eliminó correctamente');
     }
 
-    //actualizar pagos
+    //actualizar producto
     public async actualizarTrianaPoducto(req:Request, res:Response)
     {
         const db = await conexion();
 
-        let codigo = req.params.codigo;
+        let codigo_triana_producto = req.params.codigo_triana_producto;
 
-        let nuevos_datos_pago = req.body;
+        let nuevos_datos_producto = req.body;
 
-        await db.query("update pagos set ? where id_pago = ?", [nuevos_datos_pago,codigo]);
+        await db.query("update producto set ? where id_producto = ?", [nuevos_datos_producto,codigo_triana_producto]);
         
         return res.json('Se actualizo exitosamente');
     }
 
-    //Obtener un pago
+    //Obtener un producto 
     public async obtenerUnTrianaProducto(req:Request, res:Response)
     {
         const db = await conexion();
 
-        let codigo = req.params.codigo;
+        let codigo_triana_producto = req.params.codigo_triana_producto;
 
-        let unPago = await db.query("select * from pagos where id_pago = ?", [codigo]);
+        let unProducto = await db.query("select * from producto where id_producto = ?", [codigo_triana_producto]);
 
-        return res.json(unPago[0]);
+        return res.json(unProducto[0]);
     }
 }
