@@ -5,7 +5,7 @@ export async function conexion()
         host: 'localhost',
         user: 'root',
         password: '',
-        database: 'rest_api'
+        database: 'triana'
     })
 return coneect;
 }
