@@ -5,12 +5,12 @@ export interface IProducto
     nombre:string;
     categoria:number;
     stock:number;
-    precio:; 
+    precio:number; 
     variedad:number;
     imagen:Text;
     bodega:number;
     descripcion:string;
     cantmil:number;
-    estado:;
+    estado:number;
 
 }
