@@ -1,8 +1,8 @@
 import { Router } from "express";
-import {  } from "../controllers/index.controllers";
+import { mensaje_bienvenida } from "../controllers/index.controllers";
 
 
 let enrutadorIndex = Router();
 
-enrutadorIndex.route('/').get();
+enrutadorIndex.route('/').get(mensaje_bienvenida);
 export default enrutadorIndex;
