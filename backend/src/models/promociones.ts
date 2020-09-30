@@ -1,4 +1,4 @@
-export interface IDescuento
+export interface IPromociones
 {
     id_promo?:number;
     producto:number; 
