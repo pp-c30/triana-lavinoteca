@@ -31,13 +31,6 @@ export class ProductoController{
     //Eliminar producto
     public async eliminarTrianaProducto(req:Request, res:Response)
     {
-        const db = await conexion();
-
-        let codigo_triana_producto = req.params.codigo;
-
-        await db.query("delete from producto where id_producto = ?", [codigo_triana_producto]);
-
-        return res.json('El producto se eliminó correctamente');
     }
 
     //actualizar producto
