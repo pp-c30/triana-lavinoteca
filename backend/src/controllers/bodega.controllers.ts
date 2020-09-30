@@ -29,8 +29,33 @@ export class BodegaController{
     }
 
     //eliminar bodega
-    public async borrarTrianaBodega(req:Request, res:Response)
+    public async eliminarTrianaBodega(req:Request, res:Response)
     {
         
+    }
+    
+    //actualizar bodega
+    public async actualizarTrianaBodega(req:Request, res:Response){
+        const db = await conexion();
+
+        let codigo_triana_bodega = req.params.codigo_triana_bodega;
+
+        let nuevos_datos_bodega = req.body;
+
+        await db.query("update bodega set ? where id_bodega = ?", [nuevos_datos_bodega,codigo_triana_bodega]);
+        
+        return res.json('Se actualizo exitosamente');
+
+    }
+    
+    //obtener una bodega
+    public async obtenerUnTrianaBodega(req:Request, res:Response){
+        const db = await conexion();
+
+        let codigo_triana_bodega = req.params.codigo_triana_bodega;
+
+        let unaBodega = await db.query("select * from bodega where id_bodega = ?", [codigo_triana_bodega]);
+
+        return res.json(unaBodega[0]);
     }
 }

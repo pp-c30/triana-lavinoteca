@@ -1,4 +1,6 @@
 import express, { Application } from "express";
+import morgan from 'morgan';
+import cors from 'cors';
 import enrutadorIndex from "./routes/index.routes";
 import enrutadorBodega from "./routes/bodega.routes";
 import enrutadorCategoria from "./routes/categoria.routes";
@@ -40,6 +42,12 @@ export class Server {
 
     middleware()
     {
+        //muestreo de las peticiones
+        this.app.use(morgan('dev'));
+
+        this.app.use(cors());
+
+        //configuracion que le permitirá a nuestro servidor recibir y enviar datos en formato JSON
         this.app.use(express.json());
     }
 
