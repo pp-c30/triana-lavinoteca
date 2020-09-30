@@ -31,7 +31,13 @@ export class BodegaController{
     //eliminar bodega
     public async eliminarTrianaBodega(req:Request, res:Response)
     {
-        
+        const db = await conexion();
+
+        let codigo_triana_bodega = req.params.codigo_triana_bodega;
+
+        await db.query("delete from bodega where id_bodega = ?", [codigo_triana_bodega]);
+
+        return res.json('La bodega se eliminó correctamente');
     }
     
     //actualizar bodega

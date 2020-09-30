@@ -6,7 +6,15 @@ import { IOpinion } from '../models/opinion';
 
 export class OpinionController{
     //listar opinion
-    public async listarTrianaOpinion(req:Request, res:Response){}
+    public async listarTrianaOpinion(req:Request, res:Response)
+    {
+        //aca logro la conexión con la base de datos
+        const db = await conexion();
+
+        let triana_opinion = await db.query('select * from opinion');
+
+        return res.json(triana_opinion);
+    }
 
     //guardar opinion
     public async guardarTrianaOpinion(req:Request, res:Response)
@@ -45,7 +53,4 @@ export class OpinionController{
         
         return res.json('Se actualizo exitosamente');
     }
-
-    //obtener una opinion
-    public async obtenerUnTrianaOpinion(req:Request, res:Response){}
 }

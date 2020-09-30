@@ -30,7 +30,15 @@ export class CategoriaController{
 
     //eliminar una categoria 
     public async eliminarTrianaCategoria(req:Request, res:Response)
-    {}
+    {
+        const db = await conexion();
+
+        let codigo_triana_categoria = req.params.codigo_triana_categoria;
+
+        await db.query("delete from categoria where id_categoria = ?", [codigo_triana_categoria]);
+
+        return res.json('La categoria se eliminó correctamente');
+    }
 
     //actualizar una categoria
     public async actualizarTrianaCategoria(req:Request, res:Response)
