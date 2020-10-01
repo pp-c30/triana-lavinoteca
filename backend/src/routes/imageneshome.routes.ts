@@ -2,6 +2,7 @@ import { Router } from "express";
 import { ImagenesHomeController } from "../controllers/imageneshome.controllers";
 
 let trianaController = new ImagenesHomeController();
+let baba;
 
 const enrutadorTriana = Router();
 

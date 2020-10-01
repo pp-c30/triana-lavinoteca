@@ -1,6 +1,13 @@
 import express, { Application } from "express";
 import enrutadorIndex from "./routes/index.routes";
+import enrutadorBodega from "./routes/bodega.routes";
+import enrutadorCategoria from "./routes/categoria.routes";
+import enrutadorDescuento from "./routes/descuento.routes";
+import enrutadorImagenesHome from "./routes/imageneshome.routes";
+import enrutadorOpinion from "./routes/opinion.routes";
 import enrutadorProducto from "./routes/producto.routes";
+import enrutadorPromociones from "./routes/promociones.routes";
+import enrutadorVariedad from "./routes/variedad.routes";
 
 export class Server {
     app:Application;
@@ -21,7 +28,14 @@ export class Server {
     routes()
     {
         this.app.use(enrutadorIndex);
+        this.app.use(enrutadorBodega);
+        this.app.use(enrutadorCategoria);
+        this.app.use(enrutadorDescuento);
+        this.app.use(enrutadorImagenesHome);
+        this.app.use(enrutadorOpinion);
         this.app.use(enrutadorProducto);
+        this.app.use(enrutadorPromociones);
+        this.app.use(enrutadorVariedad);
     }
 
     middleware()
