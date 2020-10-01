@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { ImagenesHomeController } from "../controllers/imageneshome.controllers";
+import { ImagenesHomeController } from "../controllers/imageneshome.controller";
 
 let trianaController = new ImagenesHomeController();
 

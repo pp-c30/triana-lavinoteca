@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { BodegaController } from "../controllers/bodega.controllers";
+import { BodegaController } from "../controllers/bodega.controller";
 
 let trianaController = new BodegaController();
 

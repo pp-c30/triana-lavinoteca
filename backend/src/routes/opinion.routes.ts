@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { OpinionController } from "../controllers/opinion.controllers";
+import { OpinionController } from "../controllers/opinion.controller";
 
 let trianaController = new OpinionController();
 

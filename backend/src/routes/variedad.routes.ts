@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { VariedadController } from "../controllers/variedad.controllers";
+import { VariedadController } from "../controllers/variedad.controller";
 
 let trianaController = new VariedadController();
 

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { PromocionesController } from "../controllers/promociones.controllers";
+import { PromocionesController } from "../controllers/promociones.controller";
 
 let trianaController = new PromocionesController();
 
