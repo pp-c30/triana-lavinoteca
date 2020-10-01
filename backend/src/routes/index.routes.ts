@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import {mensaje_bienvenida} from "../controllers/index.controllers";
+import {mensaje_bienvenida} from "../controllers/index.controller";
 
 
 
