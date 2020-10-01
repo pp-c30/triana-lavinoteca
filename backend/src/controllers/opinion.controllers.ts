@@ -53,7 +53,7 @@ export class OpinionController{
         
         return res.json('Se actualizo exitosamente');
     }
-    //Obtener un producto 
+    //Obtener una opinion
     public async obtenerUnTrianaOpinion(req:Request, res:Response)
     {
     }
