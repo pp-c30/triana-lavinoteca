@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { ProductoController } from "../controllers/producto.controller";
+import { ProductoController } from "../controllers/producto.controllers";
 
 let trianaController = new ProductoController();
 
