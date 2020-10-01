@@ -31,6 +31,7 @@ export class BodegaController{
     //eliminar bodega
     public async eliminarTrianaBodega(req:Request, res:Response)
     {
+        const db= await conexion();
 
         let codigo_triana_bodega = req.params.codigo_triana_bodega;
 
