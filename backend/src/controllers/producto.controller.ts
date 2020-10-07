@@ -3,6 +3,12 @@ import { Request, Response } from "express";
 import cloudinary from "cloudinary";
 import fs from "fs-extra";
 
+cloudinary.v2.config({
+    cloud_name:'dmutxyaog',
+    api_key:'665112836568814',
+    api_secret:'eR6juzj8BGCBSxNldixJU1sM_ds',
+});
+
 export class ProductoController{
     //Listado de producto
     public async listarTrianaProducto(req:Request, res:Response)
