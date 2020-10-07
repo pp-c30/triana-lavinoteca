@@ -8,9 +8,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductoController = void 0;
 const database_1 = require("../database");
+const cloudinary_1 = __importDefault(require("cloudinary"));
+const fs_extra_1 = __importDefault(require("fs-extra"));
+cloudinary_1.default.v2.config({
+    cloud_name: 'dmutxyaog',
+    api_key: '665112836568814',
+    api_secret: 'eR6juzj8BGCBSxNldixJU1sM_ds',
+});
 class ProductoController {
     //Listado de producto
     listarTrianaProducto(req, res) {
@@ -25,9 +35,25 @@ class ProductoController {
     guardarTrianaProducto(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const db = yield database_1.conexion();
-            const triana_producto = req.body;
-            yield db.query("insert into producto set ?", [triana_producto]);
-            return res.json('El producto fue guardado exitosamente');
+            const url_img = req.file.path;
+            //fuimos a buscar la imagen a la carpeta upload para subirla a cloudinary
+            const resultado_cloud = yield cloudinary_1.default.v2.uploader.upload(req.file.path);
+            //se guardan datos en la base
+            const guardarImagen = {
+                nombre: req.body.nombre,
+                categoria: req.body.categoria,
+                stock: req.body.stock,
+                precio: req.body.precio,
+                imagen_url: resultado_cloud.url,
+                public_id: resultado_cloud.public_id,
+                bodega: req.body.bodega,
+                descripcion: req.body.descripcion,
+                cantmil: req.body.cantmil,
+                estado: req.body.estado
+            };
+            yield db.query('insert into producto set ?', [guardarImagen]);
+            fs_extra_1.default.unlink(req.file.path);
+            res.json('Se guardo exitosamente los datos y la imagen');
         });
     }
     //actualizar producto
