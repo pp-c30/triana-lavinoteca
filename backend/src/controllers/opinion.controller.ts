@@ -5,6 +5,16 @@ import { Request, Response } from "express";
 import { IOpinion } from '../models/opinion';
 
 export class OpinionController{
+    //Listado de producto
+    public async listarTrianaProducto(req:Request, res:Response)
+    {
+        //aca logro la conexión con la base de datos
+        const db = await conexion();
+
+        let triana_opinion = await db.query('select * from opinion');
+
+        return res.json(triana_opinion);
+    }
     //guardar opinion
     public async guardarTrianaOpinion(req:Request, res:Response)
     {
