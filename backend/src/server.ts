@@ -10,6 +10,7 @@ import enrutadorOpinion from "./routes/opinion.routes";
 import enrutadorProducto from "./routes/producto.routes";
 import enrutadorPromociones from "./routes/promociones.routes";
 import enrutadorVariedad from "./routes/variedad.routes";
+import path from 'path';
 
 export class Server {
     app:Application;
@@ -34,6 +35,8 @@ export class Server {
         this.app.use(enrutadorCategoria);
         this.app.use(enrutadorDescuento);
         this.app.use(enrutadorImagenesHome);
+        //se configura el server para que pueda leer esta carpeta y leer las imagenes
+        this.app.use('/uploads', express.static(path.resolve('uploads')));
         this.app.use(enrutadorOpinion);
         this.app.use(enrutadorProducto);
         this.app.use(enrutadorPromociones);

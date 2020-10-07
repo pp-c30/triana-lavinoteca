@@ -16,6 +16,7 @@ const opinion_routes_1 = __importDefault(require("./routes/opinion.routes"));
 const producto_routes_1 = __importDefault(require("./routes/producto.routes"));
 const promociones_routes_1 = __importDefault(require("./routes/promociones.routes"));
 const variedad_routes_1 = __importDefault(require("./routes/variedad.routes"));
+const path_1 = __importDefault(require("path"));
 class Server {
     constructor() {
         this.app = express_1.default();
@@ -32,6 +33,8 @@ class Server {
         this.app.use(categoria_routes_1.default);
         this.app.use(descuento_routes_1.default);
         this.app.use(imageneshome_routes_1.default);
+        //se configura el server para que pueda leer esta carpeta y leer las imagenes
+        this.app.use('/uploads', express_1.default.static(path_1.default.resolve('uploads')));
         this.app.use(opinion_routes_1.default);
         this.app.use(producto_routes_1.default);
         this.app.use(promociones_routes_1.default);

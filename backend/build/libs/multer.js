@@ -9,6 +9,7 @@ const uuid_1 = require("uuid");
 const storage = multer_1.default.diskStorage({
     destination: 'uploads',
     filename: (req, file, cb) => {
+        //le damos el nombre al archivo y se mantiene la extensión original del mismo
         cb(null, uuid_1.v4() + path_1.default.extname(file.originalname));
     }
 });
