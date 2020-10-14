@@ -30,6 +30,15 @@ class DescuentoController {
             return res.json('el descuento fue guardado exitosamente');
         });
     }
+    //eliminar un descuento
+    eliminarTrianaDescuento(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const db = yield database_1.conexion();
+            let codigo_triana_descuento = req.params.codigo_triana_descuento;
+            yield db.query("delete from descuento where id_des = ?", [codigo_triana_descuento]);
+            return res.json('El descuento se eliminó correctamente');
+        });
+    }
     //actualizar un descuento
     actualizarTrianaDescuento(req, res) {
         return __awaiter(this, void 0, void 0, function* () {

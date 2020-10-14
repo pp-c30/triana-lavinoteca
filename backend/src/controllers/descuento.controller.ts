@@ -28,6 +28,18 @@ export class DescuentoController{
         return res.json('el descuento fue guardado exitosamente');
     }
 
+    //eliminar un descuento
+    public async eliminarTrianaDescuento(req:Request, res:Response)
+    {
+        const db = await conexion();
+
+        let codigo_triana_descuento = req.params.codigo_triana_descuento;
+
+        await db.query("delete from descuento where id_des = ?", [codigo_triana_descuento]);
+
+        return res.json('El descuento se eliminó correctamente');
+    }
+
     //actualizar un descuento
     public async actualizarTrianaDescuento(req:Request, res:Response)
     {

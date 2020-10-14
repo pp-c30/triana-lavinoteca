@@ -6,7 +6,7 @@ let trianaController = new OpinionController();
 
 const enrutadorOpinion = Router();
 
-enrutadorOpinion.route('/triana_producto').get(trianaController.listarTrianaProducto); //obtener datos y mostrarlo
+enrutadorOpinion.route('/triana_opinion').get(trianaController.listarTrianaProducto); //obtener datos y mostrarlo
 enrutadorOpinion.route('/triana_opinion').post(trianaController.guardarTrianaOpinion); //guardar datos en la base de datos
 enrutadorOpinion.route('/triana_opinion/:codigo_triana_opinion').delete(trianaController.eliminarTrianaOpinion); //elimina datos de la base de datos
 export default enrutadorOpinion;
