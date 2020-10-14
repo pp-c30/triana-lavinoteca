@@ -5,7 +5,7 @@ import { Request, Response } from "express";
 import { IOpinion } from '../models/opinion';
 
 export class OpinionController{
-    //Listado de producto
+    //Listado de opinion
     public async listarTrianaProducto(req:Request, res:Response)
     {
         //aca logro la conexión con la base de datos

@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.OpinionController = void 0;
 const database_1 = require("../database");
 class OpinionController {
-    //Listado de producto
+    //Listado de opinion
     listarTrianaProducto(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             //aca logro la conexión con la base de datos
