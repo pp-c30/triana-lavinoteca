@@ -43,12 +43,13 @@ class ProductoController {
                 categoria: req.body.categoria,
                 stock: req.body.stock,
                 precio: req.body.precio,
-                imagen_url: resultado_cloud.url,
+                imagen: resultado_cloud.url,
                 public_id: resultado_cloud.public_id,
                 bodega: req.body.bodega,
                 descripcion: req.body.descripcion,
                 cantmil: req.body.cantmil,
-                estado: req.body.estado
+                estado: req.body.estado,
+                variedad: req.body.variedad
             };
             yield db.query('insert into producto set ?', [guardarImagen]);
             fs_extra_1.default.unlink(req.file.path);
