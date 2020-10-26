@@ -54,7 +54,7 @@ export class ProductoController{
         res.json('Se guardo exitosamente los datos y la imagen');
     }
 
-
+ 
     //actualizar producto
     public async actualizarTrianaPoducto(req:Request, res:Response)
     {
