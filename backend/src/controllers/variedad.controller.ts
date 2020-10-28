@@ -41,6 +41,23 @@ export class VariedadController{
         return res.json('Se actualizo exitosamente');
     }
 
+    //eliminar una variedad
+    public async eliminarTrianaVariedad(req:Request, res:Response)
+    {
+        const db = await conexion();
+
+        let codigo_triana_variedad = req.params.codigo_triana_variedad;
+        
+        try {
+            await db.query("delete from variedad where id_varie = ?", [codigo_triana_variedad]);
+
+            return res.json('La variedad se eliminó correctamente');
+        }
+        catch (error) {
+            return res.json('No se pudo eliminar la variedad, ya que esta siendo utilizado por un producto')
+        }
+    }
+
     //obtener una variedad
     public async obtenerUnTrianaVariedad(req:Request, res:Response){
         const db = await conexion();

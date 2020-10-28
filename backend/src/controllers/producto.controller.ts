@@ -53,7 +53,23 @@ export class ProductoController{
 
         res.json('Se guardo exitosamente los datos y la imagen');
     }
+    
+    //eliminar un producto
+    public async eliminarTrianaProducto(req:Request, res:Response)
+    {
+        const db = await conexion();
 
+        let codigo_triana_producto = req.params.codigo_triana_producto;
+        
+        try {
+            await db.query("delete from producto where id_producto = ?", [codigo_triana_producto]);
+
+            return res.json('El producto se eliminó correctamente');
+        }
+        catch (error) {
+            return res.json('No se pudo eliminar el producto, ya que esta siendo utilizado por una opinión y/o promoción')
+        }
+    }
  
     //actualizar producto
     public async actualizarTrianaPoducto(req:Request, res:Response)
