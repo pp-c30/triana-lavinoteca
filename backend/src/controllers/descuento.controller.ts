@@ -34,10 +34,15 @@ export class DescuentoController{
         const db = await conexion();
 
         let codigo_triana_descuento = req.params.codigo_triana_descuento;
+        
+        try {
+            await db.query("delete from descuento where id_des = ?", [codigo_triana_descuento]);
 
-        await db.query("delete from descuento where id_des = ?", [codigo_triana_descuento]);
-
-        return res.json('El descuento se eliminó correctamente');
+            return res.json('El descuento se eliminó correctamente');
+        }
+        catch (error) {
+            return res.json('No se pudo eliminar el descuento, ya que esta siendo utilizado por una promoción')
+        }
     }
 
     //actualizar un descuento
