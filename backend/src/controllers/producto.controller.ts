@@ -44,7 +44,6 @@ export class ProductoController{
             cantmil:req.body.cantmil,
             estado:req.body.estado,
             variedad:req.body.variedad
-
         }
 
         await db.query('insert into producto set ?', [guardarImagen]);
