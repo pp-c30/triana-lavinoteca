@@ -13,13 +13,13 @@ exports.conexion = void 0;
 const promise_mysql_1 = require("promise-mysql");
 function conexion() {
     return __awaiter(this, void 0, void 0, function* () {
-        const coneect = yield promise_mysql_1.createPool({
+        const connect = yield promise_mysql_1.createPool({
             host: 'localhost',
             user: 'root',
             password: '',
             database: 'triana'
         });
-        return coneect;
+        return connect;
     });
 }
 exports.conexion = conexion;
