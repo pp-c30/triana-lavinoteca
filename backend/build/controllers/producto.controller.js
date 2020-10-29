@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.ProductoController = void 0;
 const database_1 = require("../database");
 const cloudinary_1 = __importDefault(require("cloudinary"));
 const fs_extra_1 = __importDefault(require("fs-extra"));
@@ -54,6 +55,20 @@ class ProductoController {
             yield db.query('insert into producto set ?', [guardarImagen]);
             fs_extra_1.default.unlink(req.file.path);
             res.json('Se guardo exitosamente los datos y la imagen');
+        });
+    }
+    //eliminar un producto
+    eliminarTrianaProducto(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const db = yield database_1.conexion();
+            let codigo_triana_producto = req.params.codigo_triana_producto;
+            try {
+                yield db.query("delete from producto where id_producto = ?", [codigo_triana_producto]);
+                return res.json('El producto se eliminó correctamente');
+            }
+            catch (error) {
+                return res.json('No se pudo eliminar el producto, ya que esta siendo utilizado por una opinión y/o promoción');
+            }
         });
     }
     //actualizar producto

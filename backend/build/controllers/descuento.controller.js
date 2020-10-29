@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.DescuentoController = void 0;
 const database_1 = require("../database");
 class DescuentoController {
     //listar descuento
@@ -34,8 +35,13 @@ class DescuentoController {
         return __awaiter(this, void 0, void 0, function* () {
             const db = yield database_1.conexion();
             let codigo_triana_descuento = req.params.codigo_triana_descuento;
-            yield db.query("delete from descuento where id_des = ?", [codigo_triana_descuento]);
-            return res.json('El descuento se eliminó correctamente');
+            try {
+                yield db.query("delete from descuento where id_des = ?", [codigo_triana_descuento]);
+                return res.json('El descuento se eliminó correctamente');
+            }
+            catch (error) {
+                return res.json('No se pudo eliminar el descuento, ya que esta siendo utilizado por una promoción');
+            }
         });
     }
     //actualizar un descuento

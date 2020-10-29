@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.VariedadController = void 0;
 const database_1 = require("../database");
 class VariedadController {
     //listar variedad
@@ -37,6 +38,20 @@ class VariedadController {
             let nuevos_datos_variedad = req.body;
             yield db.query("update variedad set ? where id_varie = ?", [nuevos_datos_variedad, codigo_triana_variedad]);
             return res.json('Se actualizo exitosamente');
+        });
+    }
+    //eliminar una variedad
+    eliminarTrianaVariedad(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const db = yield database_1.conexion();
+            let codigo_triana_variedad = req.params.codigo_triana_variedad;
+            try {
+                yield db.query("delete from variedad where id_varie = ?", [codigo_triana_variedad]);
+                return res.json('La variedad se eliminó correctamente');
+            }
+            catch (error) {
+                return res.json('No se pudo eliminar la variedad, ya que esta siendo utilizado por un producto');
+            }
         });
     }
     //obtener una variedad
