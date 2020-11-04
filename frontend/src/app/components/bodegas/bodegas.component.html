@@ -1,1 +1,29 @@
-<p>bodegas works!</p>
+<div class="row">
+    <div class="col-sm-8">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Descripción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let bodega of listBodega">
+                    <td>{{bodega.descripcion}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-header">Formulario de bodegas</div>
+            <div class="card-body">
+                <form [formGroup]="formBodega" (ngSubmit)="guardarBodega()">
+                    <div class="form-group">
+                        <input formControlName="descripcion" placeholder="Ingrese la descripción" type="text" class="form-control">
+                    </div>
+                    <button class="btn btn-success">Guardar una bodega</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

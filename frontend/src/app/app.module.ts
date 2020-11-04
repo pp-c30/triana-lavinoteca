@@ -12,6 +12,14 @@ import { PromocionesComponent } from './components/promociones/promociones.compo
 import { VariedadesComponent } from './components/variedades/variedades.component';
 import { ImageneshomeComponent } from './components/imageneshome/imageneshome.component';
 
+import {HttpClientModule} from '@angular/common/http';
+
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 @NgModule({
   declarations: [
@@ -23,11 +31,16 @@ import { ImageneshomeComponent } from './components/imageneshome/imageneshome.co
     OpinionesComponent,
     PromocionesComponent,
     VariedadesComponent,
-    ImageneshomeComponent,
+    ImageneshomeComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
+    Ng2SearchPipeModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]
