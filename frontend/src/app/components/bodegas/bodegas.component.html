@@ -3,12 +3,21 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Descripción</th>
+                    <th>Id</th>
+                    <th style="text-align: center;">Descripción</th>
+                    <th style="text-align: center;">Operaciones</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let bodega of listBodega">
+                    <td>{{bodega.id_bodega}}</td>
                     <td>{{bodega.descripcion}}</td>
+                    <td>
+                        <div class="btn-group btn-group-sm">
+                            <button (click)="eliminarBodega(bodega.id_bodega)" class="btn btn-danger">Eliminar</button>
+                            <button (click)="editarBodega(bodega)" class="btn btn-primary">Editar</button>
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -17,11 +26,16 @@
         <div class="card">
             <div class="card-header">Formulario de bodegas</div>
             <div class="card-body">
-                <form [formGroup]="formBodega" (ngSubmit)="guardarBodega()">
+                <form [formGroup]="formBodega" (ngSubmit)="guardarBodega()" novalidate>
+                    <input formControlName="id_bodega" type="hidden">
                     <div class="form-group">
-                        <input formControlName="descripcion" placeholder="Ingrese la descripción" type="text" class="form-control">
+                        <input [ngClass]="{'is-invalid':(formBodega.get('descripcion')?.touched || formBodega.get('descripcion')?.dirty) && formBodega.get('descripcion')?.invalid}" formControlName="descripcion" placeholder="Ingrese la descripción" type="text" class="form-control">
+                        <div class="invalid-feedback">
+                            <span *ngIf="formBodega.get('descripcion').hasError('required')">Campo Requerido </span>
+                            <span *ngIf="!formBodega.get('descripcion').hasError('minLength')">(Mínimo 6 caracteres)</span>
+                        </div>
                     </div>
-                    <button class="btn btn-success">Guardar una bodega</button>
+                    <button [disabled]="formBodega.invalid" class="btn btn-success">Guardar una bodega</button>
                 </form>
             </div>
         </div>

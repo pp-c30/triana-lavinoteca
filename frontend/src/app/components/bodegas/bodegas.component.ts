@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BodegasService } from '../../services/bodegas.service';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { IBodega } from 'src/app/models/Bodega';
 
 @Component({
@@ -20,7 +20,8 @@ export class BodegasComponent implements OnInit {
   {
     // Construcción del formulario
     this.formBodega = this.fb.group({
-      descripcion: ['']
+      id_bodega: [null],
+      descripcion: ['', [Validators.required, Validators.minLength(6)]]
     });
    }
 
@@ -32,23 +33,64 @@ export class BodegasComponent implements OnInit {
   obtenerBodega(){
     this.bodegaServ.getBodega().subscribe(
       resultado => this.listBodega = resultado,
-      // Si hay un error que lo imprima en consola
+      // Si hay un error, que este se imprima en consola
       error => console.log(error)
     );
   }
 
-  // Este metodo le enviara los datos, que recoge del formulario, al saveBodega
   guardarBodega(){
-    this.bodegaServ.saveBodega(this.formBodega.value).subscribe(
-      resultado => {
-        console.log(resultado);
-        // Se refresca la grilla
-        this.obtenerBodega();
-        // Se resetea el formulario
-        this.formBodega.reset();
-      },
-      // Si hay un error que lo imprima en consola
+    if (this.formBodega.value.id_bodega)
+    {// Se actualiza
+      this.bodegaServ.updateBodega(this.formBodega.value).subscribe(
+        respuesta =>
+        { // La respuesta se mostrara en consola
+          console.log(respuesta);
+          // Se refrescan los datos
+          this.obtenerBodega();
+          // Se resetea el formulario
+          this.formBodega.reset();
+        },
+        // Si hay un error, que este se imprima en consola
+        error => console.log(error)
+      );
+    }
+    else {
+      // El metodo guardarBodega le enviara los datos, que recoge del formulario, al saveBodega
+      this.bodegaServ.saveBodega(this.formBodega.value).subscribe(
+        resultado => {
+          console.log(resultado);
+          // Se refresca la grilla
+          this.obtenerBodega();
+          // Se resetea el formulario
+          this.formBodega.reset();
+        },
+        // Si hay un error, que este se imprima en consola
+        error => console.log(error)
+      );
+    }
+  }
+
+  // El atributo bodega sera del tipo IBodega, y respetara los datos que contenga esa interfaz
+  editarBodega(bodega: IBodega)
+  {
+    // En formBodega, van a ser seteados sus valores
+    this.formBodega.setValue(bodega);
+  }
+
+  eliminarBodega(id: number)
+  {
+    // Preguntamos si fue confirmado
+    if (confirm('Está seguro de realizar esta acción?')){
+      this.bodegaServ.deleteBodega(id).subscribe(
+        // Vamos a recibir una respuesta por parte del servicio
+        respuesta => {
+          console.log(respuesta);
+          // Se refresca la grilla
+          this.obtenerBodega();
+        },
+      // Si hay un error, que este se imprima en consola
       error => console.log(error)
-    );
+      );
+    }
   }
 }
