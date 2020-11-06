@@ -11,6 +11,8 @@ import { OpinionesComponent } from './components/opiniones/opiniones.component';
 import { PromocionesComponent } from './components/promociones/promociones.component';
 import { VariedadesComponent } from './components/variedades/variedades.component';
 import { ImageneshomeComponent } from './components/imageneshome/imageneshome.component';
+import { CabeceraComponent } from './cabecera/cabecera.component';
+import { CuerpoComponent } from './cuerpo/cuerpo.component';
 
 import {HttpClientModule} from '@angular/common/http';
 
@@ -31,16 +33,18 @@ import { NgxPaginationModule } from 'ngx-pagination';
     OpinionesComponent,
     PromocionesComponent,
     VariedadesComponent,
-    ImageneshomeComponent
+    ImageneshomeComponent,
+    CabeceraComponent,
+    CuerpoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule,
     Ng2SearchPipeModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

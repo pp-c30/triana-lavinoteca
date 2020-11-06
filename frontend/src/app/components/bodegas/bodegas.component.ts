@@ -14,6 +14,12 @@ export class BodegasComponent implements OnInit {
   // Este es un atributo del tipo FormGroup
   formBodega: FormGroup;
 
+  // Este es un atributo del tipo any (acepta strings, numbers, etc).
+  buscarBodega: any;
+
+  // tslint:disable-next-line: no-inferrable-types
+  p: number = 1;
+
    /* bodegasServ: es una instancia que nos permitira acceder a los metodos que contiene la clase BodegasService
    fb: este atributo es una instancia de la clase FormBuilder*/
   constructor(private bodegaServ: BodegasService, private fb: FormBuilder)
