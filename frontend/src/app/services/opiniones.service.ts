@@ -1,9 +1,19 @@
 import { Injectable } from '@angular/core';
 
+import { HttpClient } from "@angular/common/http";
+
+import { Iopinion } from "../models/Opinion";
 @Injectable({
   providedIn: 'root'
 })
 export class OpinionesService {
 
-  constructor() { }
+  constructor(private http:HttpClient) {
+  
+   }
+   getOpiniones()
+    {
+      return this.http.get<Iopinion[]>('http:localhost:3000/triana_opinion')
+    }
+
 }
