@@ -11,12 +11,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let opinion of listOpinion">
+                    <tr style="text-align: center;" *ngFor="let opinion of listOpinion">
                         <td>{{opinion.id_opinion}}</td>
                         <td>{{opinion.id_producto}}</td>
                         <td>{{opinion.descripcion}}</td>
                         <td>
-                            <div class="btn-group btn-group-sm" style="text-align: center;">
+                            <div class="btn-group btn-group-sm">
                                 <button (click)="eliminarOpinion(opinion.id_opinion)" class="btn btn-danger">Eliminar</button>
                             </div>
                         </td>
