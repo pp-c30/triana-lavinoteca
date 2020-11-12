@@ -25,7 +25,7 @@ export class PromocionesService {
   // A traves de este metodo recibiremos una promociones que es del tipo IPromociones
   updatePromociones(UnaPromociones: IPromociones)
   {
-    let id: number; 
+    let id: number;
     id = UnaPromociones.id_promo;
     // Retornara la respuesta que nos dara la api: 'Se actualizo exitosamente'
     return this.http.put('http://localhost:3000/triana_promociones/' + id, UnaPromociones);
@@ -35,5 +35,4 @@ export class PromocionesService {
   {// Retornara la respuesta que nos dara la api: 'La promociones se eliminó correctamente'
     return this.http.delete('http://localhost:3000/triana_promociones/' + id);
   }
- 
 }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { OpinionesService } from "../../services/opiniones.service";
+import { OpinionesService } from '../../services/opiniones.service';
 
-import { FormBuilder, FormGroup, Form } from "@angular/forms";
+import { FormBuilder, FormGroup, Form } from '@angular/forms';
 
 @Component({
   selector: 'app-opiniones',
@@ -10,62 +10,57 @@ import { FormBuilder, FormGroup, Form } from "@angular/forms";
   styleUrls: ['./opiniones.component.css']
 })
 export class OpinionesComponent implements OnInit {
-  
-  listOpiniones = [];
 
-  formOpiniones: FormGroup;
+  listOpinion = [];
 
-  constructor(private opinionesserv:OpinionesService,private fb: FormBuilder)
+  formOpinion: FormGroup;
+
+  constructor(private opinionesserv: OpinionesService, private fb: FormBuilder)
    {
-    this.formOpiniones = this.fb.group({
-
-  
-      descripcion:['']
-
+    this.formOpinion = this.fb.group({
+      id_producto: [],
+      descripcion: ['']
     });
    }
 
   ngOnInit(): void {
-    this.obtenerOpiniones();
+    this.obtenerOpinion();
   }
 
-  obtenerOpiniones(){
-    this.opinionesserv.getOpiniones().subscribe(
+  obtenerOpinion(){
+    this.opinionesserv.getOpinion().subscribe(
 
-      resultado => this.listOpiniones = resultado,
+      resultado => this.listOpinion = resultado,
       error => console.log(error)
-    )
+    );
   }
 
-  guardarOpiniones()
+  guardarOpinion()
   {
-    //console.log(this.formOpiniones.value);  
-    this.opinionesserv.saveOpiniones(this.formOpiniones.value).subscribe(
+    // console.log(this.formOpiniones.value);
+    this.opinionesserv.saveOpinion(this.formOpinion.value).subscribe(
       resultado => {
         console.log(resultado);
-        //se refresca la grilla
-        this.obtenerOpiniones();
-        this.formOpiniones.reset();
+        // se refresca la grilla
+        this.obtenerOpinion();
+        this.formOpinion.reset();
       },
       error => console.log(error)
     );
 
   }
 
-  eliminarOpiniones(codigo_triana_opinion:number)
+  eliminarOpinion(id: number)
   {
-    if(confirm('Esta seguro que desa ejecutar esta accion?')){
-      this.opinionesserv.deleteOpiniones(codigo_triana_opinion).subscribe(
-        respuesta =>{
+    if (confirm('Esta seguro que desa ejecutar esta accion?')){
+      this.opinionesserv.deleteOpinion(id).subscribe(
+        respuesta => {
           console.log(respuesta);
-          this.obtenerOpiniones();
+          this.obtenerOpinion();
         },
         error => console.log(error)
       );
     }
-    
   }
-
-
-
 }
+

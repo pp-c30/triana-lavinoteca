@@ -1,41 +1,45 @@
-<div class="row">
-    <div class="cols-sm-6">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Descripcion</th>
-                    <th>Operaciones</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let opinion of listOpiniones">
-                <td> {{opinion.descripcion}}</td>
-                <td>
-                    <div class="btn-group btn-group-sm">
-                        <button (click)="eliminarOpiniones(opiniones.codigo_triana_opinion);" class="btn btn-danger">Eliminar</button>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-
-        </table>
-
-    </div>
-
-<div class="col-sm-6">
-    <div class="card">
-    <div class="card-header">Formulario de Opinion</div>
-    <div class="card-body">
-        <form [formGroup]="formOpiniones" (ngSubmit)="guardarOpiniones()">
-            <div class="form-group">
-            <input formControlName="descripcion" placeholder="Ingrese una Opinion"type="text" class="form-control">
+<div class="p-3">
+    <div class="row">
+        <div class="col-sm-8">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Id de Opinion</th>
+                        <th>Id de Producto</th>
+                        <th style="text-align: center;">Descripción</th>
+                        <th style="text-align: center;">Operaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let opinion of listOpinion">
+                        <td>{{opinion.id_opinion}}</td>
+                        <td>{{opinion.id_producto}}</td>
+                        <td>{{opinion.descripcion}}</td>
+                        <td>
+                            <div class="btn-group btn-group-sm" style="text-align: center;">
+                                <button (click)="eliminarOpinion(opinion.id_opinion)" class="btn btn-danger">Eliminar</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <div class="btn-group btn-group-sm">
-            <button class="btn btn-success">Guardar una Opinion</button>  
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-header">Formulario de bodegas</div>
+                <div class="card-body">
+                    <form [formGroup]="formOpinion" (ngSubmit)="guardarOpinion()">
+                        <input formControlName="id_opinion" type="hidden">
+                        <div class="form-group">
+                            <input formControlName="id_producto" placeholder="Ingrese la id de un producto" type="text" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input formControlName="descripcion" placeholder="Ingrese una descripción" type="text" class="form-control">
+                        </div>
+                        <button class="btn btn-success">Guardar una Opinion</button>
+                    </form>
+                </div>
+            </div>
         </div>
-        </form>
-     </div>
-     </div>
     </div>
 </div>
