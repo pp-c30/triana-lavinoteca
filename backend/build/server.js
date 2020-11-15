@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Server = void 0;
 const express_1 = __importDefault(require("express"));
 const morgan_1 = __importDefault(require("morgan"));
 const cors_1 = __importDefault(require("cors"));
@@ -13,7 +14,7 @@ const descuento_routes_1 = __importDefault(require("./routes/descuento.routes"))
 const imageneshome_routes_1 = __importDefault(require("./routes/imageneshome.routes"));
 const opinion_routes_1 = __importDefault(require("./routes/opinion.routes"));
 const producto_routes_1 = __importDefault(require("./routes/producto.routes"));
-const promociones_routes_1 = __importDefault(require("./routes/promociones.routes"));
+const promocion_routes_1 = __importDefault(require("./routes/promocion.routes"));
 const variedad_routes_1 = __importDefault(require("./routes/variedad.routes"));
 const path_1 = __importDefault(require("path"));
 class Server {
@@ -36,7 +37,7 @@ class Server {
         this.app.use('/uploads', express_1.default.static(path_1.default.resolve('uploads')));
         this.app.use(opinion_routes_1.default);
         this.app.use(producto_routes_1.default);
-        this.app.use(promociones_routes_1.default);
+        this.app.use(promocion_routes_1.default);
         this.app.use(variedad_routes_1.default);
     }
     middleware() {

@@ -8,7 +8,7 @@ import enrutadorDescuento from "./routes/descuento.routes";
 import enrutadorImagenesHome from "./routes/imageneshome.routes";
 import enrutadorOpinion from "./routes/opinion.routes";
 import enrutadorProducto from "./routes/producto.routes";
-import enrutadorPromociones from "./routes/promociones.routes";
+import enrutadorPromocion from "./routes/promocion.routes";
 import enrutadorVariedad from "./routes/variedad.routes";
 import path from 'path';
 
@@ -39,7 +39,7 @@ export class Server {
         this.app.use('/uploads', express.static(path.resolve('uploads')));
         this.app.use(enrutadorOpinion);
         this.app.use(enrutadorProducto);
-        this.app.use(enrutadorPromociones);
+        this.app.use(enrutadorPromocion);
         this.app.use(enrutadorVariedad);
     }
 
