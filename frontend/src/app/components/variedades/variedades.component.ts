@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { VariedadesService } from "../../services/variedades.service";
-import { FormBuilder, FormGroup, Form } from "@angular/forms";
+import { VariedadesService } from '../../services/variedades.service';
+import { FormBuilder, FormGroup, Form } from '@angular/forms';
 
 @Component({
   selector: 'app-variedades',
@@ -13,10 +13,10 @@ export class VariedadesComponent implements OnInit {
   listVariedad = [];
   formVariedad: FormGroup;
 
-  constructor(private variedadServ:VariedadesService,private fb: FormBuilder) {
+  constructor(private variedadServ: VariedadesService, private fb: FormBuilder) {
     this.formVariedad = this.fb.group({
-      id_varie:[''],
-      descripcion:['']
+      id_varie: [''],
+      descripcion: ['']
 
     });
    }
@@ -29,20 +29,19 @@ export class VariedadesComponent implements OnInit {
       resultado => this.listVariedad = resultado,
       error => console.log(error)
 
-    )
+    );
   }
 
   guardarVariedad(){
-    //console.log(this.formVariedad.value);
+    // console.log(this.formVariedad.value);
     this.variedadServ.saveVariedad(this.formVariedad.value).subscribe(
       resultado => {
         console.log(resultado);
-        //se refresca la grilla
+        // se refresca la grilla
         this.obtenerVariedad();
         this.formVariedad.reset();
       },
       error => console.log(error)
     );
   }
-  
 }
