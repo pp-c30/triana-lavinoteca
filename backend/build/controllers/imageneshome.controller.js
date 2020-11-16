@@ -41,5 +41,12 @@ class ImagenesHomeController {
             res.json('Se guardo exitosamente los datos y la imagen');
         });
     }
+    listarTrianaImagenesHome(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const db = yield database_1.conexion();
+            let lista = yield db.query('select * from imageneshome');
+            res.json(lista);
+        });
+    }
 }
 exports.ImagenesHomeController = ImagenesHomeController;

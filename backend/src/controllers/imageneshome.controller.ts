@@ -35,4 +35,13 @@ export class ImagenesHomeController{
 
         res.json('Se guardo exitosamente los datos y la imagen');
     }
+
+    async listarTrianaImagenesHome(req:Request, res:Response)
+    {
+        const db = await conexion();
+        
+        let lista = await db.query('select * from imageneshome');
+        
+        res.json(lista);
+    }
 }
