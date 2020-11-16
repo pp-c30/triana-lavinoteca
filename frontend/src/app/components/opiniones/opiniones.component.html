@@ -1,17 +1,24 @@
 <div class="p-3">
     <div class="row">
         <div class="col-sm-8">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <input placeholder="Ingrese criterio de búsqueda" [(ngModel)]="buscarOpinion" type="text" class="form-control">
+                    </div>
+                </div>
+            </div>
             <table class="table table-striped">
                 <thead>
-                    <tr>
-                        <th>Id de Opinion</th>
-                        <th>Id de Producto</th>
-                        <th style="text-align: center;">Descripción</th>
-                        <th style="text-align: center;">Operaciones</th>
+                    <tr style="text-align: center;">
+                        <th>Id</th>
+                        <th>Producto</th>
+                        <th>Descripción</th>
+                        <th>Operaciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr style="text-align: center;" *ngFor="let opinion of listOpinion">
+                    <tr style="text-align: center;" *ngFor="let opinion of listOpinion | filter:buscarOpinion | paginate:{itemsPerPage:4, currentPage:p}">
                         <td>{{opinion.id_opinion}}</td>
                         <td>{{opinion.id_producto}}</td>
                         <td>{{opinion.descripcion}}</td>
@@ -23,20 +30,29 @@
                     </tr>
                 </tbody>
             </table>
+            <div class="row">
+                <div class="col-sm-5">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </div>
+            </div>
         </div>
         <div class="col-sm-4">
             <div class="card">
                 <div class="card-header">Formulario de Opinion</div>
                 <div class="card-body">
-                    <form [formGroup]="formOpinion" (ngSubmit)="guardarOpinion()">
+                    <form [formGroup]="formOpinion" (ngSubmit)="guardarOpinion()" novalidate>
                         <input formControlName="id_opinion" type="hidden">
                         <div class="form-group">
                             <input formControlName="id_producto" placeholder="Ingrese la id de un producto" type="text" class="form-control">
                         </div>
                         <div class="form-group">
-                            <input formControlName="descripcion" placeholder="Ingrese una descripción" type="text" class="form-control">
+                            <input [ngClass]="{'is-invalid':(formOpinion.get('descripcion')?.touched || formOpinion.get('descripcion')?.dirty) && formOpinion.get('descripcion')?.invalid}" formControlName="descripcion" placeholder="Ingrese la descripción" type="text" class="form-control">
+                            <div class="invalid-feedback">
+                                <span *ngIf="formOpinion.get('descripcion').hasError('required')">Campo Requerido </span>
+                                <span *ngIf="!formOpinion.get('descripcion').hasError('minLength')">(Mínimo 6 caracteres)</span>
+                            </div>
                         </div>
-                        <button class="btn btn-success">Guardar una Opinion</button>
+                        <button [disabled]="formOpinion.invalid" class="btn btn-success">Guardar una bodega</button>
                     </form>
                 </div>
             </div>

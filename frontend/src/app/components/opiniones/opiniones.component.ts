@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { OpinionesService } from '../../services/opiniones.service';
 
-import { FormBuilder, FormGroup, Form } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-opiniones',
@@ -15,11 +15,18 @@ export class OpinionesComponent implements OnInit {
 
   formOpinion: FormGroup;
 
+  // Este es un atributo del tipo any (acepta strings, numbers, etc).
+  buscarOpinion: any;
+
+  // tslint:disable-next-line: no-inferrable-types
+  p: number = 1;
+
   constructor(private opinionesserv: OpinionesService, private fb: FormBuilder)
    {
     this.formOpinion = this.fb.group({
+      id_opinion: [null],
       id_producto: [],
-      descripcion: ['']
+      descripcion: ['', [Validators.required, Validators.minLength(6)]]
     });
    }
 
