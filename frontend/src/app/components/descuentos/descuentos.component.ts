@@ -22,7 +22,7 @@ export class DescuentosComponent implements OnInit {
 
    /* DescuentoServ: es una instancia que nos permitira acceder a los metodos que contiene la clase DescuentoService
    fb: este atributo es una instancia de la clase FormBuilder*/
-  constructor(private descuentoServ: DescuentoService, private fb: FormBuilder)
+  constructor(private descuentoServ: DescuentosService, private fb: FormBuilder)
    {
      // Construcción del formulario
     this.formDescuento = this.fb.group({
