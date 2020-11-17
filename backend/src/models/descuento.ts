@@ -1,6 +1,6 @@
 export interface IDescuento
 {
-    id_descuento?:number;
+    id_des?:number;
     porcentaje:number; 
     estado:number;
 }

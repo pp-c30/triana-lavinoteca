@@ -1,1 +1,66 @@
-<p>descuentos works!</p>
+<div class="p-3">
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <input placeholder="Ingrese criterio de búsqueda" [(ngModel)]="buscarDescuento" type="text" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr style="text-align: center;">
+                        <th>Id</th>
+                        <th>Producto</th>
+                        <th>Descuento</th>
+                        <th>Operaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="text-align: center;" *ngFor="let descuento of listDescuento | filter:buscarDescuento | paginate:{itemsPerPage:4, currentPage:p}">
+                        <td>{{descuento.id_des}}</td>
+                        <td>{{descuento.porcentaje}}</td>
+                        <td>{{descuento.estado}}</td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <button (click)="eliminarDescuento(descuento.id_des)" class="btn btn-danger">Eliminar</button>
+                                <button (click)="editarDescuento(descuento)" class="btn btn-primary">Editar</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-sm-5">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-header">Formulario de descuento</div>
+                <div class="card-body">
+                    <form [formGroup]="formDescuento" (ngSubmit)="guardarDescuento()" novalidate>
+                        <input formControlName="id_des" type="hidden">
+                        <div class="form-group">
+                            <input [ngClass]="{'is-invalid':(formDescuento.get('producto')?.touched || formDescuento.get('producto')?.dirty) && formDescuento.get('producto')?.invalid}" formControlName="producto" placeholder="Ingrese el producto" type="text" class="form-control">
+                            <div class="invalid-feedback">
+                                <span *ngIf="formDescuento.get('producto').hasError('required')">Campo Requerido </span>
+                                <span *ngIf="!formDescuento.get('producto').hasError('minLength')"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input [ngClass]="{'is-invalid':(formDescuento.get('descuento')?.touched || formDescuento.get('producto')?.dirty) && formDescuento.get('descuento')?.invalid}" formControlName="descuento" placeholder="Ingrese el descuento" type="text" class="form-control">
+                            <div class="invalid-feedback">
+                                <span *ngIf="formDescuento.get('descuento').hasError('required')">Campo Requerido </span>
+                                <span *ngIf="!formDescuento.get('descuento').hasError('minLength')"></span>
+                            </div>
+                        </div>
+                        <button [disabled]="formDescuento.invalid" class="btn btn-success">Guardar una descuento</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
