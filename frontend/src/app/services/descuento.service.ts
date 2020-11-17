@@ -4,7 +4,7 @@ import { IDescuento } from '../models/Descuento';
 @Injectable({
   providedIn: 'root'
 })
-export class DescuentosService {
+export class DescuentoService {
 /*Creamos un atributo llamado http, el cual es privado y del tipo HttpCliente. Esto basicamente es una instancia
   que puede acceder  a todas las herramientas del HttpClient.*/
   constructor(private http: HttpClient) {
