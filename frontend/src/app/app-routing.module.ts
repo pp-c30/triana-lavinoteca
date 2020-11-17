@@ -8,7 +8,7 @@ import { OpinionesComponent } from './components/opiniones/opiniones.component';
 import { PromocionesComponent } from './components/promociones/promociones.component';
 import { VariedadesComponent } from './components/variedades/variedades.component';
 import { ImageneshomeComponent } from './components/imageneshome/imageneshome.component';
-import { CuerpoComponent } from './cuerpo/cuerpo.component';
+import { CuerpoComponent } from './components/cuerpo/cuerpo.component';
 
 
 const routes: Routes = [
