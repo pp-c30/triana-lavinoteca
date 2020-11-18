@@ -4,7 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { IDescuento } from 'src/app/models/Descuento';
 
 @Component({
-  selector: 'app-descuentos',
+  selector: 'app-descuento',
   templateUrl: './descuento.component.html',
   styleUrls: ['./descuento.component.css']
 })
