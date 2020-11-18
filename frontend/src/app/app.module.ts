@@ -28,7 +28,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     AppComponent,
     BodegasComponent,
     CategoriasComponent,
-    DescuentosComponent,
+    DescuentoComponent,
     ProductosComponent,
     OpinionesComponent,
     PromocionesComponent,

@@ -8,11 +8,14 @@ export class DescuentoService {
 /*Creamos un atributo llamado http, el cual es privado y del tipo HttpCliente. Esto basicamente es una instancia
   que puede acceder  a todas las herramientas del HttpClient.*/
   constructor(private http: HttpClient) {
+
+  }
+
     // A través del metodo GET vamos a visitar a la ruta indicada, la cual nos retornara una lista de descuento.
-  getDescuento();
+  getDescuento()
   {
     // Los datos que lleguen tendran que concordar con la interfaz IDescuento, que es de tipo array (ya que llamamos una lista).
-    return this.http.get<Iv[]>('http://localhost:3000/triana_descuento');
+    return this.http.get<IDescuento[]>('http://localhost:3000/triana_descuento');
   }
   // A través de este metodo, saveDescuento, recibiremos una descuento
   saveDescuento(UnaDescuento: IDescuento)
@@ -36,4 +39,4 @@ export class DescuentoService {
     return this.http.delete('http://localhost:3000/triana_descuento/' + id);
   }
    }
-}
+
