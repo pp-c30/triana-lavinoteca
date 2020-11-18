@@ -39,3 +39,4 @@ export class DescuentosService {
     return this.http.delete('http://localhost:3000/triana_descuento/' + id);
   }
 }
+
