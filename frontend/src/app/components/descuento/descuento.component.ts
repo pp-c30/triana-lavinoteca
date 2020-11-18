@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DescuentoService } from '../../services/descuento.service';
+import { DescuentosService } from '../../services/descuentos.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { IDescuento } from 'src/app/models/Descuento';
 
@@ -22,7 +22,7 @@ export class DescuentoComponent implements OnInit {
 
    /* descuentosServ: es una instancia que nos permitira acceder a los metodos que contiene la clase DescuentosService
    fb: este atributo es una instancia de la clase FormBuilder*/
-  constructor(private descuentosServ: DescuentoService, private fb: FormBuilder)
+  constructor(private descuentosServ: DescuentosService, private fb: FormBuilder)
   {
     // Construcción del formulario
     this.formDescuento = this.fb.group({
