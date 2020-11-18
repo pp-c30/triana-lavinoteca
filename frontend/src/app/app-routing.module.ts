@@ -21,15 +21,14 @@ const routes: Routes = [
     path: 'bodegas', component: BodegasComponent
   },
   {
-<<<<<<< HEAD
     // tslint:disable-next-line: quotemark
     path: "descuento", component: DescuentoComponent
-=======
-    path: 'categorias', component: CategoriasComponent
->>>>>>> 37c0ebb636ee477ef5458fba32b6b8545612b6b3
   },
   {
-    path: 'descuentos', component: DescuentosComponent
+    path: 'categorias', component: CategoriasComponent
+  },
+  {
+    path: 'descuento', component: DescuentoComponent
   },
   {
     path: 'productos', component: ProductosComponent

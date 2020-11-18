@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { DescuentosService } from '../../services/descuentos.service';
+import { DescuentoService } from '../../services/descuento.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { IDescuento } from 'src/app/models/Descuento';
 
 @Component({
-  selector: 'app-descuentos',
-  templateUrl: './descuentos.component.html',
-  styleUrls: ['./descuentos.component.css']
+  selector: 'app-descuento',
+  templateUrl: './descuento.component.html',
+  styleUrls: ['./descuento.component.css']
 })
-export class DescuentosComponent implements OnInit {
+export class DescuentoComponent implements OnInit {
   listDescuento: IDescuento[] = [];
 
   // Este es un atributo del tipo FormGroup
@@ -22,7 +22,7 @@ export class DescuentosComponent implements OnInit {
 
    /* descuentosServ: es una instancia que nos permitira acceder a los metodos que contiene la clase DescuentosService
    fb: este atributo es una instancia de la clase FormBuilder*/
-  constructor(private descuentosServ: DescuentosService, private fb: FormBuilder)
+  constructor(private descuentosServ: DescuentoService, private fb: FormBuilder)
   {
     // Construcción del formulario
     this.formDescuento = this.fb.group({
