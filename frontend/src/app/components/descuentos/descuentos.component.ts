@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { DescuentoService } from '../../services/descuento.service';
+import { DescuentosService } from '../../services/descuentos.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { IDescuento } from 'src/app/models/Descuento';
 
 @Component({
-  selector: 'app-descuento',
-  templateUrl: './descuento.component.html',
-  styleUrls: ['./descuento.component.css']
+  selector: 'app-descuentos',
+  templateUrl: './descuentos.component.html',
+  styleUrls: ['./descuentos.component.css']
 })
-export class DescuentoComponent implements OnInit {
+export class DescuentosComponent implements OnInit {
   listDescuento: IDescuento[] = [];
 
   // Este es un atributo del tipo FormGroup
@@ -20,33 +20,35 @@ export class DescuentoComponent implements OnInit {
   // tslint:disable-next-line: no-inferrable-types
   p: number = 1;
 
-   /* DescuentoServ: es una instancia que nos permitira acceder a los metodos que contiene la clase DescuentoService
+   /* descuentosServ: es una instancia que nos permitira acceder a los metodos que contiene la clase DescuentosService
    fb: este atributo es una instancia de la clase FormBuilder*/
-  constructor(private descuentoServ: DescuentoService, private fb: FormBuilder)
-   {
-     // Construcción del formulario
+  constructor(private descuentosServ: DescuentosService, private fb: FormBuilder)
+  {
+    // Construcción del formulario
     this.formDescuento = this.fb.group({
       id_des: [null],
-      producto: [, [Validators.required, Validators.minLength(1)]],
-      descuento: [, [Validators.required, Validators.minLength(1)]]
+      porcentaje: [, [Validators.required, Validators.minLength(1)]],
+      estado: [, [Validators.required, Validators.minLength(1)]]
     });
-    }
+  }
 
   ngOnInit(): void {
     this.obtenerDescuento();
   }
+
   // Es un metodo que se ejecuta al iniciar la pagina, y nos mostrara una lista
   obtenerDescuento(){
-    this.descuentoServ.getDescuento().subscribe(
+    this.descuentosServ.getDescuento().subscribe(
       resultado => this.listDescuento = resultado,
       // Si hay un error, que este se imprima en consola
       error => console.log(error)
     );
   }
+
   guardarDescuento(){
     if (this.formDescuento.value.id_des)
     {// Se actualiza
-      this.descuentoServ.updateDescuento(this.formDescuento.value).subscribe(
+      this.descuentosServ.updateDescuento(this.formDescuento.value).subscribe(
         respuesta =>
         { // La respuesta se mostrara en consola
           console.log(respuesta);
@@ -60,8 +62,8 @@ export class DescuentoComponent implements OnInit {
       );
     }
     else {
-      // El metodo guardarDescuento le enviara los datos, que recoge del formulario, al saveBodega
-      this.descuentoServ.saveDescuento(this.formDescuento.value).subscribe(
+      // El metodo guardarDescuento le enviara los datos, que recoge del formulario, al saveDescuento
+      this.descuentosServ.saveDescuento(this.formDescuento.value).subscribe(
         resultado => {
           console.log(resultado);
           // Se refresca la grilla
@@ -74,10 +76,11 @@ export class DescuentoComponent implements OnInit {
       );
     }
   }
+
   // El atributo descuento sera del tipo IDescuento, y respetara los datos que contenga esa interfaz
   editarDescuento(descuento: IDescuento)
   {
-    // En formDescuento, van a ser seteados sus valores
+    // En formBodega, van a ser seteados sus valores
     this.formDescuento.setValue(descuento);
   }
 
@@ -85,7 +88,7 @@ export class DescuentoComponent implements OnInit {
   {
     // Preguntamos si fue confirmado
     if (confirm('Está seguro de realizar esta acción?')){
-      this.descuentoServ.deleteDescuento(id).subscribe(
+      this.descuentosServ.deleteDescuento(id).subscribe(
         // Vamos a recibir una respuesta por parte del servicio
         respuesta => {
           console.log(respuesta);
