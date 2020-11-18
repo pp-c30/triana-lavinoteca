@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { BodegasComponent } from './components/bodegas/bodegas.component';
 import { CategoriasComponent } from './components/categorias/categorias.component';
-import { DescuentosComponent } from './components/descuentos/descuentos.component';
+import { DescuentoComponent } from './components/descuento/descuento.component';
 import { ProductosComponent } from './components/productos/productos.component';
 import { OpinionesComponent } from './components/opiniones/opiniones.component';
 import { PromocionesComponent } from './components/promociones/promociones.component';
@@ -21,7 +21,12 @@ const routes: Routes = [
     path: 'bodegas', component: BodegasComponent
   },
   {
+<<<<<<< HEAD
+    // tslint:disable-next-line: quotemark
+    path: "descuento", component: DescuentoComponent
+=======
     path: 'categorias', component: CategoriasComponent
+>>>>>>> 37c0ebb636ee477ef5458fba32b6b8545612b6b3
   },
   {
     path: 'descuentos', component: DescuentosComponent
