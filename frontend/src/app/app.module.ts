@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import {NavegacionComponent} from './components/navegacion/navegacion.component';
 import { BodegasComponent } from './components/bodegas/bodegas.component';
 import { CategoriasComponent } from './components/categorias/categorias.component';
 import { DescuentosComponent } from './components/descuentos/descuentos.component';
@@ -10,8 +11,8 @@ import { ProductosComponent } from './components/productos/productos.component';
 import { OpinionesComponent } from './components/opiniones/opiniones.component';
 import { PromocionesComponent } from './components/promociones/promociones.component';
 import { VariedadesComponent } from './components/variedades/variedades.component';
-import { CabeceraComponent } from './components/cabecera/cabecera.component';
-import { CuerpoComponent } from './components/cuerpo/cuerpo.component';
+import { AdminImageneshomeComponent } from './components/admin-imageneshome/admin-imageneshome.component';
+import { GaleriaComponent } from './components/galeria/galeria.component';
 
 import {HttpClientModule} from '@angular/common/http';
 
@@ -22,18 +23,20 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
+    NavegacionComponent,
     BodegasComponent,
     CategoriasComponent,
     ProductosComponent,
     OpinionesComponent,
     PromocionesComponent,
     VariedadesComponent,
-    CabeceraComponent,
-    CuerpoComponent,
-    DescuentosComponent
+    DescuentosComponent,
+    AdminImageneshomeComponent,
+    GaleriaComponent
   ],
   imports: [
     BrowserModule,

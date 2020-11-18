@@ -7,45 +7,39 @@ import { ProductosComponent } from './components/productos/productos.component';
 import { OpinionesComponent } from './components/opiniones/opiniones.component';
 import { PromocionesComponent } from './components/promociones/promociones.component';
 import { VariedadesComponent } from './components/variedades/variedades.component';
-import { CuerpoComponent } from './components/cuerpo/cuerpo.component';
-
+import { AdminImageneshomeComponent } from './components/admin-imageneshome/admin-imageneshome.component';
+import { GaleriaComponent } from './components/galeria/galeria.component';
 
 const routes: Routes = [
   {
-    // tslint:disable-next-line: quotemark
-    path: "cuerpo", component: CuerpoComponent
+    path: 'galeria', component: GaleriaComponent
   },
   {
-    // tslint:disable-next-line: quotemark
-    path: "bodegas", component: BodegasComponent
+    path: 'admin-imageneshome', component: AdminImageneshomeComponent
   },
   {
-    // tslint:disable-next-line: quotemark
-    path: "categorias", component: CategoriasComponent
+    path: 'bodegas', component: BodegasComponent
   },
   {
-    // tslint:disable-next-line: quotemark
-    path: "descuentos", component: DescuentosComponent
+    path: 'categorias', component: CategoriasComponent
   },
   {
-    // tslint:disable-next-line: quotemark
-    path: "productos", component: ProductosComponent
+    path: 'descuentos', component: DescuentosComponent
   },
   {
-    // tslint:disable-next-line: quotemark
-    path: "opiniones", component: OpinionesComponent
+    path: 'productos', component: ProductosComponent
   },
   {
-    // tslint:disable-next-line: quotemark
-    path: "promociones", component: PromocionesComponent
+    path: 'opiniones', component: OpinionesComponent
   },
   {
-    // tslint:disable-next-line: quotemark
-    path: "variedades", component: VariedadesComponent
+    path: 'promociones', component: PromocionesComponent
   },
   {
-    // tslint:disable-next-line: quotemark
-    path: "**", pathMatch: 'full',  redirectTo: 'cuerpo'
+    path: 'variedades', component: VariedadesComponent
+  },
+  {
+    path: '', redirectTo: '/galeria', pathMatch: 'full'
   }
 ];
 
