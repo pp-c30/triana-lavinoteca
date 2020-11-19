@@ -23,4 +23,9 @@ export class VariedadesService {
     let id:Number = unVariedad.id_varie;
     return this.http.put('http://localhost:3000/triana_variedad/:codigo_triana_variedad/'+id,unVariedad);
   }
+  deleteVariedad(id:number){
+
+    return this.http.delete('http://localhost:3000/triana_variedad/:codigo_triana_variedad/'+id)
+
+  }
 } 

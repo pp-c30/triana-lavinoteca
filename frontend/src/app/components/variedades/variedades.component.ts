@@ -66,4 +66,17 @@ export class VariedadesComponent implements OnInit {
     this.formVariedad.setValue(variedad);
 
   }
+  eliminarVariedad(id:number){
+    if(confirm('esta seguro que desa ejecutar esta accion?')){
+      this.variedadServ.deleteVariedad(id).subscribe(
+        resultado =>{
+          console.log(resultado);
+          this.obtenerVariedad();
+        },
+        error => console.log(error)
+      );
+    }
+    
+  }
+  
 }

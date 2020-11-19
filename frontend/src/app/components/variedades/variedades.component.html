@@ -14,7 +14,7 @@
                     <td>{{variedad.descripcion}}</td>
                     <td>
                         <div class="btn-group btn-group-sm">
-                            <button class="btn btn-danger">Eliminar</button>
+                            <button {click}="eliminarVariedad(variedad.id_varie);" class="btn btn-danger">Eliminar</button>
                             <button {click}="editarVariedad(variedad)" class="btn btn-primary">Editar</button>
                         </div>
                     </td>
