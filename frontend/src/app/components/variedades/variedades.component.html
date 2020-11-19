@@ -2,20 +2,20 @@
     <div class="col-sm-8">
         <table class="table table-striped">
             <thead>
-                <tr>
+                <tr style="text-align: center;">
                     <th>Id</th>
                     <th>Descripcion</th>
                     <th>Operaciones</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let variedad of listVariedad">
+                <tr style="text-align: center;" *ngFor="let variedad of listVariedad">
                     <td>{{variedad.id_varie}}</td>
                     <td>{{variedad.descripcion}}</td>
                     <td>
                         <div class="btn-group btn-group-sm">
-                            <button {click}="eliminarVariedad(variedad.id_varie);" class="btn btn-danger">Eliminar</button>
-                            <button {click}="editarVariedad(variedad)" class="btn btn-primary">Editar</button>
+                            <button (click)="eliminarVariedad(variedad.id_varie)" class="btn btn-danger">Eliminar</button>
+                            <button (click)="editarVariedad(variedad)" class="btn btn-primary">Editar</button>
                         </div>
                     </td>
                 </tr>
