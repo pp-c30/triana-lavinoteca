@@ -18,4 +18,9 @@ export class VariedadesService {
   saveVariedad(unVariedad:IVariedad){
     return this.http.post('http://localhost:3000/triana_variedad',unVariedad);
   }
+  updateVariedad(unVariedad: IVariedad)
+  {
+    let id:Number = unVariedad.id_varie;
+    return this.http.put('http://localhost:3000/triana_variedad/:codigo_triana_variedad/'+id,unVariedad);
+  }
 } 

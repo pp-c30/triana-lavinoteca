@@ -5,11 +5,19 @@
                 <tr>
                     <th>Id</th>
                     <th>Descripcion</th>
+                    <th>Operaciones</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let variedad of listVariedad">
+                    <td>{{variedad.id_varie}}</td>
                     <td>{{variedad.descripcion}}</td>
+                    <td>
+                        <div class="btn-group btn-group-sm">
+                            <button class="btn btn-danger">Eliminar</button>
+                            <button {click}="editarVariedad(variedad)" class="btn btn-primary">Editar</button>
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -21,6 +29,7 @@
             <div class="card-header">Formulario de variedades</div>
             <div class="card-body">
                 <form [formGroup]="formVariedad" (ngSubmit)="guardarVariedad()">
+                    <input formControlName="id_varie" type="hidden">
                     <div class="form-group">
                         <input formControlName="descripcion" placeholder="Ingrese descripcion" type="text" class="form-control">
                     </div>
