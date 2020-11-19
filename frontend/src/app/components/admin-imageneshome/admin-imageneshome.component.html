@@ -1,1 +1,25 @@
-<p>admin-imageneshome works!</p>
+<div class="row">
+    <div class="col-md-8">
+        <table class="table table-striped">
+            <thead>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Estado</th>
+                <th>Imagen_url</th>
+                <th>Public_id</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let fila of listado_datos_imageneshome">
+                    <td>{{fila.id_imagen}}</td>
+                    <td>{{fila.nombre}}</td>
+                    <td>{{fila.estado}}</td>
+                    <td>
+                        <img class="img-fluid" [src]="fila.imagen_url" alt="">
+                    </td>
+                    <td>{{fila.public_id}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-4"></div>
+</div>
