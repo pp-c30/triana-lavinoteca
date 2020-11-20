@@ -1,65 +1,63 @@
-<div class="p-3">
-    <div class="row">
-        <div class="col-sm-8">
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <input placeholder="Ingrese criterio de búsqueda" [(ngModel)]="buscarPromocion" type="text" class="form-control">
-                    </div>
-                </div>
-            </div>
-            <table class="table table-striped">
-                <thead>
-                    <tr style="text-align: center;">
-                        <th>Id</th>
-                        <th>Producto</th>
-                        <th>Descuento</th>
-                        <th>Operaciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr style="text-align: center;" *ngFor="let promocion of listPromocion | filter:buscarPromocion | paginate:{itemsPerPage:4, currentPage:p}">
-                        <td>{{promocion.id_promo}}</td>
-                        <td>{{promocion.producto}}</td>
-                        <td>{{promocion.descuento}}</td>
-                        <td>
-                            <div class="btn-group btn-group-sm">
-                                <button (click)="eliminarPromocion(promocion.id_promo)" class="btn btn-danger">Eliminar</button>
-                                <button (click)="editarPromocion(promocion)" class="btn btn-primary">Editar</button>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="row">
-                <div class="col-sm-5">
-                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+<div class="row">
+    <div class="col-sm-8">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <input placeholder="Ingrese criterio de búsqueda" [(ngModel)]="buscarPromocion" type="text" class="form-control">
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="card">
-                <div class="card-header">Formulario de promociones</div>
-                <div class="card-body">
-                    <form [formGroup]="formPromocion" (ngSubmit)="guardarPromocion()" novalidate>
-                        <input formControlName="id_promo" type="hidden">
-                        <div class="form-group">
-                            <input [ngClass]="{'is-invalid':(formPromocion.get('producto')?.touched || formPromocion.get('producto')?.dirty) && formPromocion.get('producto')?.invalid}" formControlName="producto" placeholder="Ingrese el producto" type="text" class="form-control">
-                            <div class="invalid-feedback">
-                                <span *ngIf="formPromocion.get('producto').hasError('required')">Campo Requerido </span>
-                                <span *ngIf="!formPromocion.get('producto').hasError('minLength')"></span>
-                            </div>
+        <table class="table table-striped">
+            <thead>
+                <tr style="text-align: center;">
+                    <th>Id</th>
+                    <th>Producto</th>
+                    <th>Descuento</th>
+                    <th>Operaciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="text-align: center;" *ngFor="let promocion of listPromocion | filter:buscarPromocion | paginate:{itemsPerPage:4, currentPage:p}">
+                    <td>{{promocion.id_promo}}</td>
+                    <td>{{promocion.producto}}</td>
+                    <td>{{promocion.descuento}}</td>
+                    <td>
+                        <div class="btn-group btn-group-sm">
+                            <button (click)="eliminarPromocion(promocion.id_promo)" class="btn btn-danger">Eliminar</button>
+                            <button (click)="editarPromocion(promocion)" class="btn btn-primary">Editar</button>
                         </div>
-                        <div class="form-group">
-                            <input [ngClass]="{'is-invalid':(formPromocion.get('descuento')?.touched || formPromocion.get('producto')?.dirty) && formPromocion.get('descuento')?.invalid}" formControlName="descuento" placeholder="Ingrese el descuento" type="text" class="form-control">
-                            <div class="invalid-feedback">
-                                <span *ngIf="formPromocion.get('descuento').hasError('required')">Campo Requerido </span>
-                                <span *ngIf="!formPromocion.get('descuento').hasError('minLength')"></span>
-                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col-sm-5">
+                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-header">Formulario de promociones</div>
+            <div class="card-body">
+                <form [formGroup]="formPromocion" (ngSubmit)="guardarPromocion()" novalidate>
+                    <input formControlName="id_promo" type="hidden">
+                    <div class="form-group">
+                        <input [ngClass]="{'is-invalid':(formPromocion.get('producto')?.touched || formPromocion.get('producto')?.dirty) && formPromocion.get('producto')?.invalid}" formControlName="producto" placeholder="Ingrese el producto" type="text" class="form-control">
+                        <div class="invalid-feedback">
+                            <span *ngIf="formPromocion.get('producto').hasError('required')">Campo Requerido </span>
+                            <span *ngIf="!formPromocion.get('producto').hasError('minLength')"></span>
                         </div>
-                        <button [disabled]="formPromocion.invalid" class="btn btn-success">Guardar una promocion</button>
-                    </form>
-                </div>
+                    </div>
+                    <div class="form-group">
+                        <input [ngClass]="{'is-invalid':(formPromocion.get('descuento')?.touched || formPromocion.get('producto')?.dirty) && formPromocion.get('descuento')?.invalid}" formControlName="descuento" placeholder="Ingrese el descuento" type="text" class="form-control">
+                        <div class="invalid-feedback">
+                            <span *ngIf="formPromocion.get('descuento').hasError('required')">Campo Requerido </span>
+                            <span *ngIf="!formPromocion.get('descuento').hasError('minLength')"></span>
+                        </div>
+                    </div>
+                    <button [disabled]="formPromocion.invalid" class="btn btn-success">Guardar una promocion</button>
+                </form>
             </div>
         </div>
     </div>

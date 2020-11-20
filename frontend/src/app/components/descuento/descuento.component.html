@@ -1,65 +1,63 @@
-<div class="p-3">
-    <div class="row">
-        <div class="col-sm-8">
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <input placeholder="Ingrese criterio de búsqueda" [(ngModel)]="buscarDescuento" type="text" class="form-control">
-                    </div>
-                </div>
-            </div>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th style="text-align: center;">Porcentaje</th>
-                        <th style="text-align: center;">Estado</th>
-                        <th>Operaciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let descuento of listDescuento | filter:buscarDescuento | paginate:{itemsPerPage:4, currentPage:p}">
-                        <td>{{descuento.id_des}}</td>
-                        <td style="text-align: center;">{{descuento.porcentaje}}</td>
-                        <td style="text-align: center;">{{descuento.estado}}</td>
-                        <td>
-                            <div style="text-align: center;" class="btn-group btn-group-sm">
-                                <button (click)="eliminarDescuento(descuento.id_des)" class="btn btn-danger">Eliminar</button>
-                                <button (click)="editarDescuento(descuento)" class="btn btn-primary">Editar</button>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="row">
-                <div class="col-sm-5">
-                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+<div class="row">
+    <div class="col-sm-8">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <input placeholder="Ingrese criterio de búsqueda" [(ngModel)]="buscarDescuento" type="text" class="form-control">
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="card">
-                <div class="card-header">Formulario de descuentos</div>
-                <div class="card-body">
-                    <form [formGroup]="formDescuento" (ngSubmit)="guardarDescuento()" novalidate>
-                        <input formControlName="id_des" type="hidden">
-                        <div class="form-group">
-                            <input [ngClass]="{'is-invalid':(formDescuento.get('porcentaje')?.touched || formDescuento.get('porcentaje')?.dirty) && formDescuento.get('porcentaje')?.invalid}" formControlName="porcentaje" placeholder="Ingrese el porcentaje" type="text" class="form-control">
-                            <div class="invalid-feedback">
-                                <span *ngIf="formDescuento.get('porcentaje').hasError('required')">Campo Requerido </span>
-                                <span *ngIf="!formDescuento.get('porcentaje').hasError('minLength')">(Mínimo 1 caracter)</span>
-                            </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th style="text-align: center;">Porcentaje</th>
+                    <th style="text-align: center;">Estado</th>
+                    <th>Operaciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let descuento of listDescuento | filter:buscarDescuento | paginate:{itemsPerPage:4, currentPage:p}">
+                    <td>{{descuento.id_des}}</td>
+                    <td style="text-align: center;">{{descuento.porcentaje}}</td>
+                    <td style="text-align: center;">{{descuento.estado}}</td>
+                    <td>
+                        <div style="text-align: center;" class="btn-group btn-group-sm">
+                            <button (click)="eliminarDescuento(descuento.id_des)" class="btn btn-danger">Eliminar</button>
+                            <button (click)="editarDescuento(descuento)" class="btn btn-primary">Editar</button>
                         </div>
-                        <div class="form-group">
-                            <input [ngClass]="{'is-invalid':(formDescuento.get('estado')?.touched || formDescuento.get('estado')?.dirty) && formDescuento.get('estado')?.invalid}" formControlName="estado" placeholder="Ingrese el estado" type="text" class="form-control">
-                            <div class="invalid-feedback">
-                                <span *ngIf="formDescuento.get('estado').hasError('required')">Campo Requerido </span>
-                                <span *ngIf="!formDescuento.get('estado').hasError('minLength')">(Mínimo 1 caracter)</span>
-                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col-sm-5">
+                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-header">Formulario de descuentos</div>
+            <div class="card-body">
+                <form [formGroup]="formDescuento" (ngSubmit)="guardarDescuento()" novalidate>
+                    <input formControlName="id_des" type="hidden">
+                    <div class="form-group">
+                        <input [ngClass]="{'is-invalid':(formDescuento.get('porcentaje')?.touched || formDescuento.get('porcentaje')?.dirty) && formDescuento.get('porcentaje')?.invalid}" formControlName="porcentaje" placeholder="Ingrese el porcentaje" type="text" class="form-control">
+                        <div class="invalid-feedback">
+                            <span *ngIf="formDescuento.get('porcentaje').hasError('required')">Campo Requerido </span>
+                            <span *ngIf="!formDescuento.get('porcentaje').hasError('minLength')">(Mínimo 1 caracter)</span>
                         </div>
-                        <button [disabled]="formDescuento.invalid" class="btn btn-success">Guardar un descuento</button>
-                    </form>
-                </div>
+                    </div>
+                    <div class="form-group">
+                        <input [ngClass]="{'is-invalid':(formDescuento.get('estado')?.touched || formDescuento.get('estado')?.dirty) && formDescuento.get('estado')?.invalid}" formControlName="estado" placeholder="Ingrese el estado" type="text" class="form-control">
+                        <div class="invalid-feedback">
+                            <span *ngIf="formDescuento.get('estado').hasError('required')">Campo Requerido </span>
+                            <span *ngIf="!formDescuento.get('estado').hasError('minLength')">(Mínimo 1 caracter)</span>
+                        </div>
+                    </div>
+                    <button [disabled]="formDescuento.invalid" class="btn btn-success">Guardar un descuento</button>
+                </form>
             </div>
         </div>
     </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { VariedadesService } from '../../services/variedades.service';
-import { FormBuilder, FormGroup, Form } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IVariedad } from 'src/app/models/Variedad';
 
 @Component({
@@ -15,10 +15,16 @@ export class VariedadesComponent implements OnInit {
 
   formVariedad: FormGroup;
 
+  // Este es un atributo del tipo any (acepta strings, numbers, etc).
+  buscarVariedad: any;
+
+  // tslint:disable-next-line: no-inferrable-types
+  p: number = 1;
+
   constructor(private variedadesServ: VariedadesService, private fb: FormBuilder) {
     this.formVariedad = this.fb.group({
       id_varie: [null],
-      descripcion: ['']
+      descripcion: ['', [Validators.required, Validators.minLength(6)]]
     });
    }
 

@@ -1,5 +1,12 @@
 <div class="row">
     <div class="col-sm-8">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <input placeholder="Ingrese criterio de búsqueda" [(ngModel)]="buscarVariedad" type="text" class="form-control">
+                </div>
+            </div>
+        </div>
         <table class="table table-striped">
             <thead>
                 <tr style="text-align: center;">
@@ -9,7 +16,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr style="text-align: center;" *ngFor="let variedad of listVariedad">
+                <tr style="text-align: center;" *ngFor="let variedad of listVariedad | filter:buscarVariedad | paginate:{itemsPerPage:4, currentPage:p}">
                     <td>{{variedad.id_varie}}</td>
                     <td>{{variedad.descripcion}}</td>
                     <td>
@@ -21,22 +28,28 @@
                 </tr>
             </tbody>
         </table>
-
-
+        <div class="row">
+            <div class="col-sm-5">
+                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            </div>
+        </div>
     </div>
     <div class="col-sm-4">
         <div class="card">
             <div class="card-header">Formulario de variedades</div>
             <div class="card-body">
-                <form [formGroup]="formVariedad" (ngSubmit)="guardarVariedad()">
+                <form [formGroup]="formVariedad" (ngSubmit)="guardarVariedad()" novalidate>
                     <input formControlName="id_varie" type="hidden">
                     <div class="form-group">
-                        <input formControlName="descripcion" placeholder="Ingrese descripcion" type="text" class="form-control">
+                        <input [ngClass]="{'is-invalid':(formVariedad.get('descripcion')?.touched || formVariedad.get('descripcion')?.dirty) && formVariedad.get('descripcion')?.invalid}" formControlName="descripcion" placeholder="Ingrese la descripción" type="text" class="form-control">
+                        <div class="invalid-feedback">
+                            <span *ngIf="formVariedad.get('descripcion').hasError('required')">Campo Requerido </span>
+                            <span *ngIf="!formVariedad.get('descripcion').hasError('minLength')">(Mínimo 6 caracteres)</span>
+                        </div>
                     </div>
-                    <button class="btn btn-success">Guardar una Variedad</button>
+                    <button [disabled]="formVariedad.invalid" class="btn btn-success">Guardar una bodega</button>
                 </form>
             </div>
         </div>
-
     </div>
 </div>
