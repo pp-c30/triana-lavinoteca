@@ -43,14 +43,14 @@
                 <form [formGroup]="formPromocion" (ngSubmit)="guardarPromocion()" novalidate>
                     <input formControlName="id_promo" type="hidden">
                     <div class="form-group">
-                        <input [ngClass]="{'is-invalid':(formPromocion.get('producto')?.touched || formPromocion.get('producto')?.dirty) && formPromocion.get('producto')?.invalid}" formControlName="producto" placeholder="Ingrese el producto" type="text" class="form-control">
+                        <input [ngClass]="{'is-invalid':(formPromocion.get('producto')?.touched || formPromocion.get('producto')?.dirty) && formPromocion.get('producto')?.invalid}" formControlName="producto" placeholder="Ingrese el producto" type="number" class="form-control">
                         <div class="invalid-feedback">
                             <span *ngIf="formPromocion.get('producto').hasError('required')">Campo Requerido </span>
                             <span *ngIf="!formPromocion.get('producto').hasError('minLength')"></span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <input [ngClass]="{'is-invalid':(formPromocion.get('descuento')?.touched || formPromocion.get('producto')?.dirty) && formPromocion.get('descuento')?.invalid}" formControlName="descuento" placeholder="Ingrese el descuento" type="text" class="form-control">
+                        <input [ngClass]="{'is-invalid':(formPromocion.get('descuento')?.touched || formPromocion.get('producto')?.dirty) && formPromocion.get('descuento')?.invalid}" formControlName="descuento" placeholder="Ingrese el descuento" type="number" class="form-control">
                         <div class="invalid-feedback">
                             <span *ngIf="formPromocion.get('descuento').hasError('required')">Campo Requerido </span>
                             <span *ngIf="!formPromocion.get('descuento').hasError('minLength')"></span>

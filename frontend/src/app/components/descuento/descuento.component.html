@@ -43,14 +43,14 @@
                 <form [formGroup]="formDescuento" (ngSubmit)="guardarDescuento()" novalidate>
                     <input formControlName="id_des" type="hidden">
                     <div class="form-group">
-                        <input [ngClass]="{'is-invalid':(formDescuento.get('porcentaje')?.touched || formDescuento.get('porcentaje')?.dirty) && formDescuento.get('porcentaje')?.invalid}" formControlName="porcentaje" placeholder="Ingrese el porcentaje" type="text" class="form-control">
+                        <input [ngClass]="{'is-invalid':(formDescuento.get('porcentaje')?.touched || formDescuento.get('porcentaje')?.dirty) && formDescuento.get('porcentaje')?.invalid}" formControlName="porcentaje" placeholder="Ingrese el porcentaje" type="number" class="form-control">
                         <div class="invalid-feedback">
                             <span *ngIf="formDescuento.get('porcentaje').hasError('required')">Campo Requerido </span>
                             <span *ngIf="!formDescuento.get('porcentaje').hasError('minLength')">(Mínimo 1 caracter)</span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <input [ngClass]="{'is-invalid':(formDescuento.get('estado')?.touched || formDescuento.get('estado')?.dirty) && formDescuento.get('estado')?.invalid}" formControlName="estado" placeholder="Ingrese el estado" type="text" class="form-control">
+                        <input [ngClass]="{'is-invalid':(formDescuento.get('estado')?.touched || formDescuento.get('estado')?.dirty) && formDescuento.get('estado')?.invalid}" formControlName="estado" placeholder="Ingrese el estado" type="number" class="form-control">
                         <div class="invalid-feedback">
                             <span *ngIf="formDescuento.get('estado').hasError('required')">Campo Requerido </span>
                             <span *ngIf="!formDescuento.get('estado').hasError('minLength')">(Mínimo 1 caracter)</span>
