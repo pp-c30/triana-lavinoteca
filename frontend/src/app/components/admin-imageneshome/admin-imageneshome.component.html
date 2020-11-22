@@ -14,7 +14,7 @@
                     <td>{{fila.nombre}}</td>
                     <td>{{fila.estado}}</td>
                     <td style="text-align: center;">
-                        <img style="height: 75px; width: 45px;" class="img-fluid rounded" [src]="fila.imagen_url" alt="">
+                        <img style="width:75px;" class="img-fluid rounded" [src]="fila.imagen_url" alt="">
                     </td>
                     <td>{{fila.public_id}}</td>
                 </tr>
@@ -27,19 +27,21 @@
                 Nuevo registro
             </div>
             <div class="card-body">
-                <form action="">
+                <form [formGroup]="formImagenesHome" (ngSubmit)="guardarEnImagenesHome()" novalidate>
                     <div class="form-group">
-                        <input placeholder="Ingrese el nombre" type="text" class="form-control">
+                        <input formControlName="nombre" placeholder="Ingrese el nombre" type="text" class="form-control">
                     </div>
                     <div class="form-group">
-                        <input placeholder="Ingrese el estado" type="text" class="form-control">
+                        <input formControlName="estado" placeholder="Ingrese el estado" type="text" class="form-control">
                     </div>
                     <div class="form-group">
-                        <input class="form-control-file" type="file" name="" id="">
+                        <input (change)="mostrarFotoSeleccionada($event)" formControlName="archivo" class="form-control-file" type="file" name="" id="">
                     </div>
-                    <img class="img-fluid" src="assets/no-image.png" alt="">
+                    <div class="form-group">
+                        <img class="img-fluid" [src]="this.imagenPreview || 'assets/no-image.png'" alt="">
+                    </div>
                     <div class="form-control">
-                        <button class="btn btn-success btn-block">Guardar</button>
+                        <button [disabled]="formImagenesHome.invalid" type="submit" class="btn btn-success btn-block">Guardar</button>
                     </div>
                 </form>
             </div>
