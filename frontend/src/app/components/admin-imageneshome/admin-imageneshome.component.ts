@@ -22,7 +22,8 @@ export class AdminImageneshomeComponent implements OnInit {
     this.formImagenesHome = this.fb.group({
         id_imagen: [],
         nombre: [''],
-        estado: []
+        estado: [],
+        archivo: ['']
     });
 
   }
