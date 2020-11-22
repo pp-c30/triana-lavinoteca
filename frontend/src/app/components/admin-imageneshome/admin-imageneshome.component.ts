@@ -16,11 +16,16 @@ export class AdminImageneshomeComponent implements OnInit {
   // Este es un atributo del tipo FormGroup
   formImagenesHome: FormGroup;
 
-  // Generamos una instancia
-  fb = new FormBuilder();
-
   // servimageneshome: es una instancia que nos permitira acceder a los metodos que contiene la clase ImageneshomeService
-  constructor(private servImageneshome: ImageneshomeService) { }
+  constructor(private servImageneshome: ImageneshomeService, private fb: FormBuilder) {
+
+    this.formImagenesHome = this.fb.group({
+        id_imagen: [],
+        nombre: [''],
+        estado: []
+    });
+
+  }
 
   ngOnInit(): void {
     this.listarImagenesHome();
