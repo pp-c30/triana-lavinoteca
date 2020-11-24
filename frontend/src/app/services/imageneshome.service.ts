@@ -5,10 +5,12 @@ import { IImageneshome } from '../models/Imageneshome';
 @Injectable({
   providedIn: 'root'
 })
+
 export class ImageneshomeService {
+  estado: number | string;
 
   // Esta instancia, http, nos permite acceder a las funcionalidades del HttpClient
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   // Queremos obtener los datos de la tabla imageneshome
   getImagenesHome()
@@ -18,10 +20,15 @@ export class ImageneshomeService {
   }
 
   // A través de este metodo, saveImagenesHome, recibiremos una imagen con sus datos
-  saveImagenesHome(dataImagenesHome: IImageneshome)
+  saveImagenesHome(dataImagenesHome: IImageneshome, file: File)
   {
+    const fd = new FormData();
+
+    fd.append('nombre', dataImagenesHome.nombre);
+    fd.append('estado', String(dataImagenesHome.estado));
+    fd.append('img', file);
     /* A esta dirección le enviaremos, a traves del metodo POST, los datos de una imagen y retorna el mensaje:
     "La imagen y sus datos fueron guardados exitosamente"*/
-    return this.http.post('http://localhost:3000/triana_imageneshome', dataImagenesHome);
+    return this.http.post('http://localhost:3000/triana_imageneshome', fd);
   }
 }

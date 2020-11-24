@@ -52,7 +52,18 @@ export class AdminImageneshomeComponent implements OnInit {
     );
   }
 
-  guardarEnImagenesHome(){}
+  guardarEnImagenesHome()
+  {
+    this.servImageneshome.saveImagenesHome(this.formImagenesHome.value, this.file).subscribe(
+      resultado => {
+        console.log(resultado);
+        this.imagenPreview = '';
+        this.formImagenesHome.reset();
+        this.listarImagenesHome();
+      },
+      error => console.log(error)
+    );
+  }
 
   mostrarFotoSeleccionada(evento: HtmlInputElement)
   {
