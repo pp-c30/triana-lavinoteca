@@ -23,7 +23,7 @@ export class ImagenesHomeController{
         //se guardan datos en la base
         const guardarImagenesHome = {
             nombre:req.body.nombre,
-            estado:req.body.estado,
+            estado:Number(req.body.estado),
             imagen_url: resultado_cloud.url,
             public_id:resultado_cloud.public_id
 
