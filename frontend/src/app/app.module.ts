@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import {NavegacionComponent} from './components/navegacion/navegacion.component';
 import { BodegasComponent } from './components/bodegas/bodegas.component';
 import { CategoriasComponent } from './components/categorias/categorias.component';
-import { DescuentoComponent } from './components/descuento/descuento.component';
+import { DescuentosComponent } from './components/descuentos/descuentos.component';
 import { ProductosComponent } from './components/productos/productos.component';
 import { OpinionesComponent } from './components/opiniones/opiniones.component';
 import { PromocionesComponent } from './components/promociones/promociones.component';
@@ -34,7 +34,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ProductosComponent,
     PromocionesComponent,
     VariedadesComponent,
-    DescuentoComponent,
+    DescuentosComponent,
     AdminImageneshomeComponent,
     GaleriaComponent
   ],

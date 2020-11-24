@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { DescuentosService } from '../../services/descuentos.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { IDescuento } from 'src/app/models/Descuento';
+import { IDescuentos } from 'src/app/models/Descuento';
 
 @Component({
-  selector: 'app-descuento',
-  templateUrl: './descuento.component.html',
-  styleUrls: ['./descuento.component.css']
+  selector: 'app-descuentos',
+  templateUrl: './descuentos.component.html',
+  styleUrls: ['./descuentos.component.css']
 })
-export class DescuentoComponent implements OnInit {
-  listDescuento: IDescuento[] = [];
+export class DescuentosComponent implements OnInit {
+  listDescuentos: IDescuentos[] = [];
 
   // Este es un atributo del tipo FormGroup
-  formDescuento: FormGroup;
+  formDescuentos: FormGroup;
 
   // Este es un atributo del tipo any (acepta strings, numbers, etc).
-  buscarDescuento: any;
+  buscarDescuentos: any;
 
   // tslint:disable-next-line: no-inferrable-types
   p: number = 1;
@@ -25,7 +25,7 @@ export class DescuentoComponent implements OnInit {
   constructor(private descuentosServ: DescuentosService, private fb: FormBuilder)
   {
     // Construcción del formulario
-    this.formDescuento = this.fb.group({
+    this.formDescuentos = this.fb.group({
       id_des: [null],
       porcentaje: [, [Validators.required, Validators.minLength(1)]],
       estado: [, [Validators.required, Validators.minLength(1)]]
@@ -33,29 +33,29 @@ export class DescuentoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.obtenerDescuento();
+    this.obtenerDescuentos();
   }
 
   // Es un metodo que se ejecuta al iniciar la pagina, y nos mostrara una lista
-  obtenerDescuento(){
+  obtenerDescuentos(){
     this.descuentosServ.getDescuento().subscribe(
-      resultado => this.listDescuento = resultado,
+      resultado => this.listDescuentos = resultado,
       // Si hay un error, que este se imprima en consola
       error => console.log(error)
     );
   }
 
-  guardarDescuento(){
-    if (this.formDescuento.value.id_des)
+  guardarDescuentos(){
+    if (this.formDescuentos.value.id_des)
     {// Se actualiza
-      this.descuentosServ.updateDescuento(this.formDescuento.value).subscribe(
+      this.descuentosServ.updateDescuentos(this.formDescuentos.value).subscribe(
         respuesta =>
         { // La respuesta se mostrara en consola
           console.log(respuesta);
           // Se refrescan los datos
-          this.obtenerDescuento();
+          this.obtenerDescuentos();
           // Se resetea el formulario
-          this.formDescuento.reset();
+          this.formDescuentos.reset();
         },
         // Si hay un error, que este se imprima en consola
         error => console.log(error)
@@ -63,13 +63,13 @@ export class DescuentoComponent implements OnInit {
     }
     else {
       // El metodo guardarDescuento le enviara los datos, que recoge del formulario, al saveDescuento
-      this.descuentosServ.saveDescuento(this.formDescuento.value).subscribe(
+      this.descuentosServ.saveDescuento(this.formDescuentos.value).subscribe(
         resultado => {
           console.log(resultado);
           // Se refresca la grilla
-          this.obtenerDescuento();
+          this.obtenerDescuentos();
           // Se resetea el formulario
-          this.formDescuento.reset();
+          this.formDescuentos.reset();
         },
         // Si hay un error, que este se imprima en consola
         error => console.log(error)
@@ -78,22 +78,22 @@ export class DescuentoComponent implements OnInit {
   }
 
   // El atributo descuento sera del tipo IDescuento, y respetara los datos que contenga esa interfaz
-  editarDescuento(descuento: IDescuento)
+  editarDescuentos(descuentos: IDescuentos)
   {
     // En formBodega, van a ser seteados sus valores
-    this.formDescuento.setValue(descuento);
+    this.formDescuentos.setValue(descuentos);
   }
 
-  eliminarDescuento(id: number)
+  eliminarDescuentos(id: number)
   {
     // Preguntamos si fue confirmado
     if (confirm('Está seguro de realizar esta acción?')){
-      this.descuentosServ.deleteDescuento(id).subscribe(
+      this.descuentosServ.deleteDescuentos(id).subscribe(
         // Vamos a recibir una respuesta por parte del servicio
         respuesta => {
           console.log(respuesta);
           // Se refresca la grilla
-          this.obtenerDescuento();
+          this.obtenerDescuentos();
         },
       // Si hay un error, que este se imprima en consola
       error => console.log(error)

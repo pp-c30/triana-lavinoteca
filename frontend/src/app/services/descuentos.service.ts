@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import { IDescuento } from '../models/Descuento';
+import { IDescuentos } from '../models/Descuento';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +14,11 @@ export class DescuentosService {
   getDescuento()
   {
     // Los datos que lleguen tendran que concordar con la interfaz IDescuento, que es de tipo array (ya que llamamos una lista).
-    return this.http.get<IDescuento[]>('http://localhost:3000/triana_descuento');
+    return this.http.get<IDescuentos[]>('http://localhost:3000/triana_descuento');
   }
 
   // A través de este metodo, saveDescuento, recibiremos un descuento
-  saveDescuento(UnDescuento: IDescuento)
+  saveDescuento(UnDescuento: IDescuentos)
   {
     /* A esta dirección le enviaremos, a traves del metodo POST, los datos de un descuento y retorna el mensaje:
     "el descuento fue guardada exitosamente"*/
@@ -26,15 +26,15 @@ export class DescuentosService {
   }
 
   // A traves de este metodo recibiremos un descuento que es del tipo IDescuento
-  updateDescuento(UnDescuento: IDescuento)
+  updateDescuentos(UnDescuentos: IDescuentos)
   {
     let id: number;
-    id = UnDescuento.id_des;
+    id = UnDescuentos.id_des;
     // Retornara la respuesta que nos dara la api: 'Se actualizo exitosamente'
-    return this.http.put('http://localhost:3000/triana_descuento/' + id, UnDescuento);
+    return this.http.put('http://localhost:3000/triana_descuento/' + id, UnDescuentos);
   }
 
-  deleteDescuento(id: number)
+  deleteDescuentos(id: number)
   {// Retornara la respuesta que nos dara la api: 'El descuento se eliminó correctamente'
     return this.http.delete('http://localhost:3000/triana_descuento/' + id);
   }
