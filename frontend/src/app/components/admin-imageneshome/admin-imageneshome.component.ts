@@ -65,6 +65,8 @@ export class AdminImageneshomeComponent implements OnInit {
     );
   }
 
+  editarImagenesHome(fila: IImageneshome){}
+
   mostrarFotoSeleccionada(evento: HtmlInputElement)
   {
     // aca realizaremos la lectura de la foto

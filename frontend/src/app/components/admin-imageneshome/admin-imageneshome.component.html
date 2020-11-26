@@ -3,20 +3,27 @@
         <table class="table table-striped">
             <thead>
                 <th>Id</th>
-                <th>Nombre</th>
-                <th>Estado</th>
+                <th style="text-align: center;">Nombre</th>
+                <th style="text-align: center;">Estado</th>
                 <th style="text-align: center;">Imagen_url</th>
-                <th>Public_id</th>
+                <th style="text-align: center;">Public_id</th>
+                <th style="text-align: center;">Operaciones</th>
             </thead>
             <tbody>
                 <tr *ngFor="let fila of listado_datos_imageneshome">
                     <td>{{fila.id_imagen}}</td>
-                    <td>{{fila.nombre}}</td>
-                    <td>{{fila.estado}}</td>
+                    <td style="text-align: center;">{{fila.nombre}}</td>
+                    <td style="text-align: center;">{{fila.estado}}</td>
                     <td style="text-align: center;">
                         <img style="width:75px;" class="img-fluid rounded" [src]="fila.imagen_url" alt="">
                     </td>
                     <td>{{fila.public_id}}</td>
+                    <td>
+                        <div class="btn-group btn-group-sm">
+                            <button class="btn btn-danger">Eliminar</button>
+                            <button class="btn btn-primary" (click)="editarImagenesHome(fila)">Editar</button>
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         </table>
