@@ -48,5 +48,51 @@ class ImagenesHomeController {
             res.json(lista);
         });
     }
+    actualizarTrianaImagenesHome(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const db = yield database_1.conexion();
+                let id = req.params.id;
+                var updateImagenesHome;
+                var public_id_anterior = req.body.public_id;
+                if (req.file) {
+                    // Se sube imagen a cloudinary y se genera un public id
+                    const resultado_cloud = yield cloudinary_1.default.v2.uploader.upload(req.file.path);
+                    updateImagenesHome = {
+                        nombre: req.body.nombre,
+                        estado: Number(req.body.estado),
+                        imagen_url: resultado_cloud.url,
+                        public_id: resultado_cloud.public_id
+                    };
+                    yield db.query('update imageneshome set ? where id_imagen = ?', [updateImagenesHome, id]);
+                    fs_extra_1.default.unlink(req.file.path);
+                    yield cloudinary_1.default.v2.uploader.destroy(public_id_anterior);
+                }
+                else {
+                    updateImagenesHome = {
+                        nombre: req.body.nombre,
+                        estado: Number(req.body.estado)
+                    };
+                    yield db.query('update imageneshome set ? where id_imagen = ?', [updateImagenesHome, id]);
+                }
+                res.json('Se actualizó exitosamente!');
+            }
+            catch (error) {
+                console.error(error);
+            }
+        });
+    }
+    eliminarImagenesHome(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let id = req.params.id;
+            let public_id = req.params.public_id;
+            // eliminamos la imagen de cloudinary
+            yield cloudinary_1.default.v2.uploader.destroy(public_id);
+            const db = yield database_1.conexion();
+            // eliminamos registro en la base
+            yield db.query('delete from imageneshome where id_imagen = ?', [id]);
+            res.json('Se elimino exitosamente el registro');
+        });
+    }
 }
 exports.ImagenesHomeController = ImagenesHomeController;

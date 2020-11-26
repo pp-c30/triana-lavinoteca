@@ -9,5 +9,7 @@ const multer_1 = __importDefault(require("../libs/multer"));
 let imagenesHomeController = new imageneshome_controller_1.ImagenesHomeController();
 const enrutadorImagenesHome = express_1.Router();
 enrutadorImagenesHome.route('/triana_imageneshome').post(multer_1.default.single('img'), imagenesHomeController.guardarTrianaImagenesHome); //guardar datos en la base de datos
-enrutadorImagenesHome.route('/triana_imageneshome').get(imagenesHomeController.listarTrianaImagenesHome);
+enrutadorImagenesHome.route('/triana_imageneshome/:id').put(multer_1.default.single('img'), imagenesHomeController.actualizarTrianaImagenesHome); //actualizar datos de la base de datos
+enrutadorImagenesHome.route('/triana_imageneshome').get(imagenesHomeController.listarTrianaImagenesHome); //listar datos de la base de datos
+enrutadorImagenesHome.route('/triana_imageneshome/:id/:public_id').delete(imagenesHomeController.eliminarImagenesHome); // Elimina los datos y la imagen de la base de datos y cloudinary
 exports.default = enrutadorImagenesHome;
