@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ImageneshomeService } from '../../services/imageneshome.service';
 import { IImageneshome } from '../../../../../backend/src/models/imageneshome';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 
 interface HtmlInputElement{
   target: HTMLInputElement & EventTarget;
@@ -26,7 +27,7 @@ export class AdminImageneshomeComponent implements OnInit {
   imagenPreview: string | ArrayBuffer;
 
   // servimageneshome: es una instancia que nos permitira acceder a los metodos que contiene la clase ImageneshomeService
-  constructor(private servImageneshome: ImageneshomeService, private fb: FormBuilder) {
+  constructor(private servImageneshome: ImageneshomeService, private fb: FormBuilder, private spinner: NgxSpinnerService) {
 
     this.formImagenesHome = this.fb.group({
         id_imagen: [],
@@ -54,18 +55,65 @@ export class AdminImageneshomeComponent implements OnInit {
 
   guardarEnImagenesHome()
   {
-    this.servImageneshome.saveImagenesHome(this.formImagenesHome.value, this.file).subscribe(
-      resultado => {
-        console.log(resultado);
-        this.imagenPreview = '';
-        this.formImagenesHome.reset();
-        this.listarImagenesHome();
-      },
-      error => console.log(error)
-    );
+    // Si el valor de id_imagen existe, entonces actualizo
+    if (this.formImagenesHome.value.id_imagen)
+    {
+      this.spinner.show();
+      this.servImageneshome.updateImagenesHome(this.formImagenesHome.value, this.file).subscribe(
+        resultado => {
+          console.log(resultado);
+          this.imagenPreview = '';
+          this.formImagenesHome.reset();
+          this.listarImagenesHome();
+
+          this.spinner.hide();
+        },
+        error => console.log(error)
+      );
+    }
+    // En caso contrario, guardo
+    else
+    {
+      this.servImageneshome.saveImagenesHome(this.formImagenesHome.value, this.file).subscribe(
+        resultado => {
+          console.log(resultado);
+          this.imagenPreview = '';
+          this.formImagenesHome.reset();
+          this.listarImagenesHome();
+        },
+        error => console.log(error)
+      );
+    }
   }
 
-  editarImagenesHome(fila: IImageneshome){}
+  editarImagenesHome(fila: IImageneshome)
+  {
+    this.formImagenesHome.setValue({
+      id_imagen: fila.id_imagen,
+      nombre: fila.nombre,
+      estado: fila.estado,
+      archivo: ''
+    });
+
+    this.imagenPreview = fila.imagen_url;
+  }
+
+  eliminarImagenesHome(fila: IImageneshome)
+  {
+    if (confirm('¿Esta seguro que desea eliminar estos datos?'))
+    {
+      this.spinner.show();
+      this.servImageneshome.deleteImagenesHome(fila).subscribe(
+        resultado =>
+        {
+          console.log(resultado);
+          this.listarImagenesHome();
+          this.spinner.hide();
+        },
+        error => console.log(error)
+      );
+    }
+  }
 
   mostrarFotoSeleccionada(evento: HtmlInputElement)
   {

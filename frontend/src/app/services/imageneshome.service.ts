@@ -31,4 +31,28 @@ export class ImageneshomeService {
     "La imagen y sus datos fueron guardados exitosamente"*/
     return this.http.post('http://localhost:3000/triana_imageneshome', fd);
   }
+
+  updateImagenesHome(dataImagenesHome: IImageneshome, file: File)
+  {
+    const fd = new FormData();
+
+    // tslint:disable-next-line: prefer-const
+    let id = dataImagenesHome.id_imagen;
+
+    fd.append('nombre', dataImagenesHome.nombre);
+    fd.append('estado', String(dataImagenesHome.estado));
+    fd.append('public_id', dataImagenesHome.public_id);
+    fd.append('img', file);
+
+    return this.http.put('http://localhost:3000/triana_imageneshome/' + id, fd);
+  }
+
+  deleteImagenesHome(fila: IImageneshome)
+  {
+    // tslint:disable-next-line: prefer-const
+    let id = fila.id_imagen;
+    // tslint:disable-next-line: prefer-const
+    let public_id = fila.public_id;
+    return this.http.delete('http://localhost:3000/triana_imageneshome/' + id + '/' + public_id);
+  }
 }

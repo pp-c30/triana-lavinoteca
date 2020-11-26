@@ -22,7 +22,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 import { NgxPaginationModule } from 'ngx-pagination';
 
-
+import {NgxSpinnerModule} from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -45,7 +45,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ReactiveFormsModule,
     Ng2SearchPipeModule,
     NgxPaginationModule,
-    FormsModule
+    FormsModule,
+    NgxSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

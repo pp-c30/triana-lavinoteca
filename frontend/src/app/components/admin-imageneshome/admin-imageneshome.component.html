@@ -20,7 +20,7 @@
                     <td>{{fila.public_id}}</td>
                     <td>
                         <div class="btn-group btn-group-sm">
-                            <button class="btn btn-danger">Eliminar</button>
+                            <button class="btn btn-danger" (click)="eliminarImagenesHome(fila)">Eliminar</button>
                             <button class="btn btn-primary" (click)="editarImagenesHome(fila)">Editar</button>
                         </div>
                     </td>
@@ -35,6 +35,7 @@
             </div>
             <div class="card-body">
                 <form [formGroup]="formImagenesHome" (ngSubmit)="guardarEnImagenesHome()" novalidate>
+                    <input formControlName="id_imagen" type="hidden" class="form-control">
                     <div class="form-group">
                         <input formControlName="nombre" placeholder="Ingrese el nombre" type="text" class="form-control">
                     </div>
@@ -55,3 +56,5 @@
         </div>
     </div>
 </div>
+
+<ngx-spinner></ngx-spinner>
