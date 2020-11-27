@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BodegasService } from '../../services/bodegas.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { IBodega } from 'src/app/models/Bodega';
-
+ 
 @Component({
   selector: 'app-bodegas',
   templateUrl: './bodegas.component.html',
