@@ -7,8 +7,6 @@ import { IImageneshome } from '../models/Imageneshome';
 })
 
 export class ImageneshomeService {
-  estado: number | string;
-
   // Esta instancia, http, nos permite acceder a las funcionalidades del HttpClient
   constructor(private http: HttpClient) {}
 

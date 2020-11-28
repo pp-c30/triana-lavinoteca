@@ -1,1 +1,11 @@
-
+<div class="row row-cols-1 row-cols-md-4">
+    <div *ngFor="let fila of lista_datos" class="col mb-4">
+        <div class="card">
+            <img class="card-img-top" [src]="fila.imagen_url" alt="">
+            <div class="card-body">
+                <h4 class="card-title">{{fila.nombre}}
+                </h4>
+            </div>
+        </div>
+    </div>
+</div>

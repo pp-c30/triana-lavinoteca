@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ImageneshomeService } from '../../services/imageneshome.service';
 
 @Component({
   selector: 'app-galeria',
@@ -6,10 +7,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./galeria.component.css']
 })
 export class GaleriaComponent implements OnInit {
+  // tslint:disable-next-line: variable-name
+  lista_datos = [];
 
-  constructor() { }
+  constructor(private serviceImagenesHome: ImageneshomeService) { }
 
   ngOnInit(): void {
+    this.listarImagenesHome();
   }
 
+  listarImagenesHome()
+  {
+    this.serviceImagenesHome.getImagenesHome().subscribe(
+      resultado =>
+      {
+        this.lista_datos = resultado;
+      },
+      error => console.log(error)
+    );
+  }
 }
