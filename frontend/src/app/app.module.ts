@@ -24,6 +24,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 
 import {NgxSpinnerModule} from 'ngx-spinner';
 
+
 @NgModule({
   declarations: [
     AppComponent,

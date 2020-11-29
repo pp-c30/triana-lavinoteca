@@ -43,7 +43,7 @@ const routes: Routes = [
     path: 'variedades', component: VariedadesComponent
   },
   {
-    path: '', redirectTo: '/admin-imageneshome', pathMatch: 'full'
+    path: '', redirectTo: '/galeria', pathMatch: 'full'
   }
 ];
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ImageneshomeService } from '../../services/imageneshome.service';
 import { IImageneshome } from '../../../../../backend/src/models/imageneshome';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 interface HtmlInputElement{
   target: HTMLInputElement & EventTarget;
@@ -21,6 +21,12 @@ export class AdminImageneshomeComponent implements OnInit {
   // Este es un atributo del tipo FormGroup
   formImagenesHome: FormGroup;
 
+  // Este es un atributo del tipo any (acepta strings, numbers, etc).
+  buscarDato: any;
+
+  // tslint:disable-next-line: no-inferrable-types
+  p: number = 1;
+
   // Este es un atributo del tipo File (archivo)
   file: File;
 
@@ -30,9 +36,9 @@ export class AdminImageneshomeComponent implements OnInit {
   constructor(private servImageneshome: ImageneshomeService, private fb: FormBuilder, private spinner: NgxSpinnerService) {
 
     this.formImagenesHome = this.fb.group({
-        id_imagen: [],
+        id_imagen: [null],
         nombre: ['', [Validators.required, Validators.minLength(3)]],
-        estado: [, [Validators.required, Validators.minLength(1)]],
+        estado: [null, [Validators.required, Validators.minLength(1)]],
         archivo: ['']
     });
 
@@ -65,7 +71,6 @@ export class AdminImageneshomeComponent implements OnInit {
           this.imagenPreview = '';
           this.formImagenesHome.reset();
           this.listarImagenesHome();
-
           this.spinner.hide();
         },
         error => console.log(error)

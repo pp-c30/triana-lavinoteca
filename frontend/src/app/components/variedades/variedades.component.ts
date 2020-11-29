@@ -24,7 +24,7 @@ export class VariedadesComponent implements OnInit {
   constructor(private variedadesServ: VariedadesService, private fb: FormBuilder) {
     this.formVariedad = this.fb.group({
       id_varie: [null],
-      descripcion: ['', [Validators.required, Validators.minLength(6)]]
+      descripcion: ['', [Validators.required, Validators.minLength(2)]]
     });
    }
 

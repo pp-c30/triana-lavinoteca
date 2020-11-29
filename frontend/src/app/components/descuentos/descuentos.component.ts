@@ -27,8 +27,8 @@ export class DescuentosComponent implements OnInit {
     // Construcción del formulario
     this.formDescuentos = this.fb.group({
       id_des: [null],
-      porcentaje: [, [Validators.required, Validators.minLength(1)]],
-      estado: [, [Validators.required, Validators.minLength(1)]]
+      porcentaje: [null, [Validators.required, Validators.minLength(1)]],
+      estado: [null, [Validators.required, Validators.minLength(1)]]
     });
   }
 

@@ -20,16 +20,22 @@
                     <td>{{variedad.id_varie}}</td>
                     <td>{{variedad.descripcion}}</td>
                     <td>
-                        <div class="btn-group btn-group-sm">
-                            <button (click)="eliminarVariedad(variedad.id_varie)" class="btn btn-danger">Eliminar</button>
-                            <button (click)="editarVariedad(variedad)" class="btn btn-primary">Editar</button>
+                        <div class="btn-group btn-group-sm d-flex justify-content-center">
+                            <ul class="list-inline m-0">
+                                <li class="list-inline-item">
+                                    <button class="btn btn-danger btn-sm rounded-0" (click)="eliminarVariedad(variedad.id_varie)" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>
+                                </li>
+                                <li class="list-inline-item">
+                                    <button class="btn btn-primary btn-sm rounded-0" (click)="editarVariedad(variedad)" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></button>
+                                </li>
+                            </ul>
                         </div>
                     </td>
                 </tr>
             </tbody>
         </table>
         <div class="row">
-            <div class="col-sm-5">
+            <div class="col-sm-7">
                 <pagination-controls (pageChange)="p = $event"></pagination-controls>
             </div>
         </div>
@@ -44,10 +50,10 @@
                         <input [ngClass]="{'is-invalid':(formVariedad.get('descripcion')?.touched || formVariedad.get('descripcion')?.dirty) && formVariedad.get('descripcion')?.invalid}" formControlName="descripcion" placeholder="Ingrese la descripción" type="text" class="form-control">
                         <div class="invalid-feedback">
                             <span *ngIf="formVariedad.get('descripcion').hasError('required')">Campo Requerido </span>
-                            <span *ngIf="!formVariedad.get('descripcion').hasError('minLength')">(Mínimo 6 caracteres)</span>
+                            <span *ngIf="!formVariedad.get('descripcion').hasError('minLength')">(Mínimo 2 caracteres)</span>
                         </div>
                     </div>
-                    <button [disabled]="formVariedad.invalid" class="btn btn-success">Guardar una bodega</button>
+                    <button [disabled]="formVariedad.invalid" class="btn btn-success">Guardar una variedad</button>
                 </form>
             </div>
         </div>

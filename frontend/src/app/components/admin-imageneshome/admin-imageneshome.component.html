@@ -1,5 +1,12 @@
 <div class="row">
     <div class="col-md-7">
+        <div class="row">
+            <div class="col-sm-5">
+                <div class="form-group">
+                    <input placeholder="Ingrese criterio de búsqueda" [(ngModel)]="buscarDato" type="text" class="form-control">
+                </div>
+            </div>
+        </div>
         <table class="table table-striped">
             <thead>
                 <th>Id</th>
@@ -10,7 +17,7 @@
                 <th style="text-align: center;">Operaciones</th>
             </thead>
             <tbody>
-                <tr *ngFor="let fila of listado_datos_imageneshome">
+                <tr *ngFor="let fila of listado_datos_imageneshome | filter:buscarDato | paginate:{itemsPerPage:4, currentPage:p}">
                     <td>{{fila.id_imagen}}</td>
                     <td style="text-align: center;">{{fila.nombre}}</td>
                     <td style="text-align: center;">{{fila.estado}}</td>
@@ -19,14 +26,25 @@
                     </td>
                     <td>{{fila.public_id}}</td>
                     <td>
-                        <div class="btn-group btn-group-sm">
-                            <button class="btn btn-danger" (click)="eliminarImagenesHome(fila)">Eliminar</button>
-                            <button class="btn btn-primary" (click)="editarImagenesHome(fila)">Editar</button>
+                        <div class="btn-group btn-group-sm d-flex justify-content-center">
+                            <ul class="list-inline m-0">
+                                <li class="list-inline-item">
+                                    <button class="btn btn-danger btn-sm rounded-0" (click)="eliminarImagenesHome(fila)" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>
+                                </li>
+                                <li class="list-inline-item">
+                                    <button class="btn btn-primary btn-sm rounded-0" (click)="editarImagenesHome(fila)" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></button>
+                                </li>
+                            </ul>
                         </div>
                     </td>
                 </tr>
             </tbody>
         </table>
+        <div class="row">
+            <div class="col-sm-7">
+                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            </div>
+        </div>
     </div>
     <div class="col-md-5">
         <div class="card">
@@ -56,5 +74,10 @@
         </div>
     </div>
 </div>
-
-<ngx-spinner></ngx-spinner>
+<ngx-spinner>
+    <div class="text-center">
+        <div class="spinner-border text-success" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+</ngx-spinner>
