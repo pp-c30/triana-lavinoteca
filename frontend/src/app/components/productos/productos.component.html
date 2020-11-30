@@ -9,7 +9,8 @@
             </div>
             <div class="form-group">
                 <select class="form-control">
-                    <option value="">Whisky</option>
+                    <option value="" disabled selected>Seleccionar Categoría</option>
+                    <option *ngFor="let categorias of lista_categoria" value={{categorias.id_categoria}}>{{categorias.descripcion}}</option>
                 </select>
             </div>
             <div class="form-group">

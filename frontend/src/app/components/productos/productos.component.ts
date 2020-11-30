@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {CategoriasService} from '../../services/categorias.service';
+import { ICategoria } from '../../models/Categoria';
 
 @Component({
   selector: 'app-productos',
@@ -10,10 +12,13 @@ export class ProductosComponent implements OnInit {
   // Este es un atributo del tipo FormGroup
   formProducto: FormGroup;
 
-  constructor(private fb: FormBuilder)
+  // tslint:disable-next-line: variable-name
+  lista_categoria: ICategoria[] = [];
+
+  constructor(private fb: FormBuilder, private serviceCategorias: CategoriasService)
   {
     this.formProducto = this.fb.group({
-      nombre: [''],
+      nombre: ['', Validators.required],
       categoria: [null],
       stock: [null],
       precio: [null],
@@ -26,5 +31,17 @@ export class ProductosComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.obtenerCategorias();
+  }
+
+  obtenerCategorias()
+  {
+    this.serviceCategorias.getCategoria().subscribe(
+      respuesta => {
+        this.lista_categoria = respuesta;
+      },
+      error => console.log(error)
+    );
+  }
 }
