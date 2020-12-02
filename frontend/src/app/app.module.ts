@@ -23,6 +23,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 import {NgxSpinnerModule} from 'ngx-spinner';
+import { DetalleProductoComponent } from './components/detalle-producto/detalle-producto.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import {NgxSpinnerModule} from 'ngx-spinner';
     VariedadesComponent,
     DescuentosComponent,
     AdminImageneshomeComponent,
-    GaleriaComponent
+    GaleriaComponent,
+    DetalleProductoComponent
   ],
   imports: [
     BrowserModule,

@@ -9,20 +9,20 @@ import { PromocionesComponent } from './components/promociones/promociones.compo
 import { VariedadesComponent } from './components/variedades/variedades.component';
 import { AdminImageneshomeComponent } from './components/admin-imageneshome/admin-imageneshome.component';
 import { GaleriaComponent } from './components/galeria/galeria.component';
+import { DetalleProductoComponent } from './components/detalle-producto/detalle-producto.component';
 
 const routes: Routes = [
   {
-    path: 'galeria', component: GaleriaComponent
+    path: 'catalogo', component: GaleriaComponent
+  },
+  {
+    path: 'detalle-producto/:id_producto', component: DetalleProductoComponent
   },
   {
     path: 'admin-imageneshome', component: AdminImageneshomeComponent
   },
   {
     path: 'bodegas', component: BodegasComponent
-  },
-  {
-    // tslint:disable-next-line: quotemark
-    path: "descuentos", component: DescuentosComponent
   },
   {
     path: 'categorias', component: CategoriasComponent
@@ -43,7 +43,7 @@ const routes: Routes = [
     path: 'variedades', component: VariedadesComponent
   },
   {
-    path: '', redirectTo: '/galeria', pathMatch: 'full'
+    path: '', redirectTo: '/catalogo', pathMatch: 'full'
   }
 ];
 
