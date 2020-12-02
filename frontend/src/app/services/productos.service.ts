@@ -35,4 +35,9 @@ export class ProductosService {
   {// Retornara la respuesta que nos dara la api: 'El descuento se eliminó correctamente'
     return this.http.delete('http://localhost:3000/triana_producto/' + id);
   }
+
+  // tslint:disable-next-line: variable-name
+  getOneProducto(id_producto: number){
+    return this.http.get<IProducto>('http://localhost:3000/triana_producto/' + id_producto);
+  }
 }

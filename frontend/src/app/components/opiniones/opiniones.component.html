@@ -1,17 +1,63 @@
 <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-8">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <input placeholder="Ingrese criterio de búsqueda" [(ngModel)]="buscarOpinion" type="text" class="form-control">
+                </div>
+            </div>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr style="text-align: center;">
+                    <th>Id</th>
+                    <th>Producto</th>
+                    <th>Descripción</th>
+                    <th>Operaciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="text-align: center;" *ngFor="let opinion of lista_opinion | filter:buscarOpinion | paginate:{itemsPerPage:4, currentPage:p}">
+                    <td>{{opinion.id_opinion}}</td>
+                    <td>{{opinion.id_producto}}</td>
+                    <td>{{opinion.descripcion}}</td>
+                    <td>
+                        <div class="btn-group btn-group-sm d-flex justify-content-center">
+                            <ul class="list-inline m-0">
+                                <li class="list-inline-item">
+                                    <button class="btn btn-danger btn-sm rounded-0" (click)="eliminarOpinion(opinion.id_opinion)" type="button" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fa fa-trash"></i></button>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col-sm-7">
+                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            </div>
+        </div>
     </div>
-
-    <div class="col-sm-6">
-        <form [formGroup]="formOpiniones">
-            <div class="form-group">
-                <select class="form-control">
-                    <option value="">Alma Mora Malbec</option>
-                </select>
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-header">Formulario de opiniones</div>
+            <div class="card-body">
+                <form [formGroup]="formOpiniones" (ngSubmit)="guardarOpinion()" novalidate>
+                    <div class="form-group">
+                        <select formControlName="id_producto" class="form-control">
+                            <option value="0" disabled selected>Seleccionar producto</option>
+                            <option *ngFor="let producto of lista_producto" value={{producto.id_producto}}>{{producto.nombre}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input formControlName="descripcion" type="text" placeholder="Ingrese la descripción" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-success btn-block">Guardar Opinion</button>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <input formControlName="descripcion" type="text" placeholder="Ingrese su opinión" class="form-control">
-            </div>
-        </form>
+        </div>
     </div>
 </div>

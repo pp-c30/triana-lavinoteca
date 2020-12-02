@@ -6,7 +6,8 @@ export interface IProducto
     stock: number;
     precio: number;
     variedad: number;
-    imagen: Text;
+    imagen: string;
+    public_id: string;
     bodega: number;
     descripcion: string;
     cantmil: number;

@@ -1,49 +1,77 @@
 <div class="row">
-    <div class="col-sm-6"></div>
-    <div class="col-sm-6">
-        <form [formGroup]="formProducto">
-            <div class="form-group">
+    <div class="col-sm-7">
+        <table class="table table-striped">
+            <thead>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Categoria</th>
+                <th>Stock</th>
+                <th>Precio</th>
+                <th>Variedad</th>
+                <th>Imagen_url</th>
+                <th>Public_id</th>
+                <th>Bodega</th>
+                <th>Descripción</th>
+                <th>Mililitros</th>
+                <th>Estado</th>
+                <th>Operaciones</th>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-sm-5">
+        <div class="card">
+            <div class="card-header">
+                Formulario de productos
             </div>
-            <div class="form-group">
-                <input class="form-control" formControlName="nombre" type="text" placeholder="Ingrese el nombre del producto">
+            <div class="card-body">
+                <form [formGroup]="formProducto">
+                    <div class="form-group">
+                        <input class="form-control" formControlName="nombre" type="text" placeholder="Ingrese el nombre del producto">
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control">
+                            <option value="" disabled selected>Seleccionar Categoría</option>
+                            <option *ngFor="let categorias of lista_categoria" value={{categorias.id_categoria}}>{{categorias.descripcion}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" formControlName="stock" type="text" placeholder="Ingrese el stock del producto">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" formControlName="precio" type="text" placeholder="Ingrese el precio del producto">
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control">
+                            <option value="">Uva</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" formControlName="archivo" class="form-control-file" type="file" name="" id="">
+                    </div>
+                    <div class="form-group">
+                        <img class="img-fluid" src="assets/no-image.png" alt="">
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control">
+                            <option value="">El Lagar</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" formControlName="descripcion" type="text" placeholder="Ingrese la descripcion del producto">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" formControlName="cantmil" type="text" placeholder="Ingrese la cantidad de mililitros del producto">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" formControlName="estado" type="text" placeholder="Ingrese el estado del producto">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-success btn-block">Guardar Producto</button>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <select class="form-control">
-                    <option value="" disabled selected>Seleccionar Categoría</option>
-                    <option *ngFor="let categorias of lista_categoria" value={{categorias.id_categoria}}>{{categorias.descripcion}}</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <input class="form-control" formControlName="stock" type="text" placeholder="Ingrese el stock del producto">
-            </div>
-            <div class="form-group">
-                <input class="form-control" formControlName="precio" type="text" placeholder="Ingrese el precio del producto">
-            </div>
-            <div class="form-group">
-                <select class="form-control">
-                    <option value="">Uva</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <input class="form-control" formControlName="archivo" class="form-control-file" type="file" name="" id="">
-            </div>
-            <div class="form-group">
-                <img class="img-fluid" src="assets/no-image.png" alt="">
-            </div>
-            <div class="form-group">
-                <select class="form-control">
-                    <option value="">El Lagar</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <input class="form-control" formControlName="descripcion" type="text" placeholder="Ingrese la descripcion del producto">
-            </div>
-            <div class="form-group">
-                <input class="form-control" formControlName="cantmil" type="text" placeholder="Ingrese la cantidad de mililitros del producto">
-            </div>
-            <div class="form-group">
-                <input class="form-control" formControlName="estado" type="text" placeholder="Ingrese el estado del producto">
-            </div>
-        </form>
+        </div>
     </div>
 </div>
