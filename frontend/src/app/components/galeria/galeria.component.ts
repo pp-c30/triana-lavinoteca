@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ImageneshomeService } from '../../services/imageneshome.service';
+import { ProductosService } from '../../services/productos.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-galeria',
@@ -10,15 +11,21 @@ export class GaleriaComponent implements OnInit {
   // tslint:disable-next-line: variable-name
   lista_datos = [];
 
-  constructor(private serviceImagenesHome: ImageneshomeService) { }
+  constructor(private serviceProducto: ProductosService, private route: Router) { }
 
   ngOnInit(): void {
-    this.listarImagenesHome();
+    this.listarProducto();
   }
 
-  listarImagenesHome()
+  // tslint:disable-next-line: variable-name
+  verMas(id_producto: number)
   {
-    this.serviceImagenesHome.getImagenesHome().subscribe(
+    this.route.navigate(['/detalle-producto', id_producto]);
+  }
+
+  listarProducto()
+  {
+    this.serviceProducto.getProducto().subscribe(
       resultado =>
       {
         this.lista_datos = resultado;

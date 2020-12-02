@@ -16,6 +16,7 @@ export class OpinionesService {
     {
       return this.http.get<IOpinion[]>('http://localhost:3000/triana_opinion');
     }
+
     saveOpinion(UnaOpinion: IOpinion)
     {
       return this.http.post('http://localhost:3000/triana_opinion', UnaOpinion);
