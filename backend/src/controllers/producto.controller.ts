@@ -89,9 +89,9 @@ export class ProductoController{
     {
         const db = await conexion();
 
-        let codigo_triana_producto = req.params.codigo_triana_producto;
+        let id_producto = req.params.id_producto;
 
-        let unProducto = await db.query("select * from producto where id_producto = ?", [codigo_triana_producto]);
+        const unProducto = await db.query("select * from producto where id_producto = ?", [id_producto]);
 
         return res.json(unProducto[0]);
     }

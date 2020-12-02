@@ -17,15 +17,18 @@ class OpinionController {
         return __awaiter(this, void 0, void 0, function* () {
             //aca logro la conexión con la base de datos
             const db = yield database_1.conexion();
-            let triana_opinion = yield db.query('select * from opinion');
+            let triana_opinion = yield db.query('select *,(select nombre from producto where id_producto = o.id_producto) as id_producto from opinion o');
             return res.json(triana_opinion);
         });
     }
     //guardar opinion
     guardarTrianaOpinion(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            let triana_opinion = {
+                id_producto: req.body.id_producto,
+                descripcion: req.body.descripcion
+            };
             const db = yield database_1.conexion();
-            const triana_opinion = req.body;
             yield db.query("insert into opinion set ?", [triana_opinion]);
             return res.json('La opinion fue guardada exitosamente');
         });

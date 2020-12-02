@@ -11,16 +11,20 @@ export class OpinionController{
         //aca logro la conexión con la base de datos
         const db = await conexion();
 
-        let triana_opinion = await db.query('select * from opinion');
+        let triana_opinion = await db.query('select *,(select nombre from producto where id_producto = o.id_producto) as id_producto from opinion o');
 
         return res.json(triana_opinion);
     }
     //guardar opinion
     public async guardarTrianaOpinion(req:Request, res:Response)
     {
+        let triana_opinion:IOpinion = {
+            id_producto : req.body.id_producto,
+            descripcion: req.body.descripcion
+        }
+        
         const db= await conexion();
 
-        const triana_opinion:IOpinion= req.body;
 
         await db.query("insert into opinion set ?",[triana_opinion]);
 

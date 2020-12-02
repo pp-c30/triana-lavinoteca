@@ -85,8 +85,8 @@ class ProductoController {
     obtenerUnTrianaProducto(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const db = yield database_1.conexion();
-            let codigo_triana_producto = req.params.codigo_triana_producto;
-            let unProducto = yield db.query("select * from producto where id_producto = ?", [codigo_triana_producto]);
+            let id_producto = req.params.id_producto;
+            const unProducto = yield db.query("select * from producto where id_producto = ?", [id_producto]);
             return res.json(unProducto[0]);
         });
     }
