@@ -14,8 +14,8 @@ export class VariedadesService {
     return this.http.get<IVariedad[]>('http://localhost:3000/triana_variedad');
   }
 
-  saveVariedad(unVariedad: IVariedad){
-    return this.http.post('http://localhost:3000/triana_variedad', unVariedad);
+  saveVariedad(unaVariedad: IVariedad){
+    return this.http.post('http://localhost:3000/triana_variedad', unaVariedad);
   }
   updateVariedad(unVariedad: IVariedad)
   {

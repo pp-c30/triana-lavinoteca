@@ -10,7 +10,7 @@ export class VariedadController{
         //aca logro la conexión con la base de datos
         const db = await conexion();
 
-        let triana_variedad = await db.query('select * from variedad');
+        let triana_variedad = await db.query('select *,(select descripcion from categoria where id_categoria = v.id_categoria) as id_categoria from variedad v');
 
         return res.json(triana_variedad);
     }
@@ -18,11 +18,14 @@ export class VariedadController{
     //guardar una variedad
     public async guardarTrianaVariedad(req:Request, res:Response)
     {
+        let unaVariedad:IVarie= {
+            id_categoria: req.body.id_categoria,
+            descripcion: req.body.descripcion
+        }
+
         const db= await conexion();
 
-        const triana_variedad:IVarie= req.body;
-
-        await db.query("insert into variedad set ?",[triana_variedad]);
+        await db.query("insert into variedad set ?",[unaVariedad]);
 
         return res.json('La variedad fue guardada exitosamente');
     }

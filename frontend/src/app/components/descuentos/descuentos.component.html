@@ -52,14 +52,14 @@
                         <input [ngClass]="{'is-invalid':(formDescuentos.get('porcentaje')?.touched || formDescuentos.get('porcentaje')?.dirty) && formDescuentos.get('porcentaje')?.invalid}" formControlName="porcentaje" placeholder="Ingrese el porcentaje" type="number" class="form-control">
                         <div class="invalid-feedback">
                             <span *ngIf="formDescuentos.get('porcentaje').hasError('required')">Campo Requerido </span>
-                            <span *ngIf="!formDescuentos.get('porcentaje').hasError('minLength')">(Mínimo 1 caracter)</span>
+                            <span *ngIf="!formDescuentos.get('porcentaje').hasError('minLength')">(Mínimo 1 carácter)</span>
                         </div>
                     </div>
                     <div class="form-group">
                         <input [ngClass]="{'is-invalid':(formDescuentos.get('estado')?.touched || formDescuentos.get('estado')?.dirty) && formDescuentos.get('estado')?.invalid}" formControlName="estado" placeholder="Ingrese el estado" type="text" class="form-control">
                         <div class="invalid-feedback">
                             <span *ngIf="formDescuentos.get('estado').hasError('required')">Campo Requerido </span>
-                            <span *ngIf="!formDescuentos.get('estado').hasError('minLength')">(Mínimo 1 caracter)</span>
+                            <span *ngIf="!formDescuentos.get('estado').hasError('minLength')">(Mínimo 1 carácter)</span>
                         </div>
                     </div>
                     <button [disabled]="formDescuentos.invalid" class="btn btn-success">Guardar un descuento</button>

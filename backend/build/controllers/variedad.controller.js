@@ -17,16 +17,19 @@ class VariedadController {
         return __awaiter(this, void 0, void 0, function* () {
             //aca logro la conexión con la base de datos
             const db = yield database_1.conexion();
-            let triana_variedad = yield db.query('select * from variedad');
+            let triana_variedad = yield db.query('select *,(select descripcion from categoria where id_categoria = v.id_categoria) as id_categoria from variedad v');
             return res.json(triana_variedad);
         });
     }
     //guardar una variedad
     guardarTrianaVariedad(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            let unaVariedad = {
+                id_categoria: req.body.id_categoria,
+                descripcion: req.body.descripcion
+            };
             const db = yield database_1.conexion();
-            const triana_variedad = req.body;
-            yield db.query("insert into variedad set ?", [triana_variedad]);
+            yield db.query("insert into variedad set ?", [unaVariedad]);
             return res.json('La variedad fue guardada exitosamente');
         });
     }

@@ -11,7 +11,7 @@
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th style="text-align: center;">Descripción</th>
+                    <th style="text-align: center;">Categoría</th>
                     <th style="text-align: center;">Operaciones</th>
                 </tr>
             </thead>
@@ -47,7 +47,7 @@
                 <form [formGroup]="formCategoria" (ngSubmit)="guardarCategoria()" novalidate>
                     <input formControlName="id_categoria" type="hidden">
                     <div class="form-group">
-                        <input [ngClass]="{'is-invalid':(formCategoria.get('descripcion')?.touched || formCategoria.get('descripcion')?.dirty) && formCategoria.get('descripcion')?.invalid}" formControlName="descripcion" placeholder="Ingrese la descripción" type="text" class="form-control">
+                        <input [ngClass]="{'is-invalid':(formCategoria.get('descripcion')?.touched || formCategoria.get('descripcion')?.dirty) && formCategoria.get('descripcion')?.invalid}" formControlName="descripcion" placeholder="Ingrese la categoría" type="text" class="form-control">
                         <div class="invalid-feedback">
                             <span *ngIf="formCategoria.get('descripcion').hasError('required')">Campo Requerido </span>
                             <span *ngIf="!formCategoria.get('descripcion').hasError('minLength')">(Mínimo 3 caracteres)</span>

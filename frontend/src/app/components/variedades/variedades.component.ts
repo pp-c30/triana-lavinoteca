@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { VariedadesService } from '../../services/variedades.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IVariedad } from 'src/app/models/Variedad';
+import { CategoriasService } from '../../services/categorias.service';
+import { ICategoria } from '../../models/Categoria';
 
 @Component({
   selector: 'app-variedades',
@@ -10,6 +12,8 @@ import { IVariedad } from 'src/app/models/Variedad';
 })
 
 export class VariedadesComponent implements OnInit {
+  // tslint:disable-next-line: variable-name
+  lista_categoria: ICategoria[] = [];
 
   listVariedad = [];
 
@@ -21,19 +25,33 @@ export class VariedadesComponent implements OnInit {
   // tslint:disable-next-line: no-inferrable-types
   p: number = 1;
 
-  constructor(private variedadesServ: VariedadesService, private fb: FormBuilder) {
+  constructor(private variedadesServ: VariedadesService,  private serviceCategoria: CategoriasService, private fb: FormBuilder) {
     this.formVariedad = this.fb.group({
       id_varie: [null],
+      id_categoria: [null],
       descripcion: ['', [Validators.required, Validators.minLength(2)]]
     });
    }
 
   ngOnInit(): void {
+    this.obtenerCategorias();
     this.obtenerVariedad();
   }
+
+  obtenerCategorias()
+  {
+    this.serviceCategoria.getCategoria().subscribe(
+      resultado => {
+        this.lista_categoria = resultado;
+      },
+      error => console.log(error)
+    );
+  }
+
   obtenerVariedad(){
     this.variedadesServ.getVariedad().subscribe(
-      resultado => this.listVariedad = resultado,
+      resultado => {this.listVariedad = resultado;
+      },
       error => console.log(error)
 
     );
@@ -45,7 +63,7 @@ export class VariedadesComponent implements OnInit {
       // se actuaiza
       this.variedadesServ.updateVariedad(this.formVariedad.value).subscribe(
         resultado => {
-          console.log(resultado);
+          // console.log(resultado);
           this.obtenerVariedad();
           this.formVariedad.reset();
         },
@@ -57,10 +75,10 @@ export class VariedadesComponent implements OnInit {
     {
       this.variedadesServ.saveVariedad(this.formVariedad.value).subscribe(
         resultado => {
-          console.log(resultado);
+          // console.log(resultado);
           // se refresca la grilla
-          this.obtenerVariedad();
           this.formVariedad.reset();
+          this.obtenerVariedad();
         },
         error => console.log(error)
       );
@@ -82,4 +100,5 @@ export class VariedadesComponent implements OnInit {
       );
     }
   }
+
 }

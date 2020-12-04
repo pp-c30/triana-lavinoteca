@@ -15,15 +15,36 @@
                 <th>Mililitros</th>
                 <th>Estado</th>
                 <th>Operaciones</th>
+                <th>Formulario</th>
             </thead>
             <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <button class="btn btn-danger btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Mostrar</button>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
-    <div class="col-sm-5">
+    <div class="collapse col-sm-5" id="collapseExample">
         <div class="card">
             <div class="card-header">
-                Formulario de productos
+                <button class="btn btn-danger btn-sm" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" type="button">Ocultar</button>
+                <br>
+                <p></p>Formulario de productos
             </div>
             <div class="card-body">
                 <form [formGroup]="formProducto">

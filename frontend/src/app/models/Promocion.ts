@@ -1,6 +1,6 @@
 export interface IPromocion
 {
     id_promo?: number;
-    producto: number; 
+    producto: number;
     descuento: number;
 }
