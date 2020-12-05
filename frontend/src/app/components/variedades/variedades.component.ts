@@ -28,7 +28,7 @@ export class VariedadesComponent implements OnInit {
   constructor(private variedadesServ: VariedadesService,  private serviceCategoria: CategoriasService, private fb: FormBuilder) {
     this.formVariedad = this.fb.group({
       id_varie: [null],
-      id_categoria: [null],
+      id_categoria: [0],
       descripcion: ['', [Validators.required, Validators.minLength(2)]]
     });
    }
@@ -64,8 +64,8 @@ export class VariedadesComponent implements OnInit {
       this.variedadesServ.updateVariedad(this.formVariedad.value).subscribe(
         resultado => {
           // console.log(resultado);
-          this.obtenerVariedad();
           this.formVariedad.reset();
+          this.obtenerVariedad();
         },
         error => console.log(error)
       );

@@ -1,61 +1,74 @@
+<div class="p-3 row">
+    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#exampleModal">
+        Crear un nuevo producto
+      </button>
+</div>
+<p></p>
 <div class="row">
-    <div class="col-sm-7">
+    <div class="col-sm-12">
         <table class="table table-striped">
-            <thead>
+            <thead style="text-align: center;">
                 <th>Id</th>
                 <th>Nombre</th>
                 <th>Categoria</th>
                 <th>Stock</th>
                 <th>Precio</th>
                 <th>Variedad</th>
-                <th>Imagen_url</th>
+                <th>Imagen</th>
                 <th>Public_id</th>
                 <th>Bodega</th>
-                <th>Descripción</th>
                 <th>Mililitros</th>
                 <th>Estado</th>
                 <th>Operaciones</th>
-                <th>Formulario</th>
             </thead>
             <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                <tr style="text-align: center;" *ngFor="let producto of lista_producto">
+                    <td>{{producto.id_producto}}</td>
+                    <td>{{producto.nombre}}</td>
+                    <td>{{producto.descripcion_categoria}}</td>
+                    <td>{{producto.stock}}</td>
+                    <td>{{producto.precio}}</td>
+                    <td>{{producto.descripcion_variedad}}</td>
                     <td>
-                        <button class="btn btn-danger btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Mostrar</button>
+                        <img style="width:75px;" class="img-fluid rounded" [src]="producto.imagen" alt="">
+                    </td>
+                    <td>{{producto.public_id}}</td>
+                    <td>{{producto.descripcion_bodega}}</td>
+                    <td>{{producto.cantmil}}</td>
+                    <td>{{producto.estado}}</td>
+                    <td>
+                        <div class="btn-group btn-group-sm d-flex justify-content-center">
+                            <ul class="list-inline m-0">
+                                <li class="list-inline-item">
+                                    <button class="btn btn-primary btn-sm rounded-0" type="button" data-toggle="modal" data-target="#exampleModal" data-placement="top" title="Editar"><i class="fa fa-edit"></i></button>
+                                </li>
+                            </ul>
+                        </div>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
-    <div class="collapse col-sm-5" id="collapseExample">
-        <div class="card">
-            <div class="card-header">
-                <button class="btn btn-danger btn-sm" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" type="button">Ocultar</button>
-                <br>
-                <p></p>Formulario de productos
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Alta producto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
             </div>
-            <div class="card-body">
-                <form [formGroup]="formProducto">
+            <form [formGroup]="formProducto">
+                <div class="modal-body">
                     <div class="form-group">
                         <input class="form-control" formControlName="nombre" type="text" placeholder="Ingrese el nombre del producto">
                     </div>
                     <div class="form-group">
                         <select class="form-control">
-                            <option value="" disabled selected>Seleccionar Categoría</option>
-                            <option *ngFor="let categorias of lista_categoria" value={{categorias.id_categoria}}>{{categorias.descripcion}}</option>
-                        </select>
+                        <option value="" disabled selected>Seleccionar Categoría</option>
+                        <option *ngFor="let categorias of lista_categoria" value={{categorias.id_categoria}}>{{categorias.descripcion}}</option>
+                    </select>
                     </div>
                     <div class="form-group">
                         <input class="form-control" formControlName="stock" type="text" placeholder="Ingrese el stock del producto">
@@ -65,8 +78,8 @@
                     </div>
                     <div class="form-group">
                         <select class="form-control">
-                            <option value="">Uva</option>
-                        </select>
+                        <option value="">Uva</option>
+                    </select>
                     </div>
                     <div class="form-group">
                         <input class="form-control" formControlName="archivo" class="form-control-file" type="file" name="" id="">
@@ -76,8 +89,8 @@
                     </div>
                     <div class="form-group">
                         <select class="form-control">
-                            <option value="">El Lagar</option>
-                        </select>
+                        <option value="">El Lagar</option>
+                    </select>
                     </div>
                     <div class="form-group">
                         <input class="form-control" formControlName="descripcion" type="text" placeholder="Ingrese la descripcion del producto">
@@ -88,11 +101,12 @@
                     <div class="form-group">
                         <input class="form-control" formControlName="estado" type="text" placeholder="Ingrese el estado del producto">
                     </div>
-                    <div class="form-group">
-                        <button class="btn btn-success btn-block">Guardar Producto</button>
-                    </div>
-                </form>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button class="btn btn-success">Guardar Producto</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

@@ -19,7 +19,7 @@
             <tbody>
                 <tr *ngFor="let descuentos of listDescuentos | filter:buscarDescuentos | paginate:{itemsPerPage:4, currentPage:p}">
                     <td>{{descuentos.id_des}}</td>
-                    <td style="text-align: center;">{{descuentos.porcentaje}}</td>
+                    <td style="text-align: center;">{{descuentos.porcentaje}}%</td>
                     <td style="text-align: center;">{{descuentos.estado}}</td>
                     <td>
                         <div class="btn-group btn-group-sm d-flex justify-content-center">

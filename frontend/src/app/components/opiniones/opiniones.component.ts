@@ -29,7 +29,7 @@ export class OpinionesComponent implements OnInit {
   constructor(private fb: FormBuilder, private serviceProducto: ProductosService, private serviceOpinion: OpinionesService)
    {
      this.formOpiniones = this.fb.group({
-       id_producto : [null, Validators.required],
+       id_producto : [0, Validators.required],
        descripcion : ['', Validators.required]
      });
    }

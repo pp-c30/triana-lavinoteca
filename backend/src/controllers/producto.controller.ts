@@ -16,7 +16,7 @@ export class ProductoController{
         //aca logro la conexión con la base de datos
         const db = await conexion();
 
-        let triana_producto = await db.query('select * from producto');
+        let triana_producto = await db.query('select p.*, v.descripcion as descripcion_variedad, c.descripcion as descripcion_categoria, b.descripcion as descripcion_bodega from producto p, variedad v, categoria c, bodega b where p.variedad = v.id_varie and p.categoria = c.id_categoria and p.bodega = b.id_bodega');
 
         return res.json(triana_producto);
     }
@@ -91,7 +91,7 @@ export class ProductoController{
 
         let id_producto = req.params.id_producto;
 
-        const unProducto = await db.query("select * from producto where id_producto = ?", [id_producto]);
+        const unProducto = await db.query("select p.*, v.descripcion as descripcion_variedad, c.descripcion as descripcion_categoria, b.descripcion as descripcion_bodega from producto p, variedad v, categoria c, bodega b where p.variedad = v.id_varie and p.categoria = c.id_categoria and p.bodega = b.id_bodega and id_producto = ?", [id_producto]);
 
         return res.json(unProducto[0]);
     }

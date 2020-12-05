@@ -38,8 +38,8 @@ export class PromocionesComponent implements OnInit {
     // Construcción del formulario
     this.formPromocion = this.fb.group({
       id_promo: [null],
-      producto: [null, Validators.required],
-      descuento: [null, Validators.required]
+      producto: [0, Validators.required],
+      descuento: [0, Validators.required]
     });
    }
 
@@ -93,7 +93,7 @@ export class PromocionesComponent implements OnInit {
       );
     }
     else {
-      // El metodo guardarPromociones le enviara los datos, que recoge del formulario, al saveBodega
+      // El metodo guardarPromociones le enviara los datos, que recoge del formulario, al savePromocion
       this.promocionesServ.savePromocion(this.formPromocion.value).subscribe(
         resultado => {
           console.log(resultado);
@@ -107,7 +107,7 @@ export class PromocionesComponent implements OnInit {
       );
     }
   }
-  // El atributo promociones sera del tipo Ipromociones, y respetara los datos que contenga esa interfaz
+  // El atributo promociones sera del tipo IPromociones, y respetara los datos que contenga esa interfaz
   editarPromocion(promocion: IPromocion)
   {
     // En formPromociones, van a ser seteados sus valores

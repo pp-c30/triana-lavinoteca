@@ -12,4 +12,7 @@ export interface IProducto
     descripcion: string;
     cantmil: number;
     estado: number;
+    descripcion_variedad: string;
+    descripcion_bodega: string;
+    descripcion_categoria: string;
 }

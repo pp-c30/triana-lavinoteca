@@ -20,7 +20,7 @@
                 <tr style="text-align: center;" *ngFor="let promocion of listPromocion | filter:buscarPromocion | paginate:{itemsPerPage:4, currentPage:p}">
                     <td>{{promocion.id_promo}}</td>
                     <td>{{promocion.producto}}</td>
-                    <td>{{promocion.descuento}}</td>
+                    <td>{{promocion.descuento}}%</td>
                     <td>
                         <div class="btn-group btn-group-sm d-flex justify-content-center">
                             <ul class="list-inline m-0">
