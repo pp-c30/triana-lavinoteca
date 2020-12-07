@@ -16,7 +16,7 @@ class PromocionController {
         return __awaiter(this, void 0, void 0, function* () {
             //aca se logro la conexión con la base de datos
             const db = yield database_1.conexion();
-            let triana_promocion = yield db.query("select * from promociones");
+            let triana_promocion = yield db.query("select pr.id_promo, p.nombre as producto, d.porcentaje as descuento from promociones pr, producto p, descuento d where pr.producto = p.id_producto and pr.descuento = d.id_des");
             return res.json(triana_promocion);
         });
     }
