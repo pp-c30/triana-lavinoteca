@@ -103,12 +103,9 @@ export class ImagenesHomeController{
 
         res.json('Se elimino exitosamente el registro');
     }
-<<<<<<< HEAD
 
-    async obtenerUnTrianaImagenesHome(req:Request, res:Response)
-=======
      async obtenerUnTrianaImagenesHome(req:Request, res:Response)
->>>>>>> 4058fa0888f221b6aba379e61e8b1b284f001c21
+
     {
         const db = await conexion();
 
