@@ -7,19 +7,21 @@
 <div class="row">
     <div class="col-sm-12">
         <table class="table table-striped">
-            <thead style="text-align: center;">
-                <th>N° de Identificación</th>
-                <th>Nombre</th>
-                <th>Categoria</th>
-                <th>Stock</th>
-                <th>Precio</th>
-                <th>Variedad</th>
-                <th>Imagen</th>
-                <th>Public_id</th>
-                <th>Bodega</th>
-                <th>Mililitros</th>
-                <th>Estado</th>
-                <th>Operaciones</th>
+            <thead>
+                <tr style="text-align: center;">
+                    <th>N° de Identificación</th>
+                    <th>Nombre</th>
+                    <th>Categoria</th>
+                    <th>Stock</th>
+                    <th>Precio</th>
+                    <th>Variedad</th>
+                    <th>Imagen</th>
+                    <th>Public_id</th>
+                    <th>Bodega</th>
+                    <th>Mililitros</th>
+                    <th>Estado</th>
+                    <th>Operaciones</th>
+                </tr>
             </thead>
             <tbody>
                 <tr style="text-align: center;" *ngFor="let producto of lista_producto">
@@ -67,7 +69,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
             </div>
-            <form [formGroup]="formProducto">
+            <form [formGroup]="formProducto" (ngSubmit)="guardarProducto()" novalidate>
                 <div class="modal-body">
                     <div class="form-group">
                         <input class="form-control" formControlName="nombre" type="text" placeholder="Ingrese el nombre del producto">
@@ -109,7 +111,7 @@
                         <input class="form-control" formControlName="cantmil" type="text" placeholder="Ingrese la cantidad de mililitros del producto">
                     </div>
                     <div class="form-group">
-                        <select class="form-control">
+                        <select formControlName="estado" class="form-control">
                                 <option value="-1" disabled selected>Seleccionar Estado</option>
                                 <option value="1">Activo</option>
                                 <option value="0">Inactivo</option>
@@ -118,7 +120,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button class="btn btn-success">Guardar Producto</button>
+                    <button [disabled]="formProducto.invalid" class="btn btn-success">Guardar Producto</button>
                 </div>
             </form>
         </div>
