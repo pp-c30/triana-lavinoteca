@@ -16,6 +16,7 @@ const opinion_routes_1 = __importDefault(require("./routes/opinion.routes"));
 const producto_routes_1 = __importDefault(require("./routes/producto.routes"));
 const promocion_routes_1 = __importDefault(require("./routes/promocion.routes"));
 const variedad_routes_1 = __importDefault(require("./routes/variedad.routes"));
+const autenticacion_routes_1 = __importDefault(require("./routes/autenticacion.routes"));
 const path_1 = __importDefault(require("path"));
 class Server {
     constructor() {
@@ -39,6 +40,7 @@ class Server {
         this.app.use(producto_routes_1.default);
         this.app.use(promocion_routes_1.default);
         this.app.use(variedad_routes_1.default);
+        this.app.use(autenticacion_routes_1.default);
     }
     middleware() {
         //muestreo de las peticiones

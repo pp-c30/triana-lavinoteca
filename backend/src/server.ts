@@ -10,6 +10,7 @@ import enrutadorOpinion from "./routes/opinion.routes";
 import enrutadorProducto from "./routes/producto.routes";
 import enrutadorPromocion from "./routes/promocion.routes";
 import enrutadorVariedad from "./routes/variedad.routes";
+import enrutadorAut from "./routes/autenticacion.routes"
 import path from 'path';
 
 export class Server {
@@ -41,6 +42,7 @@ export class Server {
         this.app.use(enrutadorProducto);
         this.app.use(enrutadorPromocion);
         this.app.use(enrutadorVariedad);
+        this.app.use(enrutadorAut);
     }
 
     middleware()

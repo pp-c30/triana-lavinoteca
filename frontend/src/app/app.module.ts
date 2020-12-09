@@ -24,6 +24,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
 
 import {NgxSpinnerModule} from 'ngx-spinner';
 import { DetalleProductoComponent } from './components/detalle-producto/detalle-producto.component';
+import { RegistroComponent } from './components/registro/registro.component';
+import { IngresoComponent } from './components/ingreso/ingreso.component';
+import { InicioComponent } from './components/inicio/inicio.component';
 
 
 @NgModule({
@@ -39,7 +42,10 @@ import { DetalleProductoComponent } from './components/detalle-producto/detalle-
     DescuentosComponent,
     AdminImageneshomeComponent,
     GaleriaComponent,
-    DetalleProductoComponent
+    DetalleProductoComponent,
+    RegistroComponent,
+    IngresoComponent,
+    InicioComponent
   ],
   imports: [
     BrowserModule,
