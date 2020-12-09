@@ -12,7 +12,7 @@ import { ICategoria } from '../../models/Categoria';
 })
 
 export class VariedadesComponent implements OnInit {
-  // tslint:disable-next-line: variable-name
+  // tslint:disable-next-line:variable-name
   lista_categoria: ICategoria[] = [];
 
   listVariedad = [];
@@ -22,7 +22,7 @@ export class VariedadesComponent implements OnInit {
   // Este es un atributo del tipo any (acepta strings, numbers, etc).
   buscarVariedad: any;
 
-  // tslint:disable-next-line: no-inferrable-types
+  // tslint:disable-next-line:no-inferrable-types
   p: number = 1;
 
   constructor(private variedadesServ: VariedadesService,  private serviceCategoria: CategoriasService, private fb: FormBuilder) {
@@ -48,7 +48,7 @@ export class VariedadesComponent implements OnInit {
     );
   }
 
-  // tslint:disable-next-line: variable-name
+
   obtenerVariedad(){
     this.variedadesServ.getVariedad().subscribe(
       resultado => {this.listVariedad = resultado;
@@ -61,7 +61,7 @@ export class VariedadesComponent implements OnInit {
   guardarVariedad(){
     if (this.formVariedad.value.id_varie)
     {
-      // se actuaiza
+      // se actualiza
       this.variedadesServ.updateVariedad(this.formVariedad.value).subscribe(
         resultado => {
           // console.log(resultado);

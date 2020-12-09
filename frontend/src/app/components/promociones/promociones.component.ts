@@ -13,10 +13,12 @@ import { IDescuentos } from '../../models/Descuento';
   styleUrls: ['./promociones.component.css']
 })
 export class PromocionesComponent implements OnInit {
-  // tslint:disable-next-line: variable-name
+
+  // tslint:disable-next-line:variable-name
   lista_producto: IProducto[] = [];
 
-  // tslint:disable-next-line: variable-name
+
+  // tslint:disable-next-line:variable-name
   lista_descuento: IDescuentos[] = [];
 
   listPromocion: IPromocion[] = [];
@@ -27,7 +29,7 @@ export class PromocionesComponent implements OnInit {
   // Este es un atributo del tipo any (acepta strings, numbers, etc).
   buscarPromocion: any;
 
-  // tslint:disable-next-line: no-inferrable-types
+  // tslint:disable-next-line:no-inferrable-types
   p: number = 1;
 
    /* PromocionesServ: es una instancia que nos permitira acceder a los metodos que contiene la clase PromocionesService

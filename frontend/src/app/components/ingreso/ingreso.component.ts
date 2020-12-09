@@ -25,7 +25,7 @@ export class IngresoComponent implements OnInit {
     this.autServ.login(this.formIngreso.value).subscribe(
       respuesta => {
         localStorage.setItem('token', String(respuesta));
-        this.route.navigate(['/producto']); // Pagina a la cual despues de loguiarnos queremos que nos redireccione 
+        this.route.navigate(['/producto']); // Pagina a la cual despues de loguiarnos queremos que nos redireccione
       }
     );
   }

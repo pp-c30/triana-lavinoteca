@@ -9,16 +9,16 @@
         </div>
         <table class="table table-striped">
             <thead>
-                <tr>
-                    <th>Id</th>
-                    <th style="text-align: center;">Categoría</th>
-                    <th style="text-align: center;">Operaciones</th>
+                <tr style="text-align: center;">
+                    <th>N° de Identificación</th>
+                    <th>Categoría</th>
+                    <th>Operaciones</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let categoria of listCategoria | filter:buscarCategoria | paginate:{itemsPerPage:4, currentPage:p}">
+                <tr style="text-align: center;" *ngFor="let categoria of listCategoria | filter:buscarCategoria | paginate:{itemsPerPage:4, currentPage:p}">
                     <td>{{categoria.id_categoria}}</td>
-                    <td style="text-align: center;">{{categoria.descripcion}}</td>
+                    <td>{{categoria.descripcion}}</td>
                     <td>
                         <div class="btn-group btn-group-sm d-flex justify-content-center">
                             <ul class="list-inline m-0">

@@ -9,18 +9,18 @@
         </div>
         <table class="table table-striped">
             <thead>
-                <tr>
-                    <th>Id</th>
-                    <th style="text-align: center;">Porcentaje</th>
-                    <th style="text-align: center;">Estado</th>
-                    <th style="text-align: center;">Operaciones</th>
+                <tr style="text-align: center;">
+                    <th>N° de Identificación</th>
+                    <th>Porcentaje</th>
+                    <th>Estado</th>
+                    <th>Operaciones</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let descuentos of listDescuentos | filter:buscarDescuentos | paginate:{itemsPerPage:4, currentPage:p}">
+                <tr style="text-align: center;" *ngFor="let descuentos of listDescuentos | filter:buscarDescuentos | paginate:{itemsPerPage:4, currentPage:p}">
                     <td>{{descuentos.id_des}}</td>
-                    <td style="text-align: center;">{{descuentos.porcentaje}}%</td>
-                    <td style="text-align: center;">
+                    <td>{{descuentos.porcentaje}}%</td>
+                    <td>
                         <div *ngIf="descuentos.estado == 1; else loggedOut">
                             <span class="badge badge-pill badge-success">Activo</span>
                         </div>
