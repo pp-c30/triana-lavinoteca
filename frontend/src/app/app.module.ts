@@ -26,6 +26,7 @@ import {NgxSpinnerModule} from 'ngx-spinner';
 import { DetalleProductoComponent } from './components/detalle-producto/detalle-producto.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { IngresoComponent } from './components/ingreso/ingreso.component';
+import { InicioComponent } from './components/inicio/inicio.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { IngresoComponent } from './components/ingreso/ingreso.component';
     GaleriaComponent,
     DetalleProductoComponent,
     RegistroComponent,
-    IngresoComponent
+    IngresoComponent,
+    InicioComponent
   ],
   imports: [
     BrowserModule,

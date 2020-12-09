@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.ImagenesHomeController = void 0;
 const database_1 = require("../database");
 const cloudinary_1 = __importDefault(require("cloudinary"));
 const fs_extra_1 = __importDefault(require("fs-extra"));
@@ -91,6 +92,14 @@ class ImagenesHomeController {
             // eliminamos registro en la base
             yield db.query('delete from imageneshome where id_imagen = ?', [id]);
             res.json('Se elimino exitosamente el registro');
+        });
+    }
+    obtenerUnTrianaImagenesHome(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const db = yield database_1.conexion();
+            let id_imagen = req.params.id_imagen;
+            const unaImagen = yield db.query("select * from imageneshome where id_imagen = ?", [id_imagen]);
+            return res.json(unaImagen[0]);
         });
     }
 }

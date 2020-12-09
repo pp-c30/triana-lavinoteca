@@ -12,6 +12,7 @@ import { GaleriaComponent } from './components/galeria/galeria.component';
 import { DetalleProductoComponent } from './components/detalle-producto/detalle-producto.component';
 import { IngresoComponent } from './components/ingreso/ingreso.component';
 import { RegistroComponent } from './components/registro/registro.component';
+import { InicioComponent } from './components/inicio/inicio.component';
 
 const routes: Routes = [
   {
@@ -51,7 +52,10 @@ const routes: Routes = [
     path: 'registro', component: RegistroComponent
   },
   {
-    path: '', redirectTo: '/catalogo', pathMatch: 'full'
+    path: 'inicio', component: InicioComponent
+  },
+  {
+    path: '', redirectTo: '/inicio', pathMatch: 'full'
   }
 ];
 
