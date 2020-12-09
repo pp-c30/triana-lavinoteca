@@ -20,7 +20,15 @@
                 <tr *ngFor="let descuentos of listDescuentos | filter:buscarDescuentos | paginate:{itemsPerPage:4, currentPage:p}">
                     <td>{{descuentos.id_des}}</td>
                     <td style="text-align: center;">{{descuentos.porcentaje}}%</td>
-                    <td style="text-align: center;">{{descuentos.estado}}</td>
+                    <td style="text-align: center;">
+                        <div *ngIf="descuentos.estado == 1; else loggedOut">
+                            <span class="badge badge-pill badge-success">Activo</span>
+                        </div>
+
+                        <ng-template #loggedOut>
+                            <span class="badge badge-pill badge-danger">Inactivo</span>
+                        </ng-template>
+                    </td>
                     <td>
                         <div class="btn-group btn-group-sm d-flex justify-content-center">
                             <ul class="list-inline m-0">

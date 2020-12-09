@@ -9,16 +9,16 @@
         </div>
         <table class="table table-striped">
             <thead>
-                <tr>
-                    <th>Id</th>
-                    <th style="text-align: center;">Descripción</th>
-                    <th style="text-align: center;">Operaciones</th>
+                <tr style="text-align: center;">
+                    <th>N° de Identificación</th>
+                    <th>Bodega</th>
+                    <th>Operaciones</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let bodega of listBodega | filter:buscarBodega | paginate:{itemsPerPage:4, currentPage:p}">
+                <tr style="text-align: center;" *ngFor="let bodega of listBodega | filter:buscarBodega | paginate:{itemsPerPage:4, currentPage:p}">
                     <td>{{bodega.id_bodega}}</td>
-                    <td style="text-align: center;">{{bodega.descripcion}}</td>
+                    <td>{{bodega.descripcion}}</td>
                     <td>
                         <div class="btn-group btn-group-sm d-flex justify-content-center">
                             <ul class="list-inline m-0">
@@ -47,11 +47,10 @@
                 <form [formGroup]="formBodega" (ngSubmit)="guardarBodega()" novalidate>
                     <input formControlName="id_bodega" type="hidden">
                     <div class="form-group">
-                        <input [ngClass]="{'is-invalid':(formBodega.get('descripcion')?.touched || formBodega.get('descripcion')?.dirty) && formBodega.get('descripcion')?.invalid}" formControlName="descripcion" placeholder="Ingrese la bodega (junto con su descripción)" type="text"
-                            class="form-control">
+                        <input [ngClass]="{'is-invalid':(formBodega.get('descripcion')?.touched || formBodega.get('descripcion')?.dirty) && formBodega.get('descripcion')?.invalid}" formControlName="descripcion" placeholder="Ingrese la Bodega" type="text" class="form-control">
                         <div class="invalid-feedback">
                             <span *ngIf="formBodega.get('descripcion').hasError('required')">Campo Requerido </span>
-                            <span *ngIf="!formBodega.get('descripcion').hasError('minLength')">(Mínimo 6 caracteres)</span>
+                            <span *ngIf="!formBodega.get('descripcion').hasError('minLength')">(Mínimo 4 caracteres)</span>
                         </div>
                     </div>
                     <button [disabled]="formBodega.invalid" class="btn btn-success">Guardar una bodega</button>

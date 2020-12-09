@@ -9,6 +9,7 @@ export class VariedadesService {
 
   constructor(private http: HttpClient) {}
 
+  // tslint:disable-next-line: variable-name
   getVariedad()
   {
     return this.http.get<IVariedad[]>('http://localhost:3000/triana_variedad');
@@ -19,13 +20,19 @@ export class VariedadesService {
   }
   updateVariedad(unVariedad: IVariedad)
   {
-    let id: number;
-    id = unVariedad.id_varie;
+    // tslint:disable-next-line: prefer-const
+    let id: number = unVariedad.id_varie;
+    // tslint:disable-next-line: prefer-const
     return this.http.put('http://localhost:3000/triana_variedad/' + id, unVariedad);
   }
   deleteVariedad(id: number){
 
     return this.http.delete('http://localhost:3000/triana_variedad/' + id);
 
+  }
+  // tslint:disable-next-line: variable-name
+  getVariedadPorCategoria(id_cat: number)
+  {
+    return this.http.get<IVariedad[]>('http://localhost:3000/triana_variedad/' + id_cat);
   }
 }

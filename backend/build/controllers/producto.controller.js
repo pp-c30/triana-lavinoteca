@@ -41,16 +41,16 @@ class ProductoController {
             //se guardan datos en la base
             const guardarImagen = {
                 nombre: req.body.nombre,
-                categoria: req.body.categoria,
-                stock: req.body.stock,
-                precio: req.body.precio,
+                categoria: Number(req.body.categoria),
+                stock: Number(req.body.stock),
+                precio: Number(req.body.precio),
                 imagen: resultado_cloud.url,
                 public_id: resultado_cloud.public_id,
-                bodega: req.body.bodega,
+                bodega: Number(req.body.bodega),
                 descripcion: req.body.descripcion,
-                cantmil: req.body.cantmil,
-                estado: req.body.estado,
-                variedad: req.body.variedad
+                cantmil: Number(req.body.cantmil),
+                estado: Number(req.body.estado),
+                variedad: Number(req.body.variedad)
             };
             yield db.query('insert into producto set ?', [guardarImagen]);
             fs_extra_1.default.unlink(req.file.path);

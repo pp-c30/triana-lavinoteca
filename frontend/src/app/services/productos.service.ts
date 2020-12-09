@@ -15,20 +15,32 @@ export class ProductosService {
   }
 
   // A través de este metodo, saveDescuento, recibiremos un descuento
-  saveProducto(UnProducto: IProducto)
+  saveProducto(unProducto: IProducto, file: File)
   {
     /* A esta dirección le enviaremos, a traves del metodo POST, los datos de un descuento y retorna el mensaje:
     "el descuento fue guardada exitosamente"*/
-    return this.http.post('http://localhost:3000/triana_producto', UnProducto);
+    const fd = new FormData();
+
+    fd.append('nombre', unProducto.nombre);
+    fd.append('categoria', String(unProducto.categoria));
+    fd.append('stock', String(unProducto.stock));
+    fd.append('precio', String(unProducto.precio));
+    fd.append('variedad', String(unProducto.variedad));
+    fd.append('bodega', String(unProducto.bodega));
+    fd.append('cantmil', String(unProducto.cantmil));
+    fd.append('estado', String(unProducto.estado));
+    fd.append('img', file);
+
+    return this.http.post('http://localhost:3000/triana_producto', fd);
   }
 
   // A traves de este metodo recibiremos un descuento que es del tipo IDescuento
-  updateProducto(UnProducto: IProducto)
+  updateProducto(unProducto: IProducto)
   {
     let id: number;
-    id = UnProducto.id_producto;
+    id = unProducto.id_producto;
     // Retornara la respuesta que nos dara la api: 'Se actualizo exitosamente'
-    return this.http.put('http://localhost:3000/triana_producto/' + id, UnProducto);
+    return this.http.put('http://localhost:3000/triana_producto/' + id, unProducto);
   }
 
   deleteProducto(id: number)

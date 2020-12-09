@@ -20,7 +20,15 @@
                 <tr *ngFor="let fila of listado_datos_imageneshome | filter:buscarDato | paginate:{itemsPerPage:4, currentPage:p}">
                     <td>{{fila.id_imagen}}</td>
                     <td style="text-align: center;">{{fila.nombre}}</td>
-                    <td style="text-align: center;">{{fila.estado}}</td>
+                    <td style="text-align: center;">
+                        <div *ngIf="fila.estado == 1; else loggedOut">
+                            <span class="badge badge-pill badge-success">Activo</span>
+                        </div>
+
+                        <ng-template #loggedOut>
+                            <span class="badge badge-pill badge-danger">Inactivo</span>
+                        </ng-template>
+                    </td>
                     <td style="text-align: center;">
                         <img style="width:75px;" class="img-fluid rounded" [src]="fila.imagen_url" alt="">
                     </td>

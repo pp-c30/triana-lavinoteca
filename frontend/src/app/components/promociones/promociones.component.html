@@ -49,16 +49,24 @@
                 <form [formGroup]="formPromocion" (ngSubmit)="guardarPromocion()" novalidate>
                     <input formControlName="id_promo" type="hidden">
                     <div class="form-group">
-                        <select class="form-control" formControlName="producto">
+                        <select class="form-control" [ngClass]="{'is-invalid':(formPromocion.get('producto')?.touched || formPromocion.get('producto')?.dirty) && formPromocion.get('producto')?.invalid}" formControlName="producto">
                             <option value="0" disabled selected>Seleccionar producto</option>
                             <option *ngFor="let producto of lista_producto" value={{producto.id_producto}}>{{producto.nombre}}</option>
                         </select>
+                        <div class="invalid-feedback">
+                            <span *ngIf="formPromocion.get('producto').hasError('required')">Campo Requerido </span>
+                            <span *ngIf="!formPromocion.get('producto').hasError('minLength')">Campo Requerido (Escoger una opción)</span>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <select class="form-control" formControlName="descuento">
+                        <select class="form-control" [ngClass]="{'is-invalid':(formPromocion.get('descuento')?.touched || formPromocion.get('descuento')?.dirty) && formPromocion.get('descuento')?.invalid}" formControlName="descuento">
                             <option value="0" disabled selected>Seleccionar descuento</option>
                             <option *ngFor="let descuento of lista_descuento" value={{descuento.id_des}}>{{descuento.porcentaje}}%</option>
                         </select>
+                        <div class="invalid-feedback">
+                            <span *ngIf="formPromocion.get('descuento').hasError('required')">Campo Requerido </span>
+                            <span *ngIf="!formPromocion.get('descuento').hasError('minLength')">Campo Requerido (Escoger una opción)</span>
+                        </div>
                     </div>
                     <button [disabled]="formPromocion.invalid" class="btn btn-success">Guardar una promocion</button>
                 </form>

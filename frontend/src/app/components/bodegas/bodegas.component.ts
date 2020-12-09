@@ -27,7 +27,7 @@ export class BodegasComponent implements OnInit {
     // Construcción del formulario
     this.formBodega = this.fb.group({
       id_bodega: [null],
-      descripcion: ['', [Validators.required, Validators.minLength(6)]]
+      descripcion: ['', [Validators.required, Validators.minLength(4)]]
     });
    }
 

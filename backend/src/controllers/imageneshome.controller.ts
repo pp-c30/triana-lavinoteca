@@ -103,4 +103,15 @@ export class ImagenesHomeController{
 
         res.json('Se elimino exitosamente el registro');
     }
+
+    async obtenerUnTrianaImagenesHome(req:Request, res:Response)
+    {
+        const db = await conexion();
+
+        let id_imagen = req.params.id_imagen;
+
+        const unaImagen = await db.query("select * from imageneshome where id_imagen = ?", [id_imagen]);
+
+        return res.json(unaImagen[0]);
+    }
 }

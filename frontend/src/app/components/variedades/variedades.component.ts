@@ -48,6 +48,7 @@ export class VariedadesComponent implements OnInit {
     );
   }
 
+  // tslint:disable-next-line: variable-name
   obtenerVariedad(){
     this.variedadesServ.getVariedad().subscribe(
       resultado => {this.listVariedad = resultado;
@@ -64,8 +65,9 @@ export class VariedadesComponent implements OnInit {
       this.variedadesServ.updateVariedad(this.formVariedad.value).subscribe(
         resultado => {
           // console.log(resultado);
-          this.formVariedad.reset();
+          this.obtenerCategorias();
           this.obtenerVariedad();
+          this.formVariedad.reset();
         },
         error => console.log(error)
       );
@@ -76,9 +78,10 @@ export class VariedadesComponent implements OnInit {
       this.variedadesServ.saveVariedad(this.formVariedad.value).subscribe(
         resultado => {
           // console.log(resultado);
+          this.obtenerCategorias();
+          this.obtenerVariedad();
           // se refresca la grilla
           this.formVariedad.reset();
-          this.obtenerVariedad();
         },
         error => console.log(error)
       );

@@ -10,7 +10,18 @@ export class VariedadController{
         //aca logro la conexión con la base de datos
         const db = await conexion();
 
-        let triana_variedad = await db.query('select *,(select descripcion from categoria where id_categoria = v.id_categoria) as id_categoria from variedad v');
+        let triana_variedad = await db.query('select v.id_varie, v.descripcion, c.descripcion as id_categoria from variedad v, categoria c  where c.id_categoria = v.id_categoria');
+
+        return res.json(triana_variedad);
+    }
+
+    public async listarTrianaVariedadPorCategoria(req:Request, res:Response){
+        //aca logro la conexión con la base de datos
+        const db = await conexion();
+
+        const id_cat = req.params.id_categoria;
+
+        let triana_variedad = await db.query('select v.id_varie, v.descripcion, c.descripcion as id_categoria from variedad v, categoria c  where c.id_categoria = v.id_categoria and v.id_categoria = ?',[id_cat]);
 
         return res.json(triana_variedad);
     }

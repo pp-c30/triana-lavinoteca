@@ -38,8 +38,8 @@ export class PromocionesComponent implements OnInit {
     // Construcción del formulario
     this.formPromocion = this.fb.group({
       id_promo: [null],
-      producto: [0, Validators.required],
-      descuento: [0, Validators.required]
+      producto: [0, [Validators.required, Validators.minLength(1)]],
+      descuento: [0, [Validators.required, Validators.minLength(1)]]
     });
    }
 
@@ -87,6 +87,8 @@ export class PromocionesComponent implements OnInit {
           this.obtenerPromocion();
           // Se resetea el formulario
           this.formPromocion.reset();
+          this.formPromocion.get('producto').setValue(0);
+          this.formPromocion.get('descuento').setValue(0);
         },
         // Si hay un error, que este se imprima en consola
         error => console.log(error)
@@ -101,6 +103,8 @@ export class PromocionesComponent implements OnInit {
           this.obtenerPromocion();
           // Se resetea el formulario
           this.formPromocion.reset();
+          this.formPromocion.get('producto').setValue(0);
+          this.formPromocion.get('descuento').setValue(0);
         },
         // Si hay un error, que este se imprima en consola
         error => console.log(error)
@@ -111,7 +115,11 @@ export class PromocionesComponent implements OnInit {
   editarPromocion(promocion: IPromocion)
   {
     // En formPromociones, van a ser seteados sus valores
-    this.formPromocion.setValue(promocion);
+    this.formPromocion.setValue({
+      id_promo: promocion.id_promo,
+      descuento: promocion.id_des,
+      producto: promocion.id_p
+    });
   }
 
   eliminarPromocion(id: number)

@@ -12,4 +12,5 @@ enrutadorImagenesHome.route('/triana_imageneshome').post(multer_1.default.single
 enrutadorImagenesHome.route('/triana_imageneshome/:id').put(multer_1.default.single('img'), imagenesHomeController.actualizarTrianaImagenesHome); //actualizar datos de la base de datos
 enrutadorImagenesHome.route('/triana_imageneshome').get(imagenesHomeController.listarTrianaImagenesHome); //listar datos de la base de datos
 enrutadorImagenesHome.route('/triana_imageneshome/:id/:public_id').delete(imagenesHomeController.eliminarImagenesHome); // Elimina los datos y la imagen de la base de datos y cloudinary
+enrutadorImagenesHome.route('/triana_imageneshome/:id_imagen').get(imagenesHomeController.obtenerUnTrianaImagenesHome); //obtiene un valor de a bae de atos
 exports.default = enrutadorImagenesHome;

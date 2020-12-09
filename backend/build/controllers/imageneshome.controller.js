@@ -94,5 +94,13 @@ class ImagenesHomeController {
             res.json('Se elimino exitosamente el registro');
         });
     }
+    obtenerUnTrianaImagenesHome(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const db = yield database_1.conexion();
+            let id_imagen = req.params.id_imagen;
+            const unaImagen = yield db.query("select * from imageneshome where id_imagen = ?", [id_imagen]);
+            return res.json(unaImagen[0]);
+        });
+    }
 }
 exports.ImagenesHomeController = ImagenesHomeController;

@@ -27,15 +27,23 @@
                     <td>{{producto.nombre}}</td>
                     <td>{{producto.descripcion_categoria}}</td>
                     <td>{{producto.stock}}</td>
-                    <td>{{producto.precio}}</td>
+                    <td>${{producto.precio}}</td>
                     <td>{{producto.descripcion_variedad}}</td>
                     <td>
-                        <img style="width:75px;" class="img-fluid rounded" [src]="producto.imagen" alt="">
+                        <img style="width:34px;" class="img-fluid rounded" [src]="producto.imagen" alt="">
                     </td>
                     <td>{{producto.public_id}}</td>
                     <td>{{producto.descripcion_bodega}}</td>
-                    <td>{{producto.cantmil}}</td>
-                    <td>{{producto.estado}}</td>
+                    <td>{{producto.cantmil}}ml</td>
+                    <td>
+                        <div *ngIf="producto.estado == 1; else loggedOut">
+                            <span class="badge badge-pill badge-success">Activo</span>
+                        </div>
+
+                        <ng-template #loggedOut>
+                            <span class="badge badge-pill badge-danger">Inactivo</span>
+                        </ng-template>
+                    </td>
                     <td>
                         <div class="btn-group btn-group-sm d-flex justify-content-center">
                             <ul class="list-inline m-0">
@@ -65,8 +73,8 @@
                         <input class="form-control" formControlName="nombre" type="text" placeholder="Ingrese el nombre del producto">
                     </div>
                     <div class="form-group">
-                        <select class="form-control">
-                        <option value="" disabled selected>Seleccionar Categoría</option>
+                        <select (change)="obtenerVariedades($event.target.value)" formControlName="categoria" class="form-control">
+                        <option value="0" disabled selected>Seleccionar Categoría</option>
                         <option *ngFor="let categorias of lista_categoria" value={{categorias.id_categoria}}>{{categorias.descripcion}}</option>
                     </select>
                     </div>
@@ -76,20 +84,22 @@
                     <div class="form-group">
                         <input class="form-control" formControlName="precio" type="text" placeholder="Ingrese el precio del producto">
                     </div>
-                    <div class="form-group">
-                        <select class="form-control">
-                        <option value="">Uva</option>
+                    <div *ngIf="lista_variedad?.length > 0" class="form-group">
+                        <select class="form-control" formControlName="variedad">
+                            <option value="0" disabled selected>Seleccionar Variedad</option>
+                            <option *ngFor="let variedades of lista_variedad" value={{variedades.id_varie}}>{{variedades.descripcion}}</option>
                     </select>
                     </div>
                     <div class="form-group">
-                        <input class="form-control" formControlName="archivo" class="form-control-file" type="file" name="" id="">
+                        <input (change)="mostrarFotoSeleccionada($event)" formControlName="archivo" class="form-control-file" type="file" name="" id="">
                     </div>
-                    <div class="form-group">
-                        <img class="img-fluid" src="assets/no-image.png" alt="">
+                    <div class="form-group" style="text-align: center;">
+                        <img class="img-fluid" [src]="this.imagenPreview || 'assets/no-image.png'" alt="">
                     </div>
                     <div class="form-group">
                         <select class="form-control">
-                        <option value="">El Lagar</option>
+                            <option value="0" disabled selected>Seleccionar Bodega</option>
+                            <option *ngFor="let bodegas of lista_bodega" value={{bodegas.id_bodega}}>{{bodegas.descripcion}}</option>
                     </select>
                     </div>
                     <div class="form-group">
@@ -99,7 +109,11 @@
                         <input class="form-control" formControlName="cantmil" type="text" placeholder="Ingrese la cantidad de mililitros del producto">
                     </div>
                     <div class="form-group">
-                        <input class="form-control" formControlName="estado" type="text" placeholder="Ingrese el estado del producto">
+                        <select class="form-control">
+                                <option value="-1" disabled selected>Seleccionar Estado</option>
+                                <option value="1">Activo</option>
+                                <option value="0">Inactivo</option>
+                        </select>
                     </div>
                 </div>
                 <div class="modal-footer">
