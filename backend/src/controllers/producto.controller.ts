@@ -16,7 +16,7 @@ export class ProductoController{
         //aca logro la conexión con la base de datos
         const db = await conexion();
 
-        let triana_producto = await db.query('select p.*, v.descripcion as descripcion_variedad, c.descripcion as descripcion_categoria, b.descripcion as descripcion_bodega from producto p, variedad v, categoria c, bodega b where p.variedad = v.id_varie and p.categoria = c.id_categoria and p.bodega = b.id_bodega');
+        let triana_producto = await db.query('select p.*, v.id_varie as id_varie, v.descripcion as descripcion_variedad, c.id_categoria as id_cat, c.descripcion as descripcion_categoria, b.id_bodega as id_bod, b.descripcion as descripcion_bodega from producto p, variedad v, categoria c, bodega b where p.variedad = v.id_varie and p.categoria = c.id_categoria and p.bodega = b.id_bodega');
 
         return res.json(triana_producto);
     }
@@ -58,12 +58,17 @@ export class ProductoController{
     {
         const db = await conexion();
 
-        let codigo_triana_producto = req.params.codigo_triana_producto;
+        let id = req.params.id;
+
+        let public_id = req.params.public_id;
         
         try {
-            await db.query("delete from producto where id_producto = ?", [codigo_triana_producto]);
+            // eliminamos la imagen de cloudinary
+            await cloudinary.v2.uploader.destroy(public_id);
+            // eliminamos registro en la base
+            await db.query("delete from producto where id_producto = ?", [id]);
 
-            return res.json('El producto se eliminó correctamente');
+            res.json('Se elimino exitosamente el registro');
         }
         catch (error) {
             return res.json('No se pudo eliminar el producto, ya que esta siendo utilizado por una opinión y/o promoción')
@@ -73,15 +78,58 @@ export class ProductoController{
     //actualizar producto
     public async actualizarTrianaPoducto(req:Request, res:Response)
     {
-        const db = await conexion();
+        try {
+            const db = await conexion();
 
-        let codigo_triana_producto = req.params.codigo_triana_producto;
-
-        let nuevos_datos_producto = req.body;
-
-        await db.query("update producto set ? where id_producto = ?", [nuevos_datos_producto,codigo_triana_producto]);
-        
-        return res.json('Se actualizo exitosamente');
+            let id = req.params.id;
+    
+            var updateProducto;
+    
+            var public_id_anterior = req.body.public_id;
+    
+            if(req.file)
+            {
+                // Se sube imagen a cloudinary y se genera un public id
+                const resultado_cloud = await cloudinary.v2.uploader.upload(req.file.path);
+    
+                updateProducto = {
+                    nombre:req.body.nombre,
+                    categoria:Number(req.body.categoria),
+                    stock:Number(req.body.stock),
+                    precio:Number(req.body.precio),
+                    imagen: resultado_cloud.url,
+                    public_id:resultado_cloud.public_id,
+                    bodega:Number(req.body.bodega),
+                    descripcion:req.body.descripcion,
+                    cantmil:Number(req.body.cantmil),
+                    estado:Number(req.body.estado),
+                    variedad:Number(req.body.variedad)
+                }
+    
+                await db.query('update producto set ? where id_producto = ?', [updateProducto, id]);
+    
+                fs.unlink(req.file.path);
+    
+                await cloudinary.v2.uploader.destroy(public_id_anterior);
+            }
+            else {
+                updateProducto = {
+                    nombre:req.body.nombre,
+                    categoria:Number(req.body.categoria),
+                    stock:Number(req.body.stock),
+                    precio:Number(req.body.precio),
+                    bodega:Number(req.body.bodega),
+                    descripcion:req.body.descripcion,
+                    cantmil:Number(req.body.cantmil),
+                    estado:Number(req.body.estado),
+                    variedad:Number(req.body.variedad)
+                }
+                await db.query('update producto set ? where id_producto = ?', [updateProducto, id]);
+            }
+            res.json('Se actualizó exitosamente!')
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     //Obtener un producto 

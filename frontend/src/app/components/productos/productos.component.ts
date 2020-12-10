@@ -40,20 +40,26 @@ export class ProductosComponent implements OnInit {
 
    imagenPreview: string | ArrayBuffer;
 
+   // Este es un atributo del tipo any (acepta strings, numbers, etc).
+  buscarProducto: any;
+
+  // tslint:disable-next-line: no-inferrable-types
+  p: number = 1;
+
   // tslint:disable-next-line: max-line-length
-  constructor(private fb: FormBuilder, private serviceCategorias: CategoriasService, private serviceProductos: ProductosService, private serviceBodegas: BodegasService, private serviceVariedades: VariedadesService)
+  constructor(private fb: FormBuilder, private serviceCategorias: CategoriasService, private serviceProductos: ProductosService, private serviceBodegas: BodegasService, private serviceVariedades: VariedadesService, private spinner: NgxSpinnerService)
   {
     this.formProducto = this.fb.group({
-      nombre: ['', Validators.required],
-      categoria: [0, Validators.required],
-      stock: [null, Validators.required],
-      precio: [null, Validators.required],
-      variedad: [0, Validators.required],
+      nombre: ['', [Validators.required, Validators.minLength(3)]],
+      categoria: [0, [Validators.required, Validators.minLength(1)]],
+      stock: [null, [Validators.required, Validators.minLength(1)]],
+      precio: [null, [Validators.required, Validators.minLength(2)]],
+      variedad: [0, [Validators.required, Validators.minLength(1)]],
       archivo: [''],
-      bodega: [0, Validators.required],
-      descripcion: ['', Validators.required],
-      cantmil: [null, Validators.required],
-      estado: [null, Validators.required],
+      bodega: [0, [Validators.required, Validators.minLength(1)]],
+      descripcion: ['', [Validators.required, Validators.minLength(3)]],
+      cantmil: [null, [Validators.required, Validators.minLength(2)]],
+      estado: [-1, [Validators.required, Validators.minLength(1)]],
     });
   }
 
@@ -104,18 +110,74 @@ export class ProductosComponent implements OnInit {
   }
 
   guardarProducto(){
-    this.serviceProductos.saveProducto(this.formProducto.value, this.file).subscribe(
-      resultado => {
-        console.log(resultado);
-        this.imagenPreview = '';
-        this.formProducto.reset();
-        this.listarProducto();
-        this.formProducto.get('categoria').setValue(0);
-        this.formProducto.get('variedad').setValue(0);
-        this.formProducto.get('bodega').setValue(0);
-      },
-      error => console.log(error)
-    );
+    if (this.formProducto.value.id_producto)
+    {
+      this.serviceProductos.updateProducto(this.formProducto.value, this.file).subscribe(
+        resultado => {
+          console.log(resultado);
+          this.imagenPreview = '';
+          this.formProducto.reset();
+          this.listarProducto();
+          this.formProducto.get('categoria').setValue(0);
+          this.formProducto.get('variedad').setValue(0);
+          this.formProducto.get('bodega').setValue(0);
+          this.formProducto.get('estado').setValue(-1);
+          this.spinner.hide();
+        },
+        error => console.log(error)
+      );
+    }
+    else {
+      this.serviceProductos.saveProducto(this.formProducto.value, this.file).subscribe(
+        resultado => {
+          console.log(resultado);
+          this.imagenPreview = '';
+          this.listarProducto();
+          // Se resetea el formulario
+          this.formProducto.reset();
+          this.formProducto.get('categoria').setValue(0);
+          this.formProducto.get('variedad').setValue(0);
+          this.formProducto.get('bodega').setValue(0);
+          this.formProducto.get('estado').setValue(-1);
+        },
+        error => console.log(error)
+      );
+    }
+  }
+
+  editarProducto(producto: IProducto){
+    this.formProducto.setValue({
+      id_producto: producto.id_producto,
+      nombre: producto.nombre,
+      categoria: producto.id_cat,
+      stock: producto.stock,
+      precio: producto.precio,
+      variedad: producto.id_varie,
+      archivo: '',
+      bodega: producto.id_bod,
+      descripcion: producto.descripcion,
+      cantmil: producto.cantmil,
+      estado: producto.estado,
+    });
+
+    this.imagenPreview = producto.imagen;
+  }
+
+
+  eliminarProducto(producto: IProducto){
+    if (confirm('¿Esta seguro que desea eliminar estos datos?'))
+    {
+      this.spinner.show();
+      this.serviceProductos.deleteProducto(producto).subscribe(
+        resultado =>
+        {
+          console.log(resultado);
+          this.listarProducto();
+          this.spinner.hide();
+        },
+        error => console.log(error)
+      );
+    }
   }
 
   mostrarFotoSeleccionada(evento: HtmlInputElement)

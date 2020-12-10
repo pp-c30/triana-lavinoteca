@@ -38,7 +38,7 @@ export class AdminImageneshomeComponent implements OnInit {
     this.formImagenesHome = this.fb.group({
         id_imagen: [null],
         nombre: ['', [Validators.required, Validators.minLength(3)]],
-        estado: [null, [Validators.required, Validators.minLength(1)]],
+        estado: [-1, [Validators.required, Validators.minLength(1)]],
         archivo: ['']
     });
 
@@ -70,6 +70,7 @@ export class AdminImageneshomeComponent implements OnInit {
           console.log(resultado);
           this.imagenPreview = '';
           this.formImagenesHome.reset();
+          this.formImagenesHome.get('estado').setValue(-1);
           this.listarImagenesHome();
           this.spinner.hide();
         },
@@ -84,6 +85,7 @@ export class AdminImageneshomeComponent implements OnInit {
           console.log(resultado);
           this.imagenPreview = '';
           this.formImagenesHome.reset();
+          this.formImagenesHome.get('estado').setValue(-1);
           this.listarImagenesHome();
         },
         error => console.log(error)

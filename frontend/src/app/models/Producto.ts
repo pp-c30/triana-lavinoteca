@@ -15,4 +15,7 @@ export interface IProducto
     descripcion_variedad: string;
     descripcion_bodega: string;
     descripcion_categoria: string;
+    id_varie: number;
+    id_cat: number;
+    id_bod: number;
 }

@@ -73,7 +73,7 @@ export class PromocionesComponent implements OnInit {
   // Es un metodo que se ejecuta al iniciar la pagina, y nos mostrara una lista
   obtenerPromocion(){
     this.promocionesServ.getPromocion().subscribe(
-      resultado => this.listPromocion = resultado,
+      resultado => {this.listPromocion = resultado; },
       // Si hay un error, que este se imprima en consola
       error => console.log(error)
     );

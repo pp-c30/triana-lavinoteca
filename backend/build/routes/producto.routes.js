@@ -10,7 +10,7 @@ let productoController = new producto_controller_1.ProductoController();
 const enrutadorProducto = express_1.Router();
 enrutadorProducto.route('/triana_producto').get(productoController.listarTrianaProducto); //obtener datos y mostrarlo
 enrutadorProducto.route('/triana_producto').post(multer_1.default.single('img'), productoController.guardarTrianaProducto); //guardar datos en la base de datos
-enrutadorProducto.route('/triana_producto/:codigo_triana_producto').delete(productoController.eliminarTrianaProducto); //elimina datos de la base de datos
-enrutadorProducto.route('/triana_producto/:codigo_triana_producto').put(productoController.actualizarTrianaPoducto); //actualiza datos de la base de datos
+enrutadorProducto.route('/triana_producto/:id/:public_id').delete(productoController.eliminarTrianaProducto); //elimina datos de la base de datos
+enrutadorProducto.route('/triana_producto/:id').put(multer_1.default.single('img'), productoController.actualizarTrianaPoducto); //actualiza datos de la base de datos
 enrutadorProducto.route('/triana_producto/:id_producto').get(productoController.obtenerUnTrianaProducto); //obtiene un valor de a bae de atos
 exports.default = enrutadorProducto;

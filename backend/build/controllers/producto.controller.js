@@ -27,7 +27,7 @@ class ProductoController {
         return __awaiter(this, void 0, void 0, function* () {
             //aca logro la conexión con la base de datos
             const db = yield database_1.conexion();
-            let triana_producto = yield db.query('select p.*, v.descripcion as descripcion_variedad, c.descripcion as descripcion_categoria, b.descripcion as descripcion_bodega from producto p, variedad v, categoria c, bodega b where p.variedad = v.id_varie and p.categoria = c.id_categoria and p.bodega = b.id_bodega');
+            let triana_producto = yield db.query('select p.*, v.id_varie as id_varie, v.descripcion as descripcion_variedad, c.id_categoria as id_cat, c.descripcion as descripcion_categoria, b.id_bodega as id_bod, b.descripcion as descripcion_bodega from producto p, variedad v, categoria c, bodega b where p.variedad = v.id_varie and p.categoria = c.id_categoria and p.bodega = b.id_bodega');
             return res.json(triana_producto);
         });
     }
@@ -61,10 +61,14 @@ class ProductoController {
     eliminarTrianaProducto(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const db = yield database_1.conexion();
-            let codigo_triana_producto = req.params.codigo_triana_producto;
+            let id = req.params.id;
+            let public_id = req.params.public_id;
             try {
-                yield db.query("delete from producto where id_producto = ?", [codigo_triana_producto]);
-                return res.json('El producto se eliminó correctamente');
+                // eliminamos la imagen de cloudinary
+                yield cloudinary_1.default.v2.uploader.destroy(public_id);
+                // eliminamos registro en la base
+                yield db.query("delete from producto where id_producto = ?", [id]);
+                res.json('Se elimino exitosamente el registro');
             }
             catch (error) {
                 return res.json('No se pudo eliminar el producto, ya que esta siendo utilizado por una opinión y/o promoción');
@@ -74,11 +78,50 @@ class ProductoController {
     //actualizar producto
     actualizarTrianaPoducto(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const db = yield database_1.conexion();
-            let codigo_triana_producto = req.params.codigo_triana_producto;
-            let nuevos_datos_producto = req.body;
-            yield db.query("update producto set ? where id_producto = ?", [nuevos_datos_producto, codigo_triana_producto]);
-            return res.json('Se actualizo exitosamente');
+            try {
+                const db = yield database_1.conexion();
+                let id = req.params.id;
+                var updateProducto;
+                var public_id_anterior = req.body.public_id;
+                if (req.file) {
+                    // Se sube imagen a cloudinary y se genera un public id
+                    const resultado_cloud = yield cloudinary_1.default.v2.uploader.upload(req.file.path);
+                    updateProducto = {
+                        nombre: req.body.nombre,
+                        categoria: Number(req.body.categoria),
+                        stock: Number(req.body.stock),
+                        precio: Number(req.body.precio),
+                        imagen: resultado_cloud.url,
+                        public_id: resultado_cloud.public_id,
+                        bodega: Number(req.body.bodega),
+                        descripcion: req.body.descripcion,
+                        cantmil: Number(req.body.cantmil),
+                        estado: Number(req.body.estado),
+                        variedad: Number(req.body.variedad)
+                    };
+                    yield db.query('update producto set ? where id_producto = ?', [updateProducto, id]);
+                    fs_extra_1.default.unlink(req.file.path);
+                    yield cloudinary_1.default.v2.uploader.destroy(public_id_anterior);
+                }
+                else {
+                    updateProducto = {
+                        nombre: req.body.nombre,
+                        categoria: Number(req.body.categoria),
+                        stock: Number(req.body.stock),
+                        precio: Number(req.body.precio),
+                        bodega: Number(req.body.bodega),
+                        descripcion: req.body.descripcion,
+                        cantmil: Number(req.body.cantmil),
+                        estado: Number(req.body.estado),
+                        variedad: Number(req.body.variedad)
+                    };
+                    yield db.query('update producto set ? where id_producto = ?', [updateProducto, id]);
+                }
+                res.json('Se actualizó exitosamente!');
+            }
+            catch (error) {
+                console.error(error);
+            }
         });
     }
     //Obtener un producto 

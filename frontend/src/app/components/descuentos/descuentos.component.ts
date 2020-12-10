@@ -28,7 +28,7 @@ export class DescuentosComponent implements OnInit {
     this.formDescuentos = this.fb.group({
       id_des: [null],
       porcentaje: [null, [Validators.required, Validators.minLength(1)]],
-      estado: [null, [Validators.required, Validators.minLength(1)]]
+      estado: [-1, [Validators.required, Validators.minLength(1)]]
     });
   }
 
@@ -56,6 +56,7 @@ export class DescuentosComponent implements OnInit {
           this.obtenerDescuentos();
           // Se resetea el formulario
           this.formDescuentos.reset();
+          this.formDescuentos.get('estado').setValue(-1);
         },
         // Si hay un error, que este se imprima en consola
         error => console.log(error)
@@ -70,6 +71,7 @@ export class DescuentosComponent implements OnInit {
           this.obtenerDescuentos();
           // Se resetea el formulario
           this.formDescuentos.reset();
+          this.formDescuentos.get('estado').setValue(-1);
         },
         // Si hay un error, que este se imprima en consola
         error => console.log(error)

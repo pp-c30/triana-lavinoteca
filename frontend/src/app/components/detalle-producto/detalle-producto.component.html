@@ -2,37 +2,59 @@
     <div class="col-lg-4">
         <img class="img-fluid" [src]="unProducto.imagen" alt="">
     </div>
-    <div class="accordion" id="accordionExample">
-        <div class="card">
-            <div class="card-header" id="headingOne">
-                <h2 class="mb-0">
-                    <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                Collapsible Group Item #1
-              </button>
-                </h2>
-            </div>
-
-            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                <div class="card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird
-                    on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,
-                    raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+    <div class="col-lg-8 mx-auto">
+        <!-- Accordion -->
+        <div id="accordionExample" class="accordion shadow">
+            <!-- Accordion item 1 -->
+            <div class="card">
+                <div id="headingOne" class="card-header bg-white shadow-sm border-0">
+                    <h5 class="mb-0 font-weight-bold"><a href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="d-block position-relative text-dark text-uppercase collapsible-link py-2">Características Principales</a></h5>
+                </div>
+                <div id="collapseOne" aria-labelledby="headingOne" data-parent="#accordionExample" class="collapse show">
+                    <div class="card-body">
+                        <h5>
+                            <p class="font-weight-light m-0">
+                                Nombre: {{unProducto.nombre}}
+                            </p><br>
+                            <p class="font-weight-light m-0">
+                                Categoría: {{unProducto.descripcion_categoria}}
+                            </p><br>
+                            <p class="font-weight-light m-0">
+                                Stock: {{unProducto.stock}}
+                            </p><br>
+                            <p class="font-weight-light m-0">
+                                Precio: ${{unProducto.precio}}
+                            </p><br>
+                            <p class="font-weight-light m-0">
+                                Variedad: {{unProducto.descripcion_variedad}}
+                            </p><br>
+                            <p class="font-weight-light m-0">
+                                Bodega: {{unProducto.descripcion_bodega}}
+                            </p><br>
+                            <p class="font-weight-light m-0">
+                                Precio: ${{unProducto.precio}}
+                            </p><br>
+                            <p class="font-weight-light m-0">
+                                Cantidad de mililitros: {{unProducto.cantmil}}ml
+                            </p>
+                        </h5>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="col-lg-8">
-        <div class="card">
-            <div class="card-header">{{unProducto.nombre}}</div>
-            <div class="card-body">
-                {{unProducto.descripcion_categoria}}
-                <br> {{unProducto.stock}}
-                <br> ${{unProducto.precio}}
-                <br> {{unProducto.descripcion_variedad}}
-                <br> {{unProducto.descripcion_bodega}}
-                <br> {{unProducto.descripcion}}
-                <br> {{unProducto.cantmil}}ml
-                <br> {{unProducto.estado}}
+            <!-- Accordion item 2 -->
+            <div class="card">
+                <div id="headingTwo" class="card-header bg-white shadow-sm border-0">
+                    <h5 class="mb-0 font-weight-bold"><a href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" class="d-block position-relative collapsed text-dark text-uppercase collapsible-link py-2">Descripción</a></h5>
+                </div>
+                <div id="collapseTwo" aria-labelledby="headingTwo" data-parent="#accordionExample" class="collapse">
+                    <div class="card-body">
+                        <h6>
+                            <p style="text-align: center;" class="font-weight-light m-0">
+                                {{unProducto.descripcion}}
+                            </p>
+                        </h6>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
