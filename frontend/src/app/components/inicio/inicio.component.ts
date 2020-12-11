@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ImageneshomeService } from '../../services/imageneshome.service';
 import { IImageneshome } from '../../models/Imageneshome';
 
+
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.component.html',
@@ -11,6 +12,7 @@ import { IImageneshome } from '../../models/Imageneshome';
 export class InicioComponent implements OnInit {
   id_imagen: number;
   unaImagenHome: IImageneshome;
+  lista_imagenes: IImageneshome[] = [];
 
   constructor(private activatedRouter: ActivatedRoute, private serviceImagenes: ImageneshomeService) { }
 
@@ -23,6 +25,7 @@ export class InicioComponent implements OnInit {
     );
 
     this.obtenerUnaImagenHome(this.id_imagen);
+    this.obtenerListaImagenes();
 
   }
   obtenerUnaImagenHome(id_imagen:number){
@@ -31,6 +34,19 @@ export class InicioComponent implements OnInit {
         this.unaImagenHome = resultado;
       },
       error => console.log(error)
+    );
+
+  }
+
+  obtenerListaImagenes(){
+
+    this.serviceImagenes.getImagenesHome().subscribe(
+      resultado => {
+        this.lista_imagenes = resultado;
+
+      },
+      error => console.log(error)
+
     );
 
   }
