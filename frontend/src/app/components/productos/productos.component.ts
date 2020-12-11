@@ -103,6 +103,21 @@ export class ProductosComponent implements OnInit {
     );
   }
 
+  guardarProducto(){
+    this.serviceProductos.saveProducto(this.formProducto.value, this.file).subscribe(
+      resultado => {
+        console.log(resultado);
+        this.imagenPreview = '';
+        this.formProducto.reset();
+        this.listarProducto();
+        this.formProducto.get('categoria').setValue(0);
+        this.formProducto.get('variedad').setValue(0);
+        this.formProducto.get('bodega').setValue(0);
+      },
+      error => console.log(error)
+    );
+  }
+
   mostrarFotoSeleccionada(evento: HtmlInputElement)
   {
     // aca realizaremos la lectura de la foto

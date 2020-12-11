@@ -9,18 +9,20 @@
         </div>
         <table class="table table-striped">
             <thead>
-                <th>Id</th>
-                <th style="text-align: center;">Nombre</th>
-                <th style="text-align: center;">Estado</th>
-                <th style="text-align: center;">Imagen_url</th>
-                <th style="text-align: center;">Public_id</th>
-                <th style="text-align: center;">Operaciones</th>
+                <tr style="text-align: center;">
+                    <th>N° de Identificación</th>
+                    <th>Nombre</th>
+                    <th>Estado</th>
+                    <th>Imagen_url</th>
+                    <th>Public_id</th>
+                    <th>Operaciones</th>
+                </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let fila of listado_datos_imageneshome | filter:buscarDato | paginate:{itemsPerPage:4, currentPage:p}">
+                <tr style="text-align: center;" *ngFor="let fila of listado_datos_imageneshome | filter:buscarDato | paginate:{itemsPerPage:4, currentPage:p}">
                     <td>{{fila.id_imagen}}</td>
-                    <td style="text-align: center;">{{fila.nombre}}</td>
-                    <td style="text-align: center;">
+                    <td>{{fila.nombre}}</td>
+                    <td>
                         <div *ngIf="fila.estado == 1; else loggedOut">
                             <span class="badge badge-pill badge-success">Activo</span>
                         </div>

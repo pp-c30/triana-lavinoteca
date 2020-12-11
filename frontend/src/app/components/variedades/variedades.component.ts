@@ -12,7 +12,7 @@ import { ICategoria } from '../../models/Categoria';
 })
 
 export class VariedadesComponent implements OnInit {
-  // tslint:disable-next-line: variable-name
+  // tslint:disable-next-line:variable-name
   lista_categoria: ICategoria[] = [];
 
   listVariedad = [];
@@ -22,13 +22,13 @@ export class VariedadesComponent implements OnInit {
   // Este es un atributo del tipo any (acepta strings, numbers, etc).
   buscarVariedad: any;
 
-  // tslint:disable-next-line: no-inferrable-types
+  // tslint:disable-next-line:no-inferrable-types
   p: number = 1;
 
   constructor(private variedadesServ: VariedadesService,  private serviceCategoria: CategoriasService, private fb: FormBuilder) {
     this.formVariedad = this.fb.group({
       id_varie: [null],
-      id_categoria: [0],
+      id_categoria: [0, [Validators.required, Validators.minLength(1)]],
       descripcion: ['', [Validators.required, Validators.minLength(2)]]
     });
    }
@@ -48,7 +48,7 @@ export class VariedadesComponent implements OnInit {
     );
   }
 
-  // tslint:disable-next-line: variable-name
+
   obtenerVariedad(){
     this.variedadesServ.getVariedad().subscribe(
       resultado => {this.listVariedad = resultado;
@@ -61,13 +61,15 @@ export class VariedadesComponent implements OnInit {
   guardarVariedad(){
     if (this.formVariedad.value.id_varie)
     {
-      // se actuaiza
+      // se actualiza
       this.variedadesServ.updateVariedad(this.formVariedad.value).subscribe(
         resultado => {
           // console.log(resultado);
-          this.obtenerCategorias();
+          // Se refrescan los datos
           this.obtenerVariedad();
+          // Se resetea el formulario
           this.formVariedad.reset();
+          this.formVariedad.get('id_categoria').setValue(0);
         },
         error => console.log(error)
       );
@@ -78,10 +80,11 @@ export class VariedadesComponent implements OnInit {
       this.variedadesServ.saveVariedad(this.formVariedad.value).subscribe(
         resultado => {
           // console.log(resultado);
-          this.obtenerCategorias();
+          // Se refrescan los datos
           this.obtenerVariedad();
           // se refresca la grilla
           this.formVariedad.reset();
+          this.formVariedad.get('id_categoria').setValue(0);
         },
         error => console.log(error)
       );
@@ -89,7 +92,11 @@ export class VariedadesComponent implements OnInit {
 
   }
   editarVariedad(variedad: IVariedad){
-    this.formVariedad.setValue(variedad);
+    this.formVariedad.setValue({
+      id_varie: variedad.id_varie,
+      id_categoria: variedad.id_c,
+      descripcion: variedad.descripcion
+    });
 
   }
   eliminarVariedad(id: number){

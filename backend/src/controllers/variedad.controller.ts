@@ -10,7 +10,7 @@ export class VariedadController{
         //aca logro la conexión con la base de datos
         const db = await conexion();
 
-        let triana_variedad = await db.query('select v.id_varie, v.descripcion, c.descripcion as id_categoria from variedad v, categoria c  where c.id_categoria = v.id_categoria');
+        let triana_variedad = await db.query('select v.id_varie, v.descripcion, c.descripcion as id_categoria, c.id_categoria as id_c from variedad v, categoria c  where c.id_categoria = v.id_categoria');
 
         return res.json(triana_variedad);
     }

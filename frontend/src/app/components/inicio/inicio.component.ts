@@ -10,12 +10,13 @@ import { IImageneshome } from '../../models/Imageneshome';
   styleUrls: ['./inicio.component.css']
 })
 export class InicioComponent implements OnInit {
+  // tslint:disable-next-line:variable-name
   id_imagen: number;
+
   unaImagenHome: IImageneshome;
   lista_imagenes: IImageneshome[] = [];
 
   constructor(private activatedRouter: ActivatedRoute, private serviceImagenes: ImageneshomeService) { }
-
   ngOnInit(): void {
     this.activatedRouter.params.subscribe(
       params => {
@@ -28,7 +29,8 @@ export class InicioComponent implements OnInit {
     this.obtenerListaImagenes();
 
   }
-  obtenerUnaImagenHome(id_imagen:number){
+  // tslint:disable-next-line:variable-name
+  obtenerUnaImagenHome(id_imagen: number){
     this.serviceImagenes.getOneImagenHome(id_imagen).subscribe(
       resultado => {
         this.unaImagenHome = resultado;

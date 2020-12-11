@@ -27,6 +27,7 @@ export class ProductosService {
     fd.append('precio', String(unProducto.precio));
     fd.append('variedad', String(unProducto.variedad));
     fd.append('bodega', String(unProducto.bodega));
+    fd.append('descripcion', unProducto.descripcion);
     fd.append('cantmil', String(unProducto.cantmil));
     fd.append('estado', String(unProducto.estado));
     fd.append('img', file);

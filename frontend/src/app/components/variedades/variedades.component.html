@@ -10,8 +10,8 @@
         <table class="table table-striped">
             <thead>
                 <tr style="text-align: center;">
-                    <th>Id de Variedad</th>
-                    <th>Id de Categoria</th>
+                    <th>N° de Identificación</th>
+                    <th>Categoría</th>
                     <th>Variedad</th>
                     <th>Operaciones</th>
                 </tr>
@@ -49,10 +49,14 @@
                 <form [formGroup]="formVariedad" (ngSubmit)="guardarVariedad()" novalidate>
                     <input formControlName="id_varie" type="hidden">
                     <div class="form-group">
-                        <select formControlName="id_categoria" class="form-control">
+                        <select formControlName="id_categoria" class="form-control" [ngClass]="{'is-invalid':(formVariedad.get('id_categoria')?.touched || formVariedad.get('id_categoria')?.dirty) && formVariedad.get('id_categoria')?.invalid}" class="form-control">
                             <option value="0" disabled selected>Seleccionar categoría</option>
                             <option *ngFor="let categoria of lista_categoria" value={{categoria.id_categoria}}>{{categoria.descripcion}}</option>
                         </select>
+                        <div class="invalid-feedback">
+                            <span *ngIf="formVariedad.get('id_categoria').hasError('required')">Campo Requerido </span>
+                            <span *ngIf="!formVariedad.get('id_categoria').hasError('minLength')">Campo Requerido (Escoger una opción)</span>
+                        </div>
                     </div>
                     <div class="form-group">
                         <input [ngClass]="{'is-invalid':(formVariedad.get('descripcion')?.touched || formVariedad.get('descripcion')?.dirty) && formVariedad.get('descripcion')?.invalid}" formControlName="descripcion" placeholder="Ingrese la variedad" type="text" class="form-control">
