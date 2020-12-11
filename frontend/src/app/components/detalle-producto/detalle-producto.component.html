@@ -17,7 +17,7 @@
                                 Nombre: {{unProducto.nombre}}
                             </p><br>
                             <p class="font-weight-light m-0">
-                                Categoría: {{unProducto.descripcion_categoria}}
+                                Tipo: {{unProducto.descripcion_categoria}}
                             </p><br>
                             <p class="font-weight-light m-0">
                                 Stock: {{unProducto.stock}}
@@ -37,6 +37,7 @@
                             <p class="font-weight-light m-0">
                                 Cantidad de mililitros: {{unProducto.cantmil}}ml
                             </p>
+
                         </h5>
                     </div>
                 </div>
@@ -48,11 +49,10 @@
                 </div>
                 <div id="collapseTwo" aria-labelledby="headingTwo" data-parent="#accordionExample" class="collapse">
                     <div class="card-body">
-                        <h6>
-                            <p style="text-align: center;" class="font-weight-light m-0">
-                                {{unProducto.descripcion}}
+                        <h5>
+                            <p class="font-weight-light m-0" [innerHTML]="unProducto.descripcion">
                             </p>
-                        </h6>
+                        </h5>
                     </div>
                 </div>
             </div>

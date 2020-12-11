@@ -9,6 +9,7 @@ import { IBodega } from '../../models/Bodega';
 import { VariedadesService } from '../../services/variedades.service';
 import { IVariedad } from '../../models/Variedad';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 interface HtmlInputElement{
   target: HTMLInputElement & EventTarget;
@@ -20,6 +21,52 @@ interface HtmlInputElement{
   styleUrls: ['./productos.component.css']
 })
 export class ProductosComponent implements OnInit {
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+      spellcheck: true,
+      height: 'auto',
+      minHeight: '0',
+      maxHeight: 'auto',
+      width: 'auto',
+      minWidth: '0',
+      translate: 'yes',
+      enableToolbar: true,
+      showToolbar: true,
+      placeholder: 'Enter text here...',
+      defaultParagraphSeparator: '',
+      defaultFontName: '',
+      defaultFontSize: '',
+      fonts: [
+        {class: 'arial', name: 'Arial'},
+        {class: 'times-new-roman', name: 'Times New Roman'},
+        {class: 'calibri', name: 'Calibri'},
+        {class: 'comic-sans-ms', name: 'Comic Sans MS'}
+      ],
+      customClasses: [
+      {
+        name: 'quote',
+        class: 'quote',
+      },
+      {
+        name: 'redText',
+        class: 'redText'
+      },
+      {
+        name: 'titleText',
+        class: 'titleText',
+        tag: 'h1',
+      },
+    ],
+    uploadUrl: 'v1/image',
+    uploadWithCredentials: false,
+    sanitize: true,
+    toolbarPosition: 'top',
+    toolbarHiddenButtons: [
+      [],
+      // ['fontSize']
+    ]
+};
+
   // tslint:disable-next-line: variable-name
   lista_producto: IProducto[] = [];
 
@@ -50,6 +97,7 @@ export class ProductosComponent implements OnInit {
   constructor(private fb: FormBuilder, private serviceCategorias: CategoriasService, private serviceProductos: ProductosService, private serviceBodegas: BodegasService, private serviceVariedades: VariedadesService, private spinner: NgxSpinnerService)
   {
     this.formProducto = this.fb.group({
+      id_producto: [null],
       nombre: ['', [Validators.required, Validators.minLength(3)]],
       categoria: [0, [Validators.required, Validators.minLength(1)]],
       stock: [null, [Validators.required, Validators.minLength(1)]],
@@ -57,7 +105,7 @@ export class ProductosComponent implements OnInit {
       variedad: [0, [Validators.required, Validators.minLength(1)]],
       archivo: [''],
       bodega: [0, [Validators.required, Validators.minLength(1)]],
-      descripcion: ['', [Validators.required, Validators.minLength(3)]],
+      descripcion: ['', Validators.required],
       cantmil: [null, [Validators.required, Validators.minLength(2)]],
       estado: [-1, [Validators.required, Validators.minLength(1)]],
     });
@@ -119,7 +167,6 @@ export class ProductosComponent implements OnInit {
           this.formProducto.reset();
           this.listarProducto();
           this.formProducto.get('categoria').setValue(0);
-          this.formProducto.get('variedad').setValue(0);
           this.formProducto.get('bodega').setValue(0);
           this.formProducto.get('estado').setValue(-1);
           this.spinner.hide();
@@ -136,7 +183,6 @@ export class ProductosComponent implements OnInit {
           // Se resetea el formulario
           this.formProducto.reset();
           this.formProducto.get('categoria').setValue(0);
-          this.formProducto.get('variedad').setValue(0);
           this.formProducto.get('bodega').setValue(0);
           this.formProducto.get('estado').setValue(-1);
         },

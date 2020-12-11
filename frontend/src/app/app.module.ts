@@ -13,6 +13,10 @@ import { PromocionesComponent } from './components/promociones/promociones.compo
 import { VariedadesComponent } from './components/variedades/variedades.component';
 import { AdminImageneshomeComponent } from './components/admin-imageneshome/admin-imageneshome.component';
 import { GaleriaComponent } from './components/galeria/galeria.component';
+import { DetalleProductoComponent } from './components/detalle-producto/detalle-producto.component';
+import { RegistroComponent } from './components/registro/registro.component';
+import { IngresoComponent } from './components/ingreso/ingreso.component';
+import { InicioComponent } from './components/inicio/inicio.component';
 
 import {HttpClientModule} from '@angular/common/http';
 
@@ -23,10 +27,9 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 import {NgxSpinnerModule} from 'ngx-spinner';
-import { DetalleProductoComponent } from './components/detalle-producto/detalle-producto.component';
-import { RegistroComponent } from './components/registro/registro.component';
-import { IngresoComponent } from './components/ingreso/ingreso.component';
-import { InicioComponent } from './components/inicio/inicio.component';
+
+import { AngularEditorModule } from '@kolkov/angular-editor';
+
 
 
 @NgModule({
@@ -55,7 +58,8 @@ import { InicioComponent } from './components/inicio/inicio.component';
     Ng2SearchPipeModule,
     NgxPaginationModule,
     FormsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    AngularEditorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
