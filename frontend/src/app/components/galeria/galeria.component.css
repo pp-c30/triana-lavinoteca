@@ -1,7 +1,23 @@
 .card-img-top {
-    height: 350px !important;
+    height: 390px !important;
+}
+
+.card {
+    border: rgb(97, 0, 21) solid 1px !important
 }
 
 .card-title {
-    height: 70px !important;
+    height: 34px !important;
+}
+
+.btn {
+    background-color: rgb(97, 0, 21);
+}
+
+button {
+    color: white;
+}
+
+button:hover {
+    color: whitesmoke;
 }

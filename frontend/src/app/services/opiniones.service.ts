@@ -26,4 +26,11 @@ export class OpinionesService {
       return this.http.delete('http://localhost:3000/triana_opinion/' + id);
 
     }
+
+    // tslint:disable-next-line:variable-name
+    getOpinionporProducto(id_producto: number)
+    {
+      return this.http.get<IOpinion[]>('http://localhost:3000/triana_opinion/' + id_producto);
+    }
+
 }

@@ -36,17 +36,38 @@ export class ProductosService {
   }
 
   // A traves de este metodo recibiremos un descuento que es del tipo IDescuento
-  updateProducto(unProducto: IProducto)
+  updateProducto(unProducto: IProducto, file: File)
   {
-    let id: number;
-    id = unProducto.id_producto;
+    // tslint:disable-next-line:prefer-const
+    let id = unProducto.id_producto;
+
+    const fd = new FormData();
+
+    fd.append('nombre', unProducto.nombre);
+    fd.append('categoria', String(unProducto.categoria));
+    fd.append('stock', String(unProducto.stock));
+    fd.append('precio', String(unProducto.precio));
+    fd.append('variedad', String(unProducto.variedad));
+    fd.append('bodega', String(unProducto.bodega));
+    fd.append('descripcion', unProducto.descripcion);
+    fd.append('cantmil', String(unProducto.cantmil));
+    fd.append('estado', String(unProducto.estado));
+    fd.append('img', file);
+
     // Retornara la respuesta que nos dara la api: 'Se actualizo exitosamente'
-    return this.http.put('http://localhost:3000/triana_producto/' + id, unProducto);
+    return this.http.put('http://localhost:3000/triana_producto/' + id, fd);
   }
 
-  deleteProducto(id: number)
-  {// Retornara la respuesta que nos dara la api: 'El descuento se eliminó correctamente'
-    return this.http.delete('http://localhost:3000/triana_producto/' + id);
+  // tslint:disable-next-line:variable-name
+  deleteProducto(producto: IProducto)
+  {
+    // tslint:disable-next-line:prefer-const
+    let id = producto.id_producto;
+    // tslint:disable-next-line: prefer-const
+    let public_id = producto.public_id;
+
+    // Retornara la respuesta que nos dara la api: 'El descuento se eliminó correctamente'
+    return this.http.delete('http://localhost:3000/triana_producto/' + id + '/' + public_id);
   }
 
   // tslint:disable-next-line: variable-name

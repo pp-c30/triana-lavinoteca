@@ -53,5 +53,9 @@ export class ImageneshomeService {
     let public_id = fila.public_id;
     return this.http.delete('http://localhost:3000/triana_imageneshome/' + id + '/' + public_id);
   }
-  getOneImagenHome(id_imagen: number){return this.http.get<IImageneshome>('http://localhost:3000/triana_imageneshome/' + id_imagen);}
+  // tslint:disable-next-line:variable-name
+  getOneImagenHome(id_imagen: number)
+  {
+    return this.http.get<IImageneshome>('http://localhost:3000/triana_imageneshome/' + id_imagen);
+  }
 }

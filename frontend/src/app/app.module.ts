@@ -13,6 +13,10 @@ import { PromocionesComponent } from './components/promociones/promociones.compo
 import { VariedadesComponent } from './components/variedades/variedades.component';
 import { AdminImageneshomeComponent } from './components/admin-imageneshome/admin-imageneshome.component';
 import { GaleriaComponent } from './components/galeria/galeria.component';
+import { DetalleProductoComponent } from './components/detalle-producto/detalle-producto.component';
+import { RegistroComponent } from './components/registro/registro.component';
+import { IngresoComponent } from './components/ingreso/ingreso.component';
+import { InicioComponent } from './components/inicio/inicio.component';
 
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 
@@ -23,6 +27,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 import {NgxSpinnerModule} from 'ngx-spinner';
+<<<<<<< HEAD
 import { DetalleProductoComponent } from './components/detalle-producto/detalle-producto.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { IngresoComponent } from './components/ingreso/ingreso.component';
@@ -30,6 +35,11 @@ import { InicioComponent } from './components/inicio/inicio.component';
 import { AuthGuard } from "./auth.guard";
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { DatosPrivadosComponent } from './components/datos-privados/datos-privados.component';
+=======
+
+import { AngularEditorModule } from '@kolkov/angular-editor';
+
+>>>>>>> 3e98e9f737b9646f83276cce44d15eb9e43aaa64
 
 
 @NgModule({
@@ -59,7 +69,8 @@ import { DatosPrivadosComponent } from './components/datos-privados/datos-privad
     Ng2SearchPipeModule,
     NgxPaginationModule,
     FormsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    AngularEditorModule
   ],
   providers: [
     AuthGuard,
