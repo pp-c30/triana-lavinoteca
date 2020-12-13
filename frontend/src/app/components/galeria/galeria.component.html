@@ -1,11 +1,33 @@
 <div class="row row-cols-1 row-cols-md-4">
     <div *ngFor="let fila of lista_datos" class="col mb-4">
         <div class="card">
+            <div class="card-header">
+                <h6>
+                    <div *ngIf="fila.descripcion_descuento !=null; else isLoggedOut1">
+                        <i>Promo: {{fila.descripcion_descuento}}</i>
+                    </div>
+
+                    <ng-template #isLoggedOut1>
+                        <i> Variedad: {{fila.descripcion_variedad}} </i>
+                    </ng-template>
+                </h6>
+            </div>
             <img class="card-img-top" [src]="fila.imagen" alt="">
-            <div class="card-body">
+            <div class="card-body" align="center">
                 <h4 class="card-title">{{fila.nombre}}
                 </h4>
-                <button (click)="verMas(fila.id_producto)" class="btn btn-danger btn-sm">Ver más</button>
+                <button (click)="verMas(fila.id_producto)" class="btn btn-sm">Ver más</button>
+            </div>
+            <div class="card-footer" align="center">
+                <h3><b>
+                    <div *ngIf="fila.porcentaje != null; else loggedOut">
+                        ${{fila.precio-((fila.precio*fila.porcentaje)/100)}} <small class="text-muted"><del>(${{fila.precio}})</del></small>
+                      </div>
+                      
+                      <ng-template #loggedOut>
+                        ${{fila.precio}}
+                      </ng-template>
+                </b></h3>
             </div>
         </div>
     </div>

@@ -164,6 +164,7 @@ export class ProductosComponent implements OnInit {
         resultado => {
           console.log(resultado);
           this.imagenPreview = '';
+          this.lista_variedad = null;
           this.formProducto.reset();
           this.listarProducto();
           this.formProducto.get('categoria').setValue(0);
@@ -181,6 +182,7 @@ export class ProductosComponent implements OnInit {
           this.imagenPreview = '';
           this.listarProducto();
           // Se resetea el formulario
+          this.lista_variedad = null;
           this.formProducto.reset();
           this.formProducto.get('categoria').setValue(0);
           this.formProducto.get('bodega').setValue(0);

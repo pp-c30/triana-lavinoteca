@@ -27,7 +27,12 @@ class ProductoController {
         return __awaiter(this, void 0, void 0, function* () {
             //aca logro la conexión con la base de datos
             const db = yield database_1.conexion();
-            let triana_producto = yield db.query('select p.*, v.id_varie as id_varie, v.descripcion as descripcion_variedad, c.id_categoria as id_cat, c.descripcion as descripcion_categoria, b.id_bodega as id_bod, b.descripcion as descripcion_bodega from producto p, variedad v, categoria c, bodega b where p.variedad = v.id_varie and p.categoria = c.id_categoria and p.bodega = b.id_bodega');
+            let triana_producto = yield db.query(`SELECT p.*, d.porcentaje, d.descripcion as descripcion_descuento, v.id_varie as id_varie, v.descripcion as descripcion_variedad, c.id_categoria as id_cat, c.descripcion as descripcion_categoria, b.id_bodega as id_bod, b.descripcion as descripcion_bodega FROM producto p 
+        LEFT JOIN variedad v ON p.variedad = v.id_varie
+        LEFT JOIN categoria c ON p.categoria = c.id_categoria
+        LEFT JOIN bodega b ON  p.bodega = b.id_bodega
+        LEFT JOIN promociones pr ON p.id_producto = pr.producto
+        LEFT JOIN descuento d ON pr.descuento = d.id_des`);
             return res.json(triana_producto);
         });
     }

@@ -5,12 +5,26 @@
     <div class="col-lg-8 mx-auto">
         <!-- Accordion -->
         <div id="accordionExample" class="accordion shadow">
+            <!-- Accordion item 2 -->
+            <div class="card">
+                <div id="headingTwo" class="card-header bg-white shadow-sm border-0">
+                    <h5 class="mb-0 font-weight-bold"><a href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" class="d-block position-relative collapsed text-dark text-uppercase collapsible-link py-2">Nota de Cata</a></h5>
+                </div>
+                <div id="collapseTwo" aria-labelledby="headingTwo" data-parent="#accordionExample" class="collapse show">
+                    <div class="card-body">
+                        <h5>
+                            <p class="font-weight-light m-0" [innerHTML]="unProducto.descripcion">
+                            </p>
+                        </h5>
+                    </div>
+                </div>
+            </div>
             <!-- Accordion item 1 -->
             <div class="card">
                 <div id="headingOne" class="card-header bg-white shadow-sm border-0">
-                    <h5 class="mb-0 font-weight-bold"><a href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="d-block position-relative text-dark text-uppercase collapsible-link py-2">Características Principales</a></h5>
+                    <h5 class="mb-0 font-weight-bold"><a href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="d-block position-relative text-dark text-uppercase collapsible-link py-2">Características Principales</a></h5>
                 </div>
-                <div id="collapseOne" aria-labelledby="headingOne" data-parent="#accordionExample" class="collapse show">
+                <div id="collapseOne" aria-labelledby="headingOne" data-parent="#accordionExample" class="collapse">
                     <div class="card-body">
                         <h5>
                             <p class="font-weight-light m-0">
@@ -32,9 +46,6 @@
                                 Bodega: {{unProducto.descripcion_bodega}}
                             </p><br>
                             <p class="font-weight-light m-0">
-                                Precio: ${{unProducto.precio}}
-                            </p><br>
-                            <p class="font-weight-light m-0">
                                 Cantidad de mililitros: {{unProducto.cantmil}}ml
                             </p>
 
@@ -42,20 +53,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Accordion item 2 -->
-            <div class="card">
-                <div id="headingTwo" class="card-header bg-white shadow-sm border-0">
-                    <h5 class="mb-0 font-weight-bold"><a href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" class="d-block position-relative collapsed text-dark text-uppercase collapsible-link py-2">Descripción</a></h5>
-                </div>
-                <div id="collapseTwo" aria-labelledby="headingTwo" data-parent="#accordionExample" class="collapse">
-                    <div class="card-body">
-                        <h5>
-                            <p class="font-weight-light m-0" [innerHTML]="unProducto.descripcion">
-                            </p>
-                        </h5>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
+<app-opiniones [id_producto]="id_producto"></app-opiniones>

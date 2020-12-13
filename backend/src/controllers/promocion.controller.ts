@@ -11,7 +11,7 @@ export class PromocionController{
         //aca se logro la conexión con la base de datos
         const db= await conexion();
         
-        let triana_promocion = await db.query("select pr.id_promo, p.nombre as producto,p.id_producto as id_p, d.id_des as id_des, d.porcentaje as descuento from promociones pr, producto p, descuento d where pr.producto = p.id_producto and pr.descuento = d.id_des");
+        let triana_promocion = await db.query("select pr.id_promo, p.nombre as producto,p.id_producto as id_p, d.id_des as id_des, concat(d.descripcion,'  -  ',d.porcentaje) as descuento from promociones pr, producto p, descuento d where pr.producto = p.id_producto and pr.descuento = d.id_des");
 
         return res.json(triana_promocion);
     }

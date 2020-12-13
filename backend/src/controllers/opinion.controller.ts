@@ -6,12 +6,24 @@ import { IOpinion } from '../models/opinion';
 
 export class OpinionController{
     //Listado de opinion
-    public async listarTrianaProducto(req:Request, res:Response)
+    public async listarTrianaOpinion(req:Request, res:Response)
     {
         //aca logro la conexión con la base de datos
         const db = await conexion();
 
-        let triana_opinion = await db.query('select *,(select nombre from producto where id_producto = o.id_producto) as id_producto from opinion o');
+        let id = req.params.id_producto;
+
+        let triana_opinion = await db.query('select *, date_format(fecha, "%d %M %Y") as fecha_formateada,(select nombre from producto where id_producto = o.id_producto) as id_producto from opinion o where id_producto = ?', [id]);
+
+        return res.json(triana_opinion);
+    }
+
+    public async listarTrianaOpinionGeneral(req:Request, res:Response)
+    {
+        //aca logro la conexión con la base de datos
+        const db = await conexion();
+
+        let triana_opinion = await db.query('select *, date_format(fecha, "%d %M %Y") as fecha_formateada,(select nombre from producto where id_producto = o.id_producto) as id_producto from opinion o');
 
         return res.json(triana_opinion);
     }
@@ -20,6 +32,8 @@ export class OpinionController{
     {
         let triana_opinion:IOpinion = {
             id_producto : req.body.id_producto,
+            cliente: req.body.cliente,
+            fecha: new Date(),
             descripcion: req.body.descripcion
         }
         

@@ -13,11 +13,20 @@ exports.OpinionController = void 0;
 const database_1 = require("../database");
 class OpinionController {
     //Listado de opinion
-    listarTrianaProducto(req, res) {
+    listarTrianaOpinion(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             //aca logro la conexión con la base de datos
             const db = yield database_1.conexion();
-            let triana_opinion = yield db.query('select *,(select nombre from producto where id_producto = o.id_producto) as id_producto from opinion o');
+            let id = req.params.id_producto;
+            let triana_opinion = yield db.query('select *, date_format(fecha, "%d %M %Y") as fecha_formateada,(select nombre from producto where id_producto = o.id_producto) as id_producto from opinion o where id_producto = ?', [id]);
+            return res.json(triana_opinion);
+        });
+    }
+    listarTrianaOpinionGeneral(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            //aca logro la conexión con la base de datos
+            const db = yield database_1.conexion();
+            let triana_opinion = yield db.query('select *, date_format(fecha, "%d %M %Y") as fecha_formateada,(select nombre from producto where id_producto = o.id_producto) as id_producto from opinion o');
             return res.json(triana_opinion);
         });
     }
@@ -26,6 +35,8 @@ class OpinionController {
         return __awaiter(this, void 0, void 0, function* () {
             let triana_opinion = {
                 id_producto: req.body.id_producto,
+                cliente: req.body.cliente,
+                fecha: new Date(),
                 descripcion: req.body.descripcion
             };
             const db = yield database_1.conexion();
