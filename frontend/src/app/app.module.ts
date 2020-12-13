@@ -27,19 +27,13 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 import {NgxSpinnerModule} from 'ngx-spinner';
-<<<<<<< HEAD
-import { DetalleProductoComponent } from './components/detalle-producto/detalle-producto.component';
-import { RegistroComponent } from './components/registro/registro.component';
-import { IngresoComponent } from './components/ingreso/ingreso.component';
-import { InicioComponent } from './components/inicio/inicio.component';
 import { AuthGuard } from "./auth.guard";
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { DatosPrivadosComponent } from './components/datos-privados/datos-privados.component';
-=======
+
 
 import { AngularEditorModule } from '@kolkov/angular-editor';
 
->>>>>>> 3e98e9f737b9646f83276cce44d15eb9e43aaa64
 
 
 @NgModule({
