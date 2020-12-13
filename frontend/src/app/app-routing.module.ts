@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, CanActivate } from '@angular/router';
 import { BodegasComponent } from './components/bodegas/bodegas.component';
 import { CategoriasComponent } from './components/categorias/categorias.component';
 import { DescuentosComponent } from './components/descuentos/descuentos.component';
@@ -13,10 +13,12 @@ import { DetalleProductoComponent } from './components/detalle-producto/detalle-
 import { IngresoComponent } from './components/ingreso/ingreso.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { InicioComponent } from './components/inicio/inicio.component';
+import { DatosPrivadosComponent } from "./components/datos-privados/datos-privados.component";
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   {
-    path: 'catalogo', component: GaleriaComponent
+    path: 'catalogo', component: GaleriaComponent,
   },
   {
     path: 'detalle-producto/:id_producto', component: DetalleProductoComponent
@@ -25,7 +27,8 @@ const routes: Routes = [
     path: 'admin-imageneshome', component: AdminImageneshomeComponent
   },
   {
-    path: 'bodegas', component: BodegasComponent
+    path: 'bodegas', component: BodegasComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'categorias', component: CategoriasComponent
@@ -53,6 +56,10 @@ const routes: Routes = [
   },
   {
     path: 'inicio', component: InicioComponent
+  },
+  {
+    path: 'datos-privados', component: DatosPrivadosComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: '', redirectTo: '/inicio', pathMatch: 'full'

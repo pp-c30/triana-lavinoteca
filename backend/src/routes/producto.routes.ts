@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { ProductoController } from "../controllers/producto.controller";
 import multer from "../libs/multer";
-import { validarToken } from "../libs/verificarToken";
+
 
 let productoController = new ProductoController();
 

@@ -27,7 +27,7 @@ export class RegistroComponent implements OnInit {
       respuesta => {
         localStorage.setItem('token', String(respuesta));
         this.formRegistro.reset();
-        this.route.navigate(['/nombreAElegir']); // Pagina a la cual despues de loguiarnos queremos que nos redireccione
+        this.route.navigate(['/bodega']); // Pagina a la cual despues de loguiarnos queremos que nos redireccione
       }
     );
   }

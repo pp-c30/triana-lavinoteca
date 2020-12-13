@@ -5,12 +5,17 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarColor01">
+
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" routerLink="catalogo">Catálogo
-          </a>
+                <a class="nav-link" routerLink="catalogo">Catálogo</a>
             </li>
-            <li class="nav-item dropdown">
+
+            <li class="nav-item" *ngIf="autServ.verificarUsuarioLogueado()">
+                <a class="nav-link" routerLink="datos-privados">Datos Privados</a>
+            </li>
+
+            <li class="nav-item dropdown" *ngIf="autServ.verificarUsuarioLogueado()">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Más opciones</a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" routerLink="productos">Admin-Productos</a>
@@ -23,9 +28,24 @@
                 </div>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input style="color: white;" class="form-control mr-sm-2" type="text" placeholder="Buscar">
-            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
-        </form>
+        <ng-container *ngIf="!autServ.verificarUsuarioLogueado(); else cierresesion">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="registro">Registrarse</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="ingreso">Login</a>
+                </li>
+            </ul>
+        </ng-container>
+
+        <ng-template #cierresesion>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" style="cursor:pointer;" (click)="autServ.cerrarSesion()"></a>
+                </li>
+            </ul>
+        </ng-template>
+
     </div>
 </nav>

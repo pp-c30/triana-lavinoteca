@@ -14,7 +14,7 @@ import { VariedadesComponent } from './components/variedades/variedades.componen
 import { AdminImageneshomeComponent } from './components/admin-imageneshome/admin-imageneshome.component';
 import { GaleriaComponent } from './components/galeria/galeria.component';
 
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
@@ -27,6 +27,9 @@ import { DetalleProductoComponent } from './components/detalle-producto/detalle-
 import { RegistroComponent } from './components/registro/registro.component';
 import { IngresoComponent } from './components/ingreso/ingreso.component';
 import { InicioComponent } from './components/inicio/inicio.component';
+import { AuthGuard } from "./auth.guard";
+import { TokenInterceptorService } from './services/token-interceptor.service';
+import { DatosPrivadosComponent } from './components/datos-privados/datos-privados.component';
 
 
 @NgModule({
@@ -45,7 +48,8 @@ import { InicioComponent } from './components/inicio/inicio.component';
     DetalleProductoComponent,
     RegistroComponent,
     IngresoComponent,
-    InicioComponent
+    InicioComponent,
+    DatosPrivadosComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +61,14 @@ import { InicioComponent } from './components/inicio/inicio.component';
     FormsModule,
     NgxSpinnerModule
   ],
-  providers: [],
+  providers: [
+    AuthGuard,
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass:TokenInterceptorService,
+      multi:true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
