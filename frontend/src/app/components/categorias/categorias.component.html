@@ -1,60 +1,62 @@
-<div class="row">
-    <div class="col-sm-8">
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="form-group">
-                    <input placeholder="Ingrese criterio de búsqueda" [(ngModel)]="buscarCategoria" type="text" class="form-control">
+<div class="p-3">
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <input placeholder="Ingrese criterio de búsqueda" [(ngModel)]="buscarCategoria" type="text" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr style="text-align: center;">
+                        <th>N° de Identificación</th>
+                        <th>Categoría</th>
+                        <th>Operaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="text-align: center;" *ngFor="let categoria of listCategoria | filter:buscarCategoria | paginate:{itemsPerPage:4, currentPage:p}">
+                        <td>{{categoria.id_categoria}}</td>
+                        <td>{{categoria.descripcion}}</td>
+                        <td>
+                            <div class="btn-group btn-group-sm d-flex justify-content-center">
+                                <ul class="list-inline m-0">
+                                    <li class="list-inline-item">
+                                        <button class="btn btn-danger btn-sm rounded-0" (click)="eliminarCategoria(categoria.id_categoria)" type="button" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fa fa-trash"></i></button>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <button class="btn btn-primary btn-sm rounded-0" (click)="editarCategoria(categoria)" type="button" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-edit"></i></button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-sm-7">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
                 </div>
             </div>
         </div>
-        <table class="table table-striped">
-            <thead>
-                <tr style="text-align: center;">
-                    <th>N° de Identificación</th>
-                    <th>Categoría</th>
-                    <th>Operaciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr style="text-align: center;" *ngFor="let categoria of listCategoria | filter:buscarCategoria | paginate:{itemsPerPage:4, currentPage:p}">
-                    <td>{{categoria.id_categoria}}</td>
-                    <td>{{categoria.descripcion}}</td>
-                    <td>
-                        <div class="btn-group btn-group-sm d-flex justify-content-center">
-                            <ul class="list-inline m-0">
-                                <li class="list-inline-item">
-                                    <button class="btn btn-danger btn-sm rounded-0" (click)="eliminarCategoria(categoria.id_categoria)" type="button" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fa fa-trash"></i></button>
-                                </li>
-                                <li class="list-inline-item">
-                                    <button class="btn btn-primary btn-sm rounded-0" (click)="editarCategoria(categoria)" type="button" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-edit"></i></button>
-                                </li>
-                            </ul>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-header">Formulario de categorias</div>
+                <div class="card-body">
+                    <form [formGroup]="formCategoria" (ngSubmit)="guardarCategoria()" novalidate>
+                        <input formControlName="id_categoria" type="hidden">
+                        <div class="form-group">
+                            <input [ngClass]="{'is-invalid':(formCategoria.get('descripcion')?.touched || formCategoria.get('descripcion')?.dirty) && formCategoria.get('descripcion')?.invalid}" formControlName="descripcion" placeholder="Ingrese la categoría" type="text" class="form-control">
+                            <div class="invalid-feedback">
+                                <span *ngIf="formCategoria.get('descripcion').hasError('required')">Campo Requerido </span>
+                                <span *ngIf="!formCategoria.get('descripcion').hasError('minLength')">(Mínimo 3 caracteres)</span>
+                            </div>
                         </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="row">
-            <div class="col-sm-7">
-                <pagination-controls (pageChange)="p = $event"></pagination-controls>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-4">
-        <div class="card">
-            <div class="card-header">Formulario de categorias</div>
-            <div class="card-body">
-                <form [formGroup]="formCategoria" (ngSubmit)="guardarCategoria()" novalidate>
-                    <input formControlName="id_categoria" type="hidden">
-                    <div class="form-group">
-                        <input [ngClass]="{'is-invalid':(formCategoria.get('descripcion')?.touched || formCategoria.get('descripcion')?.dirty) && formCategoria.get('descripcion')?.invalid}" formControlName="descripcion" placeholder="Ingrese la categoría" type="text" class="form-control">
-                        <div class="invalid-feedback">
-                            <span *ngIf="formCategoria.get('descripcion').hasError('required')">Campo Requerido </span>
-                            <span *ngIf="!formCategoria.get('descripcion').hasError('minLength')">(Mínimo 3 caracteres)</span>
-                        </div>
-                    </div>
-                    <button [disabled]="formCategoria.invalid" class="btn btn-success">Guardar una categoria</button>
-                </form>
+                        <button [disabled]="formCategoria.invalid" class="btn btn-success">Guardar una categoria</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

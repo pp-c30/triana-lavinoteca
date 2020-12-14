@@ -29,7 +29,7 @@ export class DescuentosComponent implements OnInit {
       id_des: [null],
       descripcion: ['', [Validators.required, Validators.minLength(2)]],
       porcentaje: [null, [Validators.required, Validators.minLength(1)]],
-      estado: [-1, [Validators.required, Validators.minLength(1)]]
+      estado: [-1, Validators.required]
     });
   }
 

@@ -1,160 +1,162 @@
-<div class="p-3 row">
-    <button class="btn" type="button" data-toggle="modal" data-target="#exampleModal">
+<div class="p-3">
+    <div class="row">
+        <button class="btn" type="button" data-toggle="modal" data-target="#exampleModal">
         Crear un nuevo producto
       </button>
-</div>
-<p></p>
-<div class="row">
-    <div class="col-sm-12">
-        <div class="row">
-            <div class="col-sm-3">
-                <div class="form-group">
-                    <input placeholder="Ingrese criterio de búsqueda" [(ngModel)]="buscarProducto" type="text" class="form-control">
+    </div>
+    <p></p>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <input placeholder="Ingrese criterio de búsqueda" [(ngModel)]="buscarProducto" type="text" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr style="text-align: center;">
+                        <th>N° de Identificación</th>
+                        <th>Nombre</th>
+                        <th>Categoria</th>
+                        <th>Stock</th>
+                        <th>Precio</th>
+                        <th>Variedad</th>
+                        <th>Imagen</th>
+                        <th>Public_id</th>
+                        <th>Bodega</th>
+                        <th>Mililitros</th>
+                        <th>Estado</th>
+                        <th>Operaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="text-align: center;" *ngFor="let producto of lista_producto | filter:buscarProducto | paginate:{itemsPerPage:4, currentPage:p}">
+                        <td>{{producto.id_producto}}</td>
+                        <td>{{producto.nombre}}</td>
+                        <td>{{producto.descripcion_categoria}}</td>
+                        <td>{{producto.stock}}</td>
+                        <td>${{producto.precio}}</td>
+                        <td>{{producto.descripcion_variedad}}</td>
+                        <td>
+                            <img style="height: 85px; width:34px;" class="img-fluid rounded" [src]="producto.imagen">
+                        </td>
+                        <td>{{producto.public_id}}</td>
+                        <td>{{producto.descripcion_bodega}}</td>
+                        <td>{{producto.cantmil}}ml</td>
+                        <td>
+                            <div *ngIf="producto.estado == 1; else loggedOut">
+                                <span class="badge badge-pill badge-success">Activo</span>
+                            </div>
+
+                            <ng-template #loggedOut>
+                                <span class="badge badge-pill badge-danger">Inactivo</span>
+                            </ng-template>
+                        </td>
+                        <td>
+                            <div class="btn-group btn-group-sm d-flex justify-content-center">
+                                <ul class="list-inline m-0">
+                                    <li class="list-inline-item">
+                                        <button class="btn btn-danger btn-sm rounded-0" (click)="eliminarProducto(producto)" type="button" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fa fa-trash"></i></button>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <button class="btn btn-primary btn-sm rounded-0" (click)="editarProducto(producto)" type="button" data-toggle="modal" data-target="#exampleModal" data-placement="top" title="Editar"><i class="fa fa-edit"></i></button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-sm-7">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
                 </div>
             </div>
         </div>
-        <table class="table table-striped">
-            <thead>
-                <tr style="text-align: center;">
-                    <th>N° de Identificación</th>
-                    <th>Nombre</th>
-                    <th>Categoria</th>
-                    <th>Stock</th>
-                    <th>Precio</th>
-                    <th>Variedad</th>
-                    <th>Imagen</th>
-                    <th>Public_id</th>
-                    <th>Bodega</th>
-                    <th>Mililitros</th>
-                    <th>Estado</th>
-                    <th>Operaciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr style="text-align: center;" *ngFor="let producto of lista_producto | filter:buscarProducto | paginate:{itemsPerPage:4, currentPage:p}">
-                    <td>{{producto.id_producto}}</td>
-                    <td>{{producto.nombre}}</td>
-                    <td>{{producto.descripcion_categoria}}</td>
-                    <td>{{producto.stock}}</td>
-                    <td>${{producto.precio}}</td>
-                    <td>{{producto.descripcion_variedad}}</td>
-                    <td>
-                        <img style="height: 85px; width:34px;" class="img-fluid rounded" [src]="producto.imagen">
-                    </td>
-                    <td>{{producto.public_id}}</td>
-                    <td>{{producto.descripcion_bodega}}</td>
-                    <td>{{producto.cantmil}}ml</td>
-                    <td>
-                        <div *ngIf="producto.estado == 1; else loggedOut">
-                            <span class="badge badge-pill badge-success">Activo</span>
-                        </div>
-
-                        <ng-template #loggedOut>
-                            <span class="badge badge-pill badge-danger">Inactivo</span>
-                        </ng-template>
-                    </td>
-                    <td>
-                        <div class="btn-group btn-group-sm d-flex justify-content-center">
-                            <ul class="list-inline m-0">
-                                <li class="list-inline-item">
-                                    <button class="btn btn-danger btn-sm rounded-0" (click)="eliminarProducto(producto)" type="button" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fa fa-trash"></i></button>
-                                </li>
-                                <li class="list-inline-item">
-                                    <button class="btn btn-primary btn-sm rounded-0" (click)="editarProducto(producto)" type="button" data-toggle="modal" data-target="#exampleModal" data-placement="top" title="Editar"><i class="fa fa-edit"></i></button>
-                                </li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="row">
-            <div class="col-sm-7">
-                <pagination-controls (pageChange)="p = $event"></pagination-controls>
-            </div>
-        </div>
     </div>
-</div>
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Alta producto</h5>
-                <button id="id" class="close" data-dismiss="modal" aria-label="Close">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Alta producto</h5>
+                    <button id="id" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-            </div>
-            <form [formGroup]="formProducto" (ngSubmit)="guardarProducto()" novalidate>
-                <input formControlName="id_producto" type="hidden">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <input [ngClass]="{'is-invalid':(formProducto.get('nombre')?.touched || formProducto.get('nombre')?.dirty) && formProducto.get('nombre')?.invalid}" class="form-control" formControlName="nombre" type="text" placeholder="Ingrese el nombre del producto">
-                        <div class="invalid-feedback">
-                            <span *ngIf="formProducto.get('nombre').hasError('required')">Campo Requerido </span>
-                            <span *ngIf="!formProducto.get('nombre').hasError('minLength')">(Mínimo 3 caracteres)</span>
+                </div>
+                <form [formGroup]="formProducto" (ngSubmit)="guardarProducto()" novalidate>
+                    <input formControlName="id_producto" type="hidden">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input [ngClass]="{'is-invalid':(formProducto.get('nombre')?.touched || formProducto.get('nombre')?.dirty) && formProducto.get('nombre')?.invalid}" class="form-control" formControlName="nombre" type="text" placeholder="Ingrese el nombre del producto">
+                            <div class="invalid-feedback">
+                                <span *ngIf="formProducto.get('nombre').hasError('required')">Campo Requerido </span>
+                                <span *ngIf="!formProducto.get('nombre').hasError('minLength')">(Mínimo 3 caracteres)</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <select (change)="obtenerVariedades($event.target.value)" formControlName="categoria" class="form-control">
+                        <div class="form-group">
+                            <select (change)="obtenerVariedades($event.target.value)" formControlName="categoria" class="form-control">
                         <option value="0" disabled selected>Seleccionar Categoría</option>
                         <option *ngFor="let categorias of lista_categoria" value={{categorias.id_categoria}}>{{categorias.descripcion}}</option>
                     </select>
-                    </div>
-                    <div class="form-group">
-                        <input [ngClass]="{'is-invalid':(formProducto.get('stock')?.touched || formProducto.get('stock')?.dirty) && formProducto.get('stock')?.invalid}" class="form-control" formControlName="stock" type="text" placeholder="Ingrese el stock del producto">
-                        <div class="invalid-feedback">
-                            <span *ngIf="formProducto.get('stock').hasError('required')">Campo Requerido </span>
-                            <span *ngIf="!formProducto.get('stock').hasError('minLength')">(Mínimo 1 carácter)</span>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <input [ngClass]="{'is-invalid':(formProducto.get('precio')?.touched || formProducto.get('precio')?.dirty) && formProducto.get('precio')?.invalid}" class="form-control" formControlName="precio" type="text" placeholder="Ingrese el precio del producto">
-                        <div class="invalid-feedback">
-                            <span *ngIf="formProducto.get('precio').hasError('required')">Campo Requerido </span>
-                            <span *ngIf="!formProducto.get('precio').hasError('minLength')">(Mínimo 2 caracteres)</span>
+                        <div class="form-group">
+                            <input [ngClass]="{'is-invalid':(formProducto.get('stock')?.touched || formProducto.get('stock')?.dirty) && formProducto.get('stock')?.invalid}" class="form-control" formControlName="stock" type="text" placeholder="Ingrese el stock del producto">
+                            <div class="invalid-feedback">
+                                <span *ngIf="formProducto.get('stock').hasError('required')">Campo Requerido </span>
+                                <span *ngIf="!formProducto.get('stock').hasError('minLength')">(Mínimo 1 carácter)</span>
+                            </div>
                         </div>
-                    </div>
-                    <div *ngIf="lista_variedad?.length > 0" class="form-group">
-                        <select class="form-control" formControlName="variedad">
+                        <div class="form-group">
+                            <input [ngClass]="{'is-invalid':(formProducto.get('precio')?.touched || formProducto.get('precio')?.dirty) && formProducto.get('precio')?.invalid}" class="form-control" formControlName="precio" type="text" placeholder="Ingrese el precio del producto">
+                            <div class="invalid-feedback">
+                                <span *ngIf="formProducto.get('precio').hasError('required')">Campo Requerido </span>
+                                <span *ngIf="!formProducto.get('precio').hasError('minLength')">(Mínimo 2 caracteres)</span>
+                            </div>
+                        </div>
+                        <div *ngIf="lista_variedad?.length > 0" class="form-group">
+                            <select class="form-control" formControlName="variedad">
                             <option value="0" disabled selected>Seleccionar Variedad</option>
                             <option *ngFor="let variedades of lista_variedad" value={{variedades.id_varie}}>{{variedades.descripcion}}</option>
-                    </select>
-                    </div>
-                    <div class="form-group">
-                        <input (change)="mostrarFotoSeleccionada($event)" formControlName="archivo" class="form-control-file" type="file" name="" id="">
-                    </div>
-                    <div class="form-group" style="text-align: center;">
-                        <img class="img-fluid" [src]="this.imagenPreview || 'assets/no-image.png'" alt="">
-                    </div>
-                    <div class="form-group">
-                        <select class="form-control" formControlName="bodega">
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input (change)="mostrarFotoSeleccionada($event)" formControlName="archivo" class="form-control-file" type="file" name="" id="">
+                        </div>
+                        <div class="form-group" style="text-align: center;">
+                            <img class="img-fluid" [src]="this.imagenPreview || 'assets/no-image.png'" alt="">
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" formControlName="bodega">
                             <option value="0" disabled selected>Seleccionar Bodega</option>
                             <option *ngFor="let bodegas of lista_bodega" value={{bodegas.id_bodega}}>{{bodegas.descripcion}}</option>
                     </select>
-                    </div>
-                    <div class="form-group">
-                        <angular-editor formControlName="descripcion" [config]="editorConfig"></angular-editor>
-                    </div>
-                    <div class="form-group">
-                        <input [ngClass]="{'is-invalid':(formProducto.get('cantmil')?.touched || formProducto.get('cantmil')?.dirty) && formProducto.get('cantmil')?.invalid}" class="form-control" formControlName="cantmil" type="text" placeholder="Ingrese la cantidad de mililitros del producto">
-                        <div class="invalid-feedback">
-                            <span *ngIf="formProducto.get('cantmil').hasError('required')">Campo Requerido </span>
-                            <span *ngIf="!formProducto.get('cantmil').hasError('minLength')">(Mínimo 2 caracteres)</span>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <select formControlName="estado" class="form-control">
+                        <div class="form-group">
+                            <angular-editor formControlName="descripcion" [config]="editorConfig"></angular-editor>
+                        </div>
+                        <div class="form-group">
+                            <input [ngClass]="{'is-invalid':(formProducto.get('cantmil')?.touched || formProducto.get('cantmil')?.dirty) && formProducto.get('cantmil')?.invalid}" class="form-control" formControlName="cantmil" type="text" placeholder="Ingrese la cantidad de mililitros del producto">
+                            <div class="invalid-feedback">
+                                <span *ngIf="formProducto.get('cantmil').hasError('required')">Campo Requerido </span>
+                                <span *ngIf="!formProducto.get('cantmil').hasError('minLength')">(Mínimo 2 caracteres)</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <select formControlName="estado" class="form-control">
                                 <option value="-1" disabled selected>Seleccionar Estado</option>
                                 <option value="1">Activo</option>
                                 <option value="0">Inactivo</option>
                         </select>
+                        </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button [disabled]="formProducto.invalid" class="btn btn-success">Guardar Producto</button>
-                </div>
-            </form>
+                    <div class="modal-footer">
+                        <button id="id" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button [disabled]="formProducto.invalid" class="btn btn-success">Guardar Producto</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>

@@ -1,97 +1,95 @@
-<div class="row">
-    <div class="col-md-7">
-        <div class="row">
-            <div class="col-sm-5">
-                <div class="form-group">
-                    <input placeholder="Ingrese criterio de búsqueda" [(ngModel)]="buscarDato" type="text" class="form-control">
+<div class="p-3">
+    <div class="row">
+        <div class="col-md-7">
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <input placeholder="Ingrese criterio de búsqueda" [(ngModel)]="buscarDato" type="text" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr style="text-align: center;">
+                        <th>N° de Identificación</th>
+                        <th>Nombre</th>
+                        <th>Estado</th>
+                        <th>Imagen_url</th>
+                        <th>Public_id</th>
+                        <th>Operaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="text-align: center;" *ngFor="let fila of listado_datos_imageneshome | filter:buscarDato | paginate:{itemsPerPage:4, currentPage:p}">
+                        <td>{{fila.id_imagen}}</td>
+                        <td>{{fila.nombre}}</td>
+                        <td>
+                            <div *ngIf="fila.estado == 1; else loggedOut">
+                                <span class="badge badge-pill badge-success">Activo</span>
+                            </div>
+
+                            <ng-template #loggedOut>
+                                <span class="badge badge-pill badge-danger">Inactivo</span>
+                            </ng-template>
+                        </td>
+                        <td style="text-align: center;">
+                            <img style="width:75px;" class="img-fluid rounded" [src]="fila.imagen_url" alt="">
+                        </td>
+                        <td>{{fila.public_id}}</td>
+                        <td>
+                            <div class="btn-group btn-group-sm d-flex justify-content-center">
+                                <ul class="list-inline m-0">
+                                    <li class="list-inline-item">
+                                        <button class="btn btn-danger btn-sm rounded-0" (click)="eliminarImagenesHome(fila)" type="button" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fa fa-trash"></i></button>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <button class="btn btn-primary btn-sm rounded-0" (click)="editarImagenesHome(fila)" type="button" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-edit"></i></button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-sm-7">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
                 </div>
             </div>
         </div>
-        <table class="table table-striped">
-            <thead>
-                <tr style="text-align: center;">
-                    <th>N° de Identificación</th>
-                    <th>Nombre</th>
-                    <th>Estado</th>
-                    <th>Imagen_url</th>
-                    <th>Public_id</th>
-                    <th>Operaciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr style="text-align: center;" *ngFor="let fila of listado_datos_imageneshome | filter:buscarDato | paginate:{itemsPerPage:4, currentPage:p}">
-                    <td>{{fila.id_imagen}}</td>
-                    <td>{{fila.nombre}}</td>
-                    <td>
-                        <div *ngIf="fila.estado == 1; else loggedOut">
-                            <span class="badge badge-pill badge-success">Activo</span>
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-header">
+                    Nuevo registro
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="formImagenesHome" (ngSubmit)="guardarEnImagenesHome()" novalidate>
+                        <input formControlName="id_imagen" type="hidden" class="form-control">
+                        <div class="form-group">
+                            <input [ngClass]="{'is-invalid':(formImagenesHome.get('nombre')?.touched || formImagenesHome.get('nombre')?.dirty) && formImagenesHome.get('nombre')?.invalid}" formControlName="nombre" placeholder="Ingrese el nombre de la imagen" type="text" class="form-control">
+                            <div class="invalid-feedback">
+                                <span *ngIf="formImagenesHome.get('nombre').hasError('required')">Campo Requerido </span>
+                                <span *ngIf="!formImagenesHome.get('nombre').hasError('minLength')">(Mínimo 3 caracteres)</span>
+                            </div>
                         </div>
-
-                        <ng-template #loggedOut>
-                            <span class="badge badge-pill badge-danger">Inactivo</span>
-                        </ng-template>
-                    </td>
-                    <td style="text-align: center;">
-                        <img style="width:75px;" class="img-fluid rounded" [src]="fila.imagen_url" alt="">
-                    </td>
-                    <td>{{fila.public_id}}</td>
-                    <td>
-                        <div class="btn-group btn-group-sm d-flex justify-content-center">
-                            <ul class="list-inline m-0">
-                                <li class="list-inline-item">
-                                    <button class="btn btn-danger btn-sm rounded-0" (click)="eliminarImagenesHome(fila)" type="button" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fa fa-trash"></i></button>
-                                </li>
-                                <li class="list-inline-item">
-                                    <button class="btn btn-primary btn-sm rounded-0" (click)="editarImagenesHome(fila)" type="button" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-edit"></i></button>
-                                </li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="row">
-            <div class="col-sm-7">
-                <pagination-controls (pageChange)="p = $event"></pagination-controls>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-5">
-        <div class="card">
-            <div class="card-header">
-                Nuevo registro
-            </div>
-            <div class="card-body">
-                <form [formGroup]="formImagenesHome" (ngSubmit)="guardarEnImagenesHome()" novalidate>
-                    <input formControlName="id_imagen" type="hidden" class="form-control">
-                    <div class="form-group">
-                        <input [ngClass]="{'is-invalid':(formImagenesHome.get('nombre')?.touched || formImagenesHome.get('nombre')?.dirty) && formImagenesHome.get('nombre')?.invalid}" formControlName="nombre" placeholder="Ingrese el nombre de la imagen" type="text" class="form-control">
-                        <div class="invalid-feedback">
-                            <span *ngIf="formImagenesHome.get('nombre').hasError('required')">Campo Requerido </span>
-                            <span *ngIf="!formImagenesHome.get('nombre').hasError('minLength')">(Mínimo 3 caracteres)</span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <select formControlName="estado" class="form-control" [ngClass]="{'is-invalid':(formImagenesHome.get('estado')?.touched || formImagenesHome.get('estado')?.dirty) && formImagenesHome.get('estado')?.invalid}">
+                        <div class="form-group">
+                            <select formControlName="estado" class="form-control">
                                 <option value="-1" disabled selected>Seleccionar Estado</option>
                                 <option value="1">Activo</option>
                                 <option value="0">Inactivo</option>
                         </select>
-                        <div class="invalid-feedback">
-                            <span *ngIf="formImagenesHome.get('estado').hasError('required')">Campo Requerido </span>
-                            <span *ngIf="!formImagenesHome.get('estado').hasError('minLength')">(Escoger 1 opción)</span>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <input (change)="mostrarFotoSeleccionada($event)" formControlName="archivo" class="form-control-file" type="file" name="" id="">
-                    </div>
-                    <div class="form-group">
-                        <img class="img-fluid" [src]="this.imagenPreview || 'assets/no-image.png'" alt="">
-                    </div>
-                    <div class="form-control">
-                        <button [disabled]="formImagenesHome.invalid" type="submit" class="btn btn-success btn-block">Guardar</button>
-                    </div>
-                </form>
+                        <div class="form-group">
+                            <input (change)="mostrarFotoSeleccionada($event)" formControlName="archivo" class="form-control-file" type="file" name="" id="">
+                        </div>
+                        <div class="form-group">
+                            <img class="img-fluid" [src]="this.imagenPreview || 'assets/no-image.png'" alt="">
+                        </div>
+                        <div class="form-control">
+                            <button [disabled]="formImagenesHome.invalid" type="submit" class="btn btn-success btn-block">Guardar</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
