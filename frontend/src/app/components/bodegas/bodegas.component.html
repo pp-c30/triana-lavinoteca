@@ -1,60 +1,62 @@
-<div class="row">
-    <div class="col-sm-8">
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="form-group">
-                    <input placeholder="Ingrese criterio de búsqueda" [(ngModel)]="buscarBodega" type="text" class="form-control">
+<div class="p-3">
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <input placeholder="Ingrese criterio de búsqueda" [(ngModel)]="buscarBodega" type="text" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr style="text-align: center;">
+                        <th>N° de Identificación</th>
+                        <th>Bodega</th>
+                        <th>Operaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="text-align: center;" *ngFor="let bodega of listBodega | filter:buscarBodega | paginate:{itemsPerPage:4, currentPage:p}">
+                        <td>{{bodega.id_bodega}}</td>
+                        <td>{{bodega.descripcion}}</td>
+                        <td>
+                            <div class="btn-group btn-group-sm d-flex justify-content-center">
+                                <ul class="list-inline m-0">
+                                    <li class="list-inline-item">
+                                        <button class="btn btn-danger btn-sm rounded-0" (click)="eliminarBodega(bodega.id_bodega)" type="button" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fa fa-trash"></i></button>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <button class="btn btn-primary btn-sm rounded-0" (click)="editarBodega(bodega)" type="button" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-edit"></i></button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-sm-7">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
                 </div>
             </div>
         </div>
-        <table class="table table-striped">
-            <thead>
-                <tr style="text-align: center;">
-                    <th>N° de Identificación</th>
-                    <th>Bodega</th>
-                    <th>Operaciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr style="text-align: center;" *ngFor="let bodega of listBodega | filter:buscarBodega | paginate:{itemsPerPage:4, currentPage:p}">
-                    <td>{{bodega.id_bodega}}</td>
-                    <td>{{bodega.descripcion}}</td>
-                    <td>
-                        <div class="btn-group btn-group-sm d-flex justify-content-center">
-                            <ul class="list-inline m-0">
-                                <li class="list-inline-item">
-                                    <button class="btn btn-danger btn-sm rounded-0" (click)="eliminarBodega(bodega.id_bodega)" type="button" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fa fa-trash"></i></button>
-                                </li>
-                                <li class="list-inline-item">
-                                    <button class="btn btn-primary btn-sm rounded-0" (click)="editarBodega(bodega)" type="button" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-edit"></i></button>
-                                </li>
-                            </ul>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-header">Formulario de bodegas</div>
+                <div class="card-body">
+                    <form [formGroup]="formBodega" (ngSubmit)="guardarBodega()" novalidate>
+                        <input formControlName="id_bodega" type="hidden">
+                        <div class="form-group">
+                            <input [ngClass]="{'is-invalid':(formBodega.get('descripcion')?.touched || formBodega.get('descripcion')?.dirty) && formBodega.get('descripcion')?.invalid}" formControlName="descripcion" placeholder="Ingrese la Bodega" type="text" class="form-control">
+                            <div class="invalid-feedback">
+                                <span *ngIf="formBodega.get('descripcion').hasError('required')">Campo Requerido </span>
+                                <span *ngIf="!formBodega.get('descripcion').hasError('minLength')">(Mínimo 4 caracteres)</span>
+                            </div>
                         </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="row">
-            <div class="col-sm-7">
-                <pagination-controls (pageChange)="p = $event"></pagination-controls>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-4">
-        <div class="card">
-            <div class="card-header">Formulario de bodegas</div>
-            <div class="card-body">
-                <form [formGroup]="formBodega" (ngSubmit)="guardarBodega()" novalidate>
-                    <input formControlName="id_bodega" type="hidden">
-                    <div class="form-group">
-                        <input [ngClass]="{'is-invalid':(formBodega.get('descripcion')?.touched || formBodega.get('descripcion')?.dirty) && formBodega.get('descripcion')?.invalid}" formControlName="descripcion" placeholder="Ingrese la Bodega" type="text" class="form-control">
-                        <div class="invalid-feedback">
-                            <span *ngIf="formBodega.get('descripcion').hasError('required')">Campo Requerido </span>
-                            <span *ngIf="!formBodega.get('descripcion').hasError('minLength')">(Mínimo 4 caracteres)</span>
-                        </div>
-                    </div>
-                    <button [disabled]="formBodega.invalid" class="btn btn-success">Guardar una bodega</button>
-                </form>
+                        <button [disabled]="formBodega.invalid" class="btn btn-success">Guardar una bodega</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

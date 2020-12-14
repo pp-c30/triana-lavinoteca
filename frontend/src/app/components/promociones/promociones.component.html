@@ -1,75 +1,77 @@
-<div class="row">
-    <div class="col-sm-8">
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="form-group">
-                    <input placeholder="Ingrese criterio de búsqueda" [(ngModel)]="buscarPromocion" type="text" class="form-control">
+<div class="p-3">
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <input placeholder="Ingrese criterio de búsqueda" [(ngModel)]="buscarPromocion" type="text" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr style="text-align: center;">
+                        <th>N° de Identificación</th>
+                        <th>Producto</th>
+                        <th>Descuento</th>
+                        <th>Operaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="text-align: center;" *ngFor="let promocion of listPromocion | filter:buscarPromocion | paginate:{itemsPerPage:4, currentPage:p}">
+                        <td>{{promocion.id_promo}}</td>
+                        <td>{{promocion.producto}}</td>
+                        <td>{{promocion.descuento}}%</td>
+                        <td>
+                            <div class="btn-group btn-group-sm d-flex justify-content-center">
+                                <ul class="list-inline m-0">
+                                    <li class="list-inline-item">
+                                        <button class="btn btn-danger btn-sm rounded-0" (click)="eliminarPromocion(promocion.id_promo)" type="button" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fa fa-trash"></i></button>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <button class="btn btn-primary btn-sm rounded-0" (click)="editarPromocion(promocion)" type="button" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-edit"></i></button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-sm-7">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
                 </div>
             </div>
         </div>
-        <table class="table table-striped">
-            <thead>
-                <tr style="text-align: center;">
-                    <th>N° de Identificación</th>
-                    <th>Producto</th>
-                    <th>Descuento</th>
-                    <th>Operaciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr style="text-align: center;" *ngFor="let promocion of listPromocion | filter:buscarPromocion | paginate:{itemsPerPage:4, currentPage:p}">
-                    <td>{{promocion.id_promo}}</td>
-                    <td>{{promocion.producto}}</td>
-                    <td>{{promocion.descuento}}%</td>
-                    <td>
-                        <div class="btn-group btn-group-sm d-flex justify-content-center">
-                            <ul class="list-inline m-0">
-                                <li class="list-inline-item">
-                                    <button class="btn btn-danger btn-sm rounded-0" (click)="eliminarPromocion(promocion.id_promo)" type="button" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fa fa-trash"></i></button>
-                                </li>
-                                <li class="list-inline-item">
-                                    <button class="btn btn-primary btn-sm rounded-0" (click)="editarPromocion(promocion)" type="button" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-edit"></i></button>
-                                </li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="row">
-            <div class="col-sm-7">
-                <pagination-controls (pageChange)="p = $event"></pagination-controls>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-4">
-        <div class="card">
-            <div class="card-header">Formulario de promociones</div>
-            <div class="card-body">
-                <form [formGroup]="formPromocion" (ngSubmit)="guardarPromocion()" novalidate>
-                    <input formControlName="id_promo" type="hidden">
-                    <div class="form-group">
-                        <select class="form-control" [ngClass]="{'is-invalid':(formPromocion.get('producto')?.touched || formPromocion.get('producto')?.dirty) && formPromocion.get('producto')?.invalid}" formControlName="producto">
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-header">Formulario de promociones</div>
+                <div class="card-body">
+                    <form [formGroup]="formPromocion" (ngSubmit)="guardarPromocion()" novalidate>
+                        <input formControlName="id_promo" type="hidden">
+                        <div class="form-group">
+                            <select class="form-control" [ngClass]="{'is-invalid':(formPromocion.get('producto')?.touched || formPromocion.get('producto')?.dirty) && formPromocion.get('producto')?.invalid}" formControlName="producto">
                             <option value="0" disabled selected>Seleccionar producto</option>
                             <option *ngFor="let producto of lista_producto" value={{producto.id_producto}}>{{producto.nombre}}</option>
                         </select>
-                        <div class="invalid-feedback">
-                            <span *ngIf="formPromocion.get('producto').hasError('required')">Campo Requerido </span>
-                            <span *ngIf="!formPromocion.get('producto').hasError('minLength')">Campo Requerido (Escoger una opción)</span>
+                            <div class="invalid-feedback">
+                                <span *ngIf="formPromocion.get('producto').hasError('required')">Campo Requerido </span>
+                                <span *ngIf="!formPromocion.get('producto').hasError('minLength')">Campo Requerido (Escoger una opción)</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <select class="form-control" [ngClass]="{'is-invalid':(formPromocion.get('descuento')?.touched || formPromocion.get('descuento')?.dirty) && formPromocion.get('descuento')?.invalid}" formControlName="descuento">
+                        <div class="form-group">
+                            <select class="form-control" [ngClass]="{'is-invalid':(formPromocion.get('descuento')?.touched || formPromocion.get('descuento')?.dirty) && formPromocion.get('descuento')?.invalid}" formControlName="descuento">
                             <option value="0" disabled selected>Seleccionar descuento</option>
                             <option *ngFor="let descuento of lista_descuento" value={{descuento.id_des}}>{{descuento.porcentaje}}%</option>
                         </select>
-                        <div class="invalid-feedback">
-                            <span *ngIf="formPromocion.get('descuento').hasError('required')">Campo Requerido </span>
-                            <span *ngIf="!formPromocion.get('descuento').hasError('minLength')">Campo Requerido (Escoger una opción)</span>
+                            <div class="invalid-feedback">
+                                <span *ngIf="formPromocion.get('descuento').hasError('required')">Campo Requerido </span>
+                                <span *ngIf="!formPromocion.get('descuento').hasError('minLength')">Campo Requerido (Escoger una opción)</span>
+                            </div>
                         </div>
-                    </div>
-                    <button [disabled]="formPromocion.invalid" class="btn btn-success">Guardar una promocion</button>
-                </form>
+                        <button [disabled]="formPromocion.invalid" class="btn btn-success">Guardar una promocion</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

@@ -102,7 +102,7 @@ export class ProductosComponent implements OnInit {
       categoria: [0, [Validators.required, Validators.minLength(1)]],
       stock: [null, [Validators.required, Validators.minLength(1)]],
       precio: [null, [Validators.required, Validators.minLength(2)]],
-      variedad: [0, [Validators.required, Validators.minLength(1)]],
+      variedad: [0],
       archivo: [''],
       bodega: [0, [Validators.required, Validators.minLength(1)]],
       descripcion: ['', Validators.required],
