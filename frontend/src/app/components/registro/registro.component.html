@@ -16,7 +16,7 @@
                         <input formControlName="email" type="text" class="form-control" placeholder="Ingrese correo electronico">
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-primary">Registrarme</button>
+                        <button [disabled]="formRegistro.invalid" class="btn btn-primary">Registrarme</button>
                     </div>
                 </form>
             </div>

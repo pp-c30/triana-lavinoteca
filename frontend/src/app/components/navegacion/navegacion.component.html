@@ -28,21 +28,23 @@
                 </div>
             </li>
         </ul>
-        <ng-container *ngIf="!autServ.verificarUsuarioLogueado(); else cierresesion">
+
+        <ng-container>
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="autServ.verificarUsuarioLogueado();">
                     <a class="nav-link" routerLink="registro">Registrarse</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="!autServ.verificarUsuarioLogueado(); else cierresesion">
                     <a class="nav-link" routerLink="ingreso">Login</a>
                 </li>
             </ul>
+
         </ng-container>
 
         <ng-template #cierresesion>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" style="cursor:pointer;" (click)="autServ.cerrarSesion()"></a>
+                    <a class="nav-link" style="cursor:pointer;" (click)="autServ.cerrarSesion()">Cerrar Sesion</a>
                 </li>
             </ul>
         </ng-template>

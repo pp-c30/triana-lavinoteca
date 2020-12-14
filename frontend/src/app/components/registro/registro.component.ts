@@ -13,8 +13,8 @@ export class RegistroComponent implements OnInit {
   formRegistro: FormGroup;
   constructor(private fb: FormBuilder, private autServ: AutenticacionService, private route: Router) {
     this.formRegistro = this.fb.group({
-      username: ['', [Validators.required]],
-      password: ['', [Validators.required]],
+      username: ['', [Validators.required, Validators.minLength(8)]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
       email: ['', [Validators.required]]
     });
   }
@@ -27,7 +27,7 @@ export class RegistroComponent implements OnInit {
       respuesta => {
         localStorage.setItem('token', String(respuesta));
         this.formRegistro.reset();
-        this.route.navigate(['/bodega']); // Pagina a la cual despues de loguiarnos queremos que nos redireccione
+        this.route.navigate(['/bodegas']); // Pagina a la cual despues de loguiarnos queremos que nos redireccione
       }
     );
   }
