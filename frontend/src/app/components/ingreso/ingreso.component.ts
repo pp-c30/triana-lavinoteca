@@ -31,7 +31,7 @@ export class IngresoComponent implements OnInit {
             alert('Contraseña incorrecta');
           }else{
             localStorage.setItem('token', String(respuesta));
-            this.route.navigate(['/bodegas']); // Pagina a la cual despues de loguiarnos queremos que nos redireccione
+            this.route.navigate(['/productos']); // Pagina a la cual despues de loguiarnos queremos que nos redireccione
           }
         }
         
