@@ -13,8 +13,8 @@ import { DetalleProductoComponent } from './components/detalle-producto/detalle-
 import { IngresoComponent } from './components/ingreso/ingreso.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { InicioComponent } from './components/inicio/inicio.component';
-import { DatosPrivadosComponent } from "./components/datos-privados/datos-privados.component";
 import { AuthGuard } from './auth.guard';
+import { ContactoComponent } from './components/contacto/contacto.component';
 
 const routes: Routes = [
   {
@@ -28,7 +28,7 @@ const routes: Routes = [
   },
   {
     path: 'bodegas', component: BodegasComponent,
-    canActivate:[AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'categorias', component: CategoriasComponent
@@ -58,8 +58,7 @@ const routes: Routes = [
     path: 'inicio', component: InicioComponent
   },
   {
-    path: 'datos-privados', component: DatosPrivadosComponent,
-    canActivate:[AuthGuard]
+    path: 'contacto', component: ContactoComponent,
   },
   {
     path: '', redirectTo: '/inicio', pathMatch: 'full'

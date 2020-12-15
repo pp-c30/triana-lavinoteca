@@ -24,17 +24,18 @@ export class IngresoComponent implements OnInit {
   ingresar(){
     this.autServ.login(this.formIngreso.value).subscribe(
       respuesta => {
-        if(respuesta == 0){
+        // tslint:disable-next-line:triple-equals
+        if (respuesta == 0){
           alert('Usuario o contraseña incorrecta');
         }else{
-          if(respuesta == 1){
+          // tslint:disable-next-line:triple-equals
+          if (respuesta == 1){
             alert('Contraseña incorrecta');
           }else{
             localStorage.setItem('token', String(respuesta));
             this.route.navigate(['/bodegas']); // Pagina a la cual despues de loguiarnos queremos que nos redireccione
           }
         }
-        
       }
     );
   }

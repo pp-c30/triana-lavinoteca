@@ -10,15 +10,15 @@
     height: 34px !important;
 }
 
-.btn {
+#btn {
     background-color: rgb(97, 0, 21);
 }
 
-button {
+#btn {
     color: white;
 }
 
-button:hover {
+#btn:hover {
     color: whitesmoke;
 }
 

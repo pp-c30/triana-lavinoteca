@@ -17,6 +17,7 @@ import { DetalleProductoComponent } from './components/detalle-producto/detalle-
 import { RegistroComponent } from './components/registro/registro.component';
 import { IngresoComponent } from './components/ingreso/ingreso.component';
 import { InicioComponent } from './components/inicio/inicio.component';
+import { ContactoComponent } from './components/contacto/contacto.component';
 
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 
@@ -27,12 +28,12 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 import {NgxSpinnerModule} from 'ngx-spinner';
-import { AuthGuard } from "./auth.guard";
+import { AuthGuard } from './auth.guard';
 import { TokenInterceptorService } from './services/token-interceptor.service';
-import { DatosPrivadosComponent } from './components/datos-privados/datos-privados.component';
 
 
 import { AngularEditorModule } from '@kolkov/angular-editor';
+
 
 
 
@@ -53,7 +54,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     RegistroComponent,
     IngresoComponent,
     InicioComponent,
-    DatosPrivadosComponent
+    ContactoComponent
   ],
   imports: [
     BrowserModule,
@@ -69,9 +70,9 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
   providers: [
     AuthGuard,
     {
-      provide:HTTP_INTERCEPTORS,
-      useClass:TokenInterceptorService,
-      multi:true
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
     }
   ],
   bootstrap: [AppComponent]

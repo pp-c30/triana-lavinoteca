@@ -37,6 +37,7 @@ export class GaleriaComponent implements OnInit {
   ngOnInit(): void {
     this.listarProducto();
     this.obtenerCategorias();
+    this.buscarProducto = 0;
   }
 
   // tslint:disable-next-line: variable-name
