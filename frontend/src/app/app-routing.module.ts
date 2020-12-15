@@ -37,7 +37,8 @@ const routes: Routes = [
     path: 'descuentos', component: DescuentosComponent
   },
   {
-    path: 'productos', component: ProductosComponent
+    path: 'productos', component: ProductosComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'opiniones', component: OpinionesComponent

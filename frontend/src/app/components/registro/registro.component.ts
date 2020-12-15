@@ -15,7 +15,7 @@ export class RegistroComponent implements OnInit {
     this.formRegistro = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(8)]],
       password: ['', [Validators.required, Validators.minLength(8)]],
-      email: ['', [Validators.required]]
+      email: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
@@ -27,8 +27,9 @@ export class RegistroComponent implements OnInit {
       respuesta => {
         localStorage.setItem('token', String(respuesta));
         this.formRegistro.reset();
-        this.route.navigate(['/bodegas']); // Pagina a la cual despues de loguiarnos queremos que nos redireccione
+        this.route.navigate(['/productos']); // Pagina a la cual despues de loguiarnos queremos que nos redireccione
       }
     );
   }
 }
+ 
