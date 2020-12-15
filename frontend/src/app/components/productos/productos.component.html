@@ -1,6 +1,6 @@
 <div class="p-3">
     <div class="row">
-        <button class="btn" type="button" data-toggle="modal" data-target="#exampleModal">
+        <button id="btn" class="btn" type="button" data-toggle="modal" data-target="#exampleModal">
         Crear un nuevo producto
       </button>
     </div>
@@ -152,7 +152,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button id="id" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button id="id" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                         <button [disabled]="formProducto.invalid" class="btn btn-success">Guardar Producto</button>
                     </div>
                 </form>
