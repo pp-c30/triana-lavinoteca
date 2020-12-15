@@ -24,17 +24,20 @@ const routes: Routes = [
     path: 'detalle-producto/:id_producto', component: DetalleProductoComponent
   },
   {
-    path: 'admin-imageneshome', component: AdminImageneshomeComponent
+    path: 'admin-imageneshome', component: AdminImageneshomeComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'bodegas', component: BodegasComponent,
     canActivate:[AuthGuard]
   },
   {
-    path: 'categorias', component: CategoriasComponent
+    path: 'categorias', component: CategoriasComponent,
+    canActivate:[AuthGuard]
   },
   {
-    path: 'descuentos', component: DescuentosComponent
+    path: 'descuentos', component: DescuentosComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'productos', component: ProductosComponent,
@@ -44,10 +47,12 @@ const routes: Routes = [
     path: 'opiniones', component: OpinionesComponent
   },
   {
-    path: 'promociones', component: PromocionesComponent
+    path: 'promociones', component: PromocionesComponent,
+    canActivate:[AuthGuard]
   },
   {
-    path: 'variedades', component: VariedadesComponent
+    path: 'variedades', component: VariedadesComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'ingreso', component: IngresoComponent

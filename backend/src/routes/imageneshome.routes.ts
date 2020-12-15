@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { ImagenesHomeController } from "../controllers/imageneshome.controller";
 import multer from "../libs/multer";
+import { validarToken } from "../libs/verificarToken";
 
 let imagenesHomeController = new ImagenesHomeController();
 
@@ -10,7 +11,7 @@ enrutadorImagenesHome.route('/triana_imageneshome').post(multer.single('img'),im
 
 enrutadorImagenesHome.route('/triana_imageneshome/:id').put(multer.single('img'), imagenesHomeController.actualizarTrianaImagenesHome);//actualizar datos de la base de datos
 
-enrutadorImagenesHome.route('/triana_imageneshome').get(imagenesHomeController.listarTrianaImagenesHome); //listar datos de la base de datos
+enrutadorImagenesHome.route('/triana_imageneshome').get(validarToken,imagenesHomeController.listarTrianaImagenesHome); //listar datos de la base de datos
 
 enrutadorImagenesHome.route('/triana_imageneshome/:id/:public_id').delete(imagenesHomeController.eliminarImagenesHome);// Elimina los datos y la imagen de la base de datos y cloudinary
 
