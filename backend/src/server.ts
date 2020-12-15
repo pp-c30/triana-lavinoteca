@@ -57,9 +57,9 @@ export class Server {
     }
 
     //Corre el servidor por un puerto elegido
-    listen()
+    async listen()
     {
-        this.app.listen(this.app.get('port'));
+        await this.app.listen(this.app.get('port'));
         console.log('Servidor corriendo en el puerto 3000');
     }
 }
