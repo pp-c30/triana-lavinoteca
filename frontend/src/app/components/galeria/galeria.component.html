@@ -29,9 +29,8 @@
                 <div class="card-footer" align="center">
                     <h3><b>
                             <div *ngIf="fila.porcentaje != null; else loggedOut">
-                                ${{fila.precio-((fila.precio*fila.porcentaje)/100)}} <small class="text-muted"><del>(${{fila.precio}})</del></small>
+                                ${{(fila.precio-((fila.precio*fila.porcentaje)/100)).toFixed()}} <small class="text-muted"><del>(${{fila.precio}})</del></small>
                               </div>
-                              
                               <ng-template #loggedOut>
                                 ${{fila.precio}}
                               </ng-template>
